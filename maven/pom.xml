@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.datamininglab</groupId>
+    <artifactId>eri-maven-base</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <host>swdev.elderresearch.com</host>
+        <servlet.version>3.0.1</servlet.version>
+        <jsp.version>2.2.1</jsp.version>
+        <cobertura.version>2.5.1</cobertura.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <eri.releases.repo>http://${host}/nexus/content/repositories/releases</eri.releases.repo>
+        <eri.snapshots.repo>http://${host}/nexus/content/repositories/snapshots</eri.snapshots.repo>
+        <thirdparty.repo>http://${host}/nexus/content/repositories/thirdparty</thirdparty.repo>
+        <site.write>dav:http://${host}/site-upload</site.write>
+        <site.read>http://${host}/site</site.read>
+    </properties>
+
+    <name>ERI Cross-Project Parent POM</name>
+
+    <repositories>
+        <repository>
+            <id>eri-snapshots</id>
+            <url>${eri.snapshots.repo}</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>eri-third-party</id>
+            <url>${thirdparty.repo}</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </releases>
+        </repository>
+
+        <repository>
+            <id>maven-restlet</id>
+            <name>Public online Restlet repository</name>
+            <url>http://maven.restlet.org</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <downloadUrl>${eri.snapshots.repo}</downloadUrl>
+        <repository>
+            <id>eri-releases-repo</id>
+            <name>ERI Release Artifact Repository</name>
+            <url>${eri.releases.repo}</url>
+        </repository>
+        <snapshotRepository>
+            <id>eri-snapshots-repo</id>
+            <name>ERI Snapshot Artifact Repository</name>
+            <url>${eri.snapshots.repo}</url>
+        </snapshotRepository>
+        <site>
+            <id>eri-mvn-site</id>
+            <name>ERI Maven Site</name>
+            <url>${site.write}</url>
+        </site>
+    </distributionManagement>
+
+    <issueManagement>
+        <system>Redmine</system>
+        <url>http://${host}/redmine</url>
+    </issueManagement>
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>http://${host}/jenkins</url>
+    </ciManagement>
+    <organization>
+        <name>Elder Research, Inc.</name>
+        <url>http://datamininglab.com</url>
+    </organization>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+        </extensions>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <configLocation>http://swdev.elderresearch.com/nexus/service/local/repositories/releases/content/com/datamininglab/Foundation-Package/checkstyle/Foundation-Package-checkstyle.xml</configLocation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <bottom>
+						<![CDATA[Copyright 2012, <a href="http://www.datamininglab.com">Elder Research, Inc.</a><br>All Rights Reserved]]>
+                    </bottom>
+                    <links>
+                        <link>http://docs.oracle.com/javase/6/docs/api/</link>
+                    </links>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+  
+</project>
