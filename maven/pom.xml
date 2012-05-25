@@ -11,6 +11,7 @@
 
     <properties>
         <host>swdev.elderresearch.com</host>
+        <scm>support.datamininglab.com/kiln/Repo/Repositories</scm>
         <servlet.version>3.0.1</servlet.version>
         <jsp.version>2.2.1</jsp.version>
         <cobertura.version>2.5.1</cobertura.version>
@@ -24,6 +25,10 @@
 
     <name>ERI Cross-Project Parent POM</name>
 
+    <scm>
+        <developerConnection>scm:hg:http://${scm}/General/ERI-Dev-Settings</developerConnection>
+    </scm>
+    
     <repositories>
         <repository>
             <id>eri-snapshots</id>
