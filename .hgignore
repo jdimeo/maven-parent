@@ -1,0 +1,4 @@
+syntax: glob
+**/target
+*.releaseBackup
+release.properties
