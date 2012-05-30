@@ -159,7 +159,7 @@
                         <!-- This contains the eri_checks.xml file. -->
                         <groupId>com.datamininglab.commons</groupId>
                         <artifactId>eri-commons-checkstyle</artifactId>
-                        <version>1.0-SNAPSHOT</version>
+                        <version>1.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
