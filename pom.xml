@@ -27,6 +27,25 @@
         <developerConnection>scm:hg:http://${scm}/General/ERI-Dev-Settings</developerConnection>
     </scm>
 
+    <distributionManagement>
+        <downloadUrl>${eri.snapshots.repo}</downloadUrl>
+        <repository>
+            <id>eri-releases-repo</id>
+            <name>ERI Release Artifact Repository</name>
+            <url>${eri.releases.repo}</url>
+        </repository>
+        <snapshotRepository>
+            <id>eri-snapshots-repo</id>
+            <name>ERI Snapshot Artifact Repository</name>
+            <url>${eri.snapshots.repo}</url>
+        </snapshotRepository>
+        <site>
+            <id>eri-mvn-site</id>
+            <name>ERI Maven Site</name>
+            <url>${site.write}</url>
+        </site>
+    </distributionManagement>
+
     <repositories>
         <repository>
             <id>eri-snapshots</id>
@@ -60,25 +79,24 @@
             </snapshots>
         </repository>
     </repositories>
-    <distributionManagement>
-        <downloadUrl>${eri.snapshots.repo}</downloadUrl>
-        <repository>
-            <id>eri-releases-repo</id>
+    
+
+    <pluginRepositories>
+        <pluginRepository>
+         <id>eri-releases-repo</id>
             <name>ERI Release Artifact Repository</name>
             <url>${eri.releases.repo}</url>
-        </repository>
-        <snapshotRepository>
-            <id>eri-snapshots-repo</id>
-            <name>ERI Snapshot Artifact Repository</name>
-            <url>${eri.snapshots.repo}</url>
-        </snapshotRepository>
-        <site>
-            <id>eri-mvn-site</id>
-            <name>ERI Maven Site</name>
-            <url>${site.write}</url>
-        </site>
-    </distributionManagement>
-
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>interval:30</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    
+        
     <issueManagement>
         <system>Redmine</system>
         <url>http://${host}/redmine</url>
