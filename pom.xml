@@ -25,6 +25,8 @@
 
     <scm>
         <developerConnection>scm:hg:http://${scm}/General/ERI-Dev-Settings</developerConnection>
+        <connection>scm:hg:http://${scm}/General/ERI-Dev-Settings</connection>
+        <url>http://${scm}/General/ERI-Dev-Settings</url>
     </scm>
 
     <distributionManagement>
@@ -232,6 +234,21 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changelog-plugin</artifactId>
                 <version>2.2</version>
+                <reportSets>
+                  <reportSet>
+                    <id>dual-report</id>
+                    <configuration>
+                    <!-- Expecting dates from Hg like: "Wed May 30 16:29:20 2012 -0400" -->
+                    <dateFormat>EEE MMM d HH:mm:ss yyyy Z</dateFormat>
+                      <type>range</type>
+                      <range>30</range>
+                    </configuration>
+                    <reports>
+                      <report>changelog</report>
+                      <!--report>file-activity</report-->
+                    </reports>
+                  </reportSet>
+                </reportSets>
             </plugin>            
         </plugins>
     </reporting>
