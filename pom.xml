@@ -4,7 +4,7 @@
 
     <groupId>com.datamininglab</groupId>
     <artifactId>eri-maven-base</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7</version>
     <packaging>pom</packaging>
 
     <properties>
