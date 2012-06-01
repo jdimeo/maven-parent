@@ -34,6 +34,7 @@
     <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage       -->
     <module name="JavadocPackage">
       <property name="allowLegacy" value="true"/>
+      <property name="severity" value="warning"/>
     </module>
 
     <!-- Checks whether files end with a new line.                        -->
@@ -51,10 +52,18 @@
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-        <module name="JavadocMethod"/>
-        <module name="JavadocType"/>
-        <module name="JavadocVariable"/>
-        <module name="JavadocStyle"/>
+        <module name="JavadocMethod">
+        	<property name="severity" value="warning"/>
+        </module>
+        <module name="JavadocType">
+        	<property name="severity" value="warning"/>
+        </module>
+        <module name="JavadocVariable">
+        	<property name="severity" value="warning"/>
+        </module>
+        <module name="JavadocStyle">
+        	<property name="severity" value="warning"/>
+        </module>
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
