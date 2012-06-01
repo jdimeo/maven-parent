@@ -47,9 +47,15 @@
 
     <module name="FileLength"/>
 
-    <module name="TreeWalker">
-        <property name="cacheFile" value="${checkstyle.cache.file}"/>
+	<property name="cacheFile" value="${checkstyle.cache.file}"/>
 
+    <module name="TreeWalker">
+		<module name="FileContentsHolder"/>
+		
+		<!-- This allows you to turn off checkstyle for a block of code via
+		     CHECKSTYLE:OFF and CHECKSTYLE:ON pairs -->
+		<module name="SuppressionCommentFilter" />
+    
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <module name="JavadocMethod">
