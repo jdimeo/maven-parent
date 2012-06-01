@@ -47,9 +47,9 @@
 
     <module name="FileLength"/>
 
-	<property name="cacheFile" value="${checkstyle.cache.file}"/>
-
     <module name="TreeWalker">
+    	<property name="cacheFile" value="${checkstyle.cache.file}"/>
+    	
 		<module name="FileContentsHolder"/>
 		
 		<!-- This allows you to turn off checkstyle for a block of code via
