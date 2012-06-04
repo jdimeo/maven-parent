@@ -45,8 +45,6 @@
 	<module name="SuppressionCommentFilter" />
 
     <module name="TreeWalker">
-    	<property name="cacheFile" value="${checkstyle.cache.file}"/>
-    	
 		<module name="FileContentsHolder"/>
 		
         <!-- Checks for Javadoc comments.                     -->
