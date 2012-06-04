@@ -15,6 +15,10 @@
 
     <name>Checkstyle Configuration for ERI Projects</name>
 
+    <scm>
+        <developerConnection>scm:hg:http://${scm}/General/ERI-Dev-Settings</developerConnection>
+    </scm>
+    
     <build>
         <plugins>
             <plugin>
