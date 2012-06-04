@@ -4,15 +4,12 @@
 
     <groupId>com.datamininglab</groupId>
     <artifactId>eri-maven-base</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.12-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <host>swdev.elderresearch.com</host>
         <scm>support.datamininglab.com/kiln/Repo/Repositories</scm>
-        <servlet.version>3.0.1</servlet.version>
-        <jsp.version>2.2.1</jsp.version>
-        <cobertura.version>2.5.1</cobertura.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <eri.releases.repo>http://${host}/nexus/content/repositories/releases</eri.releases.repo>
         <eri.snapshots.repo>http://${host}/nexus/content/repositories/snapshots</eri.snapshots.repo>
