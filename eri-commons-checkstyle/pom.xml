@@ -17,6 +17,7 @@
 
     <scm>
         <developerConnection>scm:hg:http://${scm}/General/ERI-Dev-Settings</developerConnection>
+        <connection>scm:hg:http://${scm}/General/ERI-Dev-Settings</connection>
     </scm>
     
     <build>
