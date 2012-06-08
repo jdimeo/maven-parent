@@ -71,7 +71,9 @@
     </module>
     <module name="IllegalInstantiation"/>
     <module name="InnerAssignment"/>
-    <module name="MagicNumber"/>
+    <module name="MagicNumber">
+      <property name="ignoreHashCodeMethod" value="true"/>
+    </module>
     <module name="MissingSwitchDefault"/>
     <module name="RedundantThrows"/>
     <module name="SimplifyBooleanExpression"/>
@@ -118,7 +120,9 @@
     </module>
     <module name="NoClone"/>
     <module name="SuperFinalize"/>
-    <module name="AnonInnerLength"/>
+    <module name="AnonInnerLength">
+      <property name="max" value="25"/>
+    </module>
     <module name="MutableException"/>
     <module name="ThrowsCount"/>
   </module>
