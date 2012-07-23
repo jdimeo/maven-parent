@@ -240,7 +240,7 @@
                     <additionalparam>
                         -inferdep -inferrel -inferdepinpackage
                         -enumerations -enumconstants
-                        -postfixpackage -qualify 
+                        -postfixpackage  
                         -collpackages java.util.* -hide java.*
                     </additionalparam>                    
                     <useStandardDocletOptions>true</useStandardDocletOptions>
