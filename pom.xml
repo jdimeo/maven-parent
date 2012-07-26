@@ -9,7 +9,7 @@
 
     <properties>
         <host>swdev.elderresearch.com</host>
-        <scm>support.datamininglab.com/kiln/Repo/Repositories</scm>
+        <scm>swdev.elderresearch.com/mercurial</scm>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <eri.releases.repo>http://${host}/nexus/content/repositories/releases</eri.releases.repo>
         <eri.snapshots.repo>http://${host}/nexus/content/repositories/snapshots</eri.snapshots.repo>
@@ -21,9 +21,9 @@
     <name>ERI Cross-Project Parent POM</name>
 
     <scm>
-        <developerConnection>scm:hg:http://${scm}/General/ERI-Dev-Settings</developerConnection>
-        <connection>scm:hg:http://${scm}/General/ERI-Dev-Settings</connection>
-        <url>http://${scm}/General/ERI-Dev-Settings</url>
+        <developerConnection>scm:hg:http://${scm}/ERI-Dev-Settings</developerConnection>
+        <connection>scm:hg:http://${scm}/ERI-Dev-Settings</connection>
+        <url>http://${scm}/ERI-Dev-Settings</url>
     </scm>
 
     <distributionManagement>
