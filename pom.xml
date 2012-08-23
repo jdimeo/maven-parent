@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.datamininglab</groupId>
@@ -78,11 +80,11 @@
             </snapshots>
         </repository>
         <!-- Need to figure out why this is needed in some cases-->
-        <repository>  
-           <id>maven-restlet</id>  
-           <name>Public online Restlet repository</name>  
-           <url>http://maven.restlet.org</url>  
-        </repository>          
+        <repository>
+            <id>maven-restlet</id>
+            <name>Public online Restlet repository</name>
+            <url>http://maven.restlet.org</url>
+        </repository>
     </repositories>
 
 
@@ -143,23 +145,6 @@
                         <target>1.6</target>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.0</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>2.4</version>
-                </plugin>
-                
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.8</version>                
-                </plugin>
 
             </plugins>
         </pluginManagement>
@@ -205,19 +190,24 @@
                 <configuration>
                     <configLocation>eri_checks.xml</configLocation>
                     <enableRulesSummary>false</enableRulesSummary>
-                </configuration>                
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-descriptor</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
 
     <reporting>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.0</version>
-            </plugin>
-        
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
@@ -240,9 +230,9 @@
                     <additionalparam>
                         -inferdep -inferrel -inferdepinpackage
                         -enumerations -enumconstants
-                        -postfixpackage  
+                        -postfixpackage
                         -collpackages java.util.* -hide java.*
-                    </additionalparam>                    
+                    </additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions>
                     <bottom>
                         <![CDATA[Copyright 2012, <a href="http://www.datamininglab.com">Elder Research, Inc.</a><br>All Rights Reserved]]>
@@ -250,7 +240,7 @@
                     <links>
                         <link>http://docs.oracle.com/javase/6/docs/api/</link>
                     </links>
-                </configuration>                
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -262,21 +252,21 @@
                 <artifactId>maven-changelog-plugin</artifactId>
                 <version>2.2</version>
                 <reportSets>
-                  <reportSet>
-                    <id>dual-report</id>
-                    <configuration>
+                    <reportSet>
+                        <id>dual-report</id>
+                        <configuration>
                     <!-- Expecting dates from Hg like: "Wed May 30 16:29:20 2012 -0400" -->
-                    <dateFormat>EEE MMM d HH:mm:ss yyyy Z</dateFormat>
-                      <type>range</type>
-                      <range>30</range>
-                    </configuration>
-                    <reports>
-                      <report>changelog</report>
+                            <dateFormat>EEE MMM d HH:mm:ss yyyy Z</dateFormat>
+                            <type>range</type>
+                            <range>30</range>
+                        </configuration>
+                        <reports>
+                            <report>changelog</report>
                       <!--report>file-activity</report-->
-                    </reports>
-                  </reportSet>
+                        </reports>
+                    </reportSet>
                 </reportSets>
-            </plugin>            
+            </plugin>
         </plugins>
     </reporting>
 </project>
