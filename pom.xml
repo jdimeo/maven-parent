@@ -16,6 +16,8 @@
         <thirdparty.repo>http://${host}/nexus/content/repositories/thirdparty</thirdparty.repo>
         <site.write>dav:http://${host}/site-upload</site.write>
         <site.read>http://${host}/site</site.read>
+        
+        <wagon.webdav.continueOnFailure>true</wagon.webdav.continueOnFailure>
     </properties>
 
     <name>ERI Cross-Project Parent POM</name>
@@ -128,8 +130,8 @@
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-webdav</artifactId>
-                <version>1.0-beta-2</version>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>2.2</version>
             </extension>
         </extensions>
         <pluginManagement>
