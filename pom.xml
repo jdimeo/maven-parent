@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.datamininglab</groupId>
@@ -16,8 +18,11 @@
         <thirdparty.repo>http://${host}/nexus/content/repositories/thirdparty</thirdparty.repo>
         <site.write>dav:http://${host}/site-upload</site.write>
         <site.read>http://${host}/site</site.read>
-        
+
         <wagon.webdav.continueOnFailure>true</wagon.webdav.continueOnFailure>
+        <!-- Disable dependency reporting stuff that really slows deployment down. -->
+        <dependency.details.enabled>false</dependency.details.enabled>
+        <dependency.locations.enabled>false</dependency.locations.enabled>
     </properties>
 
     <name>ERI Cross-Project Parent POM</name>
@@ -203,10 +208,7 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-                </configuration>
+
             </plugin>
         </plugins>
     </build>
