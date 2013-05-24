@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: ERI Checks
+    Checkstyle-Configuration: ER Checks
     Description: none
 -->
 <module name="Checker">
@@ -70,7 +70,10 @@
     <module name="EmptyBlock"/>
     <module name="LeftCurly"/>
     <module name="NeedBraces"/>
-    <module name="RightCurly"/>
+    <module name="RightCurly">
+      <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+    </module>
     <module name="EmptyStatement"/>
     <module name="EqualsHashCode"/>
     <module name="HiddenField">
@@ -135,10 +138,16 @@
       <metadata name="net.sf.eclipsecs.core.comment" value="Non-private members."/>
       <property name="applyToPrivate" value="false"/>
     </module>
+    <module name="NeedBraces"/>
   </module>
   <module name="NewlineAtEndOfFile"/>
   <module name="Translation"/>
   <module name="FileLength"/>
   <module name="SuppressionCommentFilter"/>
   <module name="StrictDuplicateCode"/>
+  <module name="SuppressWithNearbyCommentFilter">
+    <property name="commentFormat" value="CHECKSTYLE\:DISABLE\(\s*([\w\|]+)\s*\,\s*(-?\d+)\s*\)\s*"/>
+    <property name="checkFormat" value="$1"/>
+    <property name="influenceFormat" value="$2"/>
+  </module>
 </module>
