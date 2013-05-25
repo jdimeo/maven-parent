@@ -4,7 +4,7 @@
 
     <groupId>com.datamininglab</groupId>
     <artifactId>eri-maven-base</artifactId>
-    <version>2.7-SNAPSHOT</version>
+    <version>2.7</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -29,7 +29,8 @@
         <developerConnection>scm:hg:http://${scm}/ERI-Dev-Settings</developerConnection>
         <connection>scm:hg:http://${scm}/ERI-Dev-Settings</connection>
         <url>http://${scm}/ERI-Dev-Settings</url>
-    </scm>
+      <tag>eri-maven-base-2.7</tag>
+  </scm>
 
     <distributionManagement>
         <downloadUrl>${eri.snapshots.repo}</downloadUrl>
