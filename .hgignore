@@ -1,5 +1,4 @@
 syntax: glob
-**/target
-*.releaseBackup
-release.properties
-target
+.project
+.settings/*
+target/*
