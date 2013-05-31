@@ -165,7 +165,7 @@
     <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
   </module>
   <module name="RegexpHeader">
-    <property name="header" value="/*\n * Copyright \(c\) \d\d\d\d((-|, )(\d\d){1,2})* .+\n * All ([Rr])ights \1eserved.\n */"/>
+    <property name="header" value="/*\n * Copyright \(c\) \d\d\d\d(-(\d\d){1,2}|, \d\d\d\d)* .+\n * All ([Rr])ights \1eserved.\n */"/>
     <property name="fileExtensions" value=".java"/>
   </module>
 </module>
