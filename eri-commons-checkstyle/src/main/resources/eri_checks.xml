@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: ERI Checkstyle
+    Checkstyle-Configuration: ERI Checks
     Description: none
 -->
 <module name="Checker">
@@ -156,13 +156,6 @@
     <property name="commentFormat" value="CHECKSTYLE\:DISABLE\(\s*([\w\|]+)\s*\,\s*(-?\d+)\s*\)\s*"/>
     <property name="checkFormat" value="$1"/>
     <property name="influenceFormat" value="$2"/>
-  </module>
-  <module name="Header">
-    <property name="severity" value="ignore"/>
-    <property name="header" value="/*\n * Copyright (c) 2013 Elder Research, Inc.\n * All Rights Reserved.\n */"/>
-    <property name="ignoreLines" value="2"/>
-    <property name="fileExtensions" value=".java"/>
-    <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
   </module>
   <module name="RegexpHeader">
     <property name="header" value="/*\n * Copyright \(c\) \d\d\d\d((-|, )(\d\d){1,2})* .+\n * All ([Rr])ights \1eserved.\n */"/>
