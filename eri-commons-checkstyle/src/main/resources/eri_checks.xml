@@ -104,7 +104,6 @@
     <module name="ClassTypeParameterName"/>
     <module name="GenericWhitespace"/>
     <module name="TrailingComment"/>
-    <module name="UncommentedMain"/>
     <module name="CovariantEquals"/>
     <module name="DefaultComesLast"/>
     <module name="FallThrough"/>
