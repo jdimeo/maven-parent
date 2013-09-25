@@ -67,7 +67,9 @@
     <module name="ModifierOrder"/>
     <module name="RedundantModifier"/>
     <module name="AvoidNestedBlocks"/>
-    <module name="EmptyBlock"/>
+    <module name="EmptyBlock">
+      <property name="option" value="text"/>
+    </module>
     <module name="LeftCurly"/>
     <module name="NeedBraces"/>
     <module name="RightCurly">
@@ -160,4 +162,7 @@
     <property name="header" value="/*\n * Copyright \(c\) \d\d\d\d(-(\d\d){1,2}|, \d\d\d\d)* .+\n * All ([Rr])ights \1eserved.\n */"/>
     <property name="fileExtensions" value=".java"/>
   </module>
+  <module name="MissingOverride"/>
+  <module name="MethodCount"/>
+  <module name="OuterTypeFilename"/>
 </module>

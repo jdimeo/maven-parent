@@ -1,289 +1,368 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.datamininglab</groupId>
-    <artifactId>eri-maven-base</artifactId>
-    <version>2.8-SNAPSHOT</version>
-    <packaging>pom</packaging>
+	<groupId>com.datamininglab</groupId>
+	<artifactId>eri-maven-base</artifactId>
+	<version>2.8-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-    <properties>
-        <host>swdev.elderresearch.com</host>
-        <scm>swdev.elderresearch.com/mercurial</scm>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <eri.releases.repo>http://${host}/nexus/content/repositories/releases</eri.releases.repo>
-        <eri.snapshots.repo>http://${host}/nexus/content/repositories/snapshots</eri.snapshots.repo>
-        <thirdparty.repo>http://${host}/nexus/content/repositories/thirdparty</thirdparty.repo>
-        <site.write>dav:http://${host}/site-upload</site.write>
-        <site.read>http://${host}/site</site.read>
+	<properties>
+		<host>swdev.elderresearch.com</host>
+		<scm>swdev.elderresearch.com/mercurial</scm>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<eri.releases.repo>http://${host}/nexus/content/repositories/releases</eri.releases.repo>
+		<eri.snapshots.repo>http://${host}/nexus/content/repositories/snapshots</eri.snapshots.repo>
+		<thirdparty.repo>http://${host}/nexus/content/repositories/thirdparty</thirdparty.repo>
+		<site.write>dav:http://${host}/site-upload</site.write>
+		<site.read>http://${host}/site</site.read>
 
-        <wagon.webdav.continueOnFailure>true</wagon.webdav.continueOnFailure>
-        <!-- Disable dependency reporting stuff that really slows deployment down. -->
-        <dependency.details.enabled>false</dependency.details.enabled>
-        <dependency.locations.enabled>false</dependency.locations.enabled>
-    </properties>
+		<wagon.webdav.continueOnFailure>true</wagon.webdav.continueOnFailure>
+		<!-- Disable dependency reporting stuff that really slows deployment down. -->
+		<dependency.details.enabled>false</dependency.details.enabled>
+		<dependency.locations.enabled>false</dependency.locations.enabled>
+		
+		<!-- These are referenced multiple places so are located here to avoid
+		     redundancy and allow for convenient change since currently there isn't
+		     an "official" version of SWT in central -->
+		<swt.groupId>org.eclipse.swt</swt.groupId>
+		<swt.artifactId.win32>org.eclipse.swt.win32.win32.x86</swt.artifactId.win32>
+        <swt.artifactId.win64>org.eclipse.swt.win32.win32.x86_64</swt.artifactId.win64>
+        <swt.artifactId.mac32>org.eclipse.swt.cocoa.macosx</swt.artifactId.mac32>
+        <swt.artifactId.mac64>org.eclipse.swt.cocoa.macosx.x86_64</swt.artifactId.mac64>
+        <swt.artifactId.linux>org.eclipse.swt.gtk.linux.x86</swt.artifactId.linux>
+	</properties>
 
-    <name>ERI Cross-Project Parent POM</name>
+	<name>ERI Cross-Project Parent POM</name>
 
-    <scm>
-        <developerConnection>scm:hg:http://${scm}/ERI-Dev-Settings</developerConnection>
-        <connection>scm:hg:http://${scm}/ERI-Dev-Settings</connection>
-        <url>http://${scm}/ERI-Dev-Settings</url>
-      <tag>HEAD</tag>
-  </scm>
+	<scm>
+		<developerConnection>scm:hg:http://${scm}/ERI-Dev-Settings</developerConnection>
+		<connection>scm:hg:http://${scm}/ERI-Dev-Settings</connection>
+		<url>http://${scm}/ERI-Dev-Settings</url>
+		<tag>HEAD</tag>
+	</scm>
 
-    <distributionManagement>
-        <downloadUrl>${eri.snapshots.repo}</downloadUrl>
-        <repository>
-            <id>eri-releases-repo</id>
-            <name>ERI Release Artifact Repository</name>
-            <url>${eri.releases.repo}</url>
-        </repository>
-        <snapshotRepository>
-            <id>eri-snapshots-repo</id>
-            <name>ERI Snapshot Artifact Repository</name>
-            <url>${eri.snapshots.repo}</url>
-        </snapshotRepository>
-        <site>
-            <id>eri-mvn-site</id>
-            <name>ERI Maven Site</name>
-            <url>${site.write}</url>
-        </site>
-    </distributionManagement>
+	<distributionManagement>
+		<downloadUrl>${eri.snapshots.repo}</downloadUrl>
+		<repository>
+			<id>eri-releases-repo</id>
+			<name>ERI Release Artifact Repository</name>
+			<url>${eri.releases.repo}</url>
+		</repository>
+		<snapshotRepository>
+			<id>eri-snapshots-repo</id>
+			<name>ERI Snapshot Artifact Repository</name>
+			<url>${eri.snapshots.repo}</url>
+		</snapshotRepository>
+		<site>
+			<id>eri-mvn-site</id>
+			<name>ERI Maven Site</name>
+			<url>${site.write}</url>
+		</site>
+	</distributionManagement>
 
-    <repositories>
-        <repository>
-            <id>eri-snapshots</id>
-            <url>${eri.snapshots.repo}</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>eri-third-party</id>
-            <url>${thirdparty.repo}</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-            </releases>
-        </repository>
-        <repository>
-            <id>eri-releases-repo</id>
-            <name>ERI Release Artifact Repository</name>
-            <url>${eri.releases.repo}</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>interval:30</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <!-- Need to figure out why this is needed in some cases-->
-        <repository>
-            <id>maven-restlet</id>
-            <name>Public online Restlet repository</name>
-            <url>http://maven.restlet.org</url>
-        </repository>
-    </repositories>
+	<repositories>
+		<repository>
+			<id>eri-snapshots</id>
+			<url>${eri.snapshots.repo}</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>eri-third-party</id>
+			<url>${thirdparty.repo}</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</releases>
+		</repository>
+		<repository>
+			<id>eri-releases-repo</id>
+			<name>ERI Release Artifact Repository</name>
+			<url>${eri.releases.repo}</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>interval:30</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>eri-releases-repo</id>
+			<name>ERI Release Artifact Repository</name>
+			<url>${eri.releases.repo}</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>interval:30</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>eri-releases-repo</id>
-            <name>ERI Release Artifact Repository</name>
-            <url>${eri.releases.repo}</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>interval:30</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+	<issueManagement>
+		<system>Redmine</system>
+		<url>http://${host}/redmine</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>http://${host}/jenkins</url>
+	</ciManagement>
+	<organization>
+		<name>Elder Research, Inc.</name>
+		<url>http://datamininglab.com</url>
+	</organization>
 
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-    <issueManagement>
-        <system>Redmine</system>
-        <url>http://${host}/redmine</url>
-    </issueManagement>
-    <ciManagement>
-        <system>Jenkins</system>
-        <url>http://${host}/jenkins</url>
-    </ciManagement>
-    <organization>
-        <name>Elder Research, Inc.</name>
-        <url>http://datamininglab.com</url>
-    </organization>
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>2.2</version>
+			</extension>
+		</extensions>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<optimize>true</optimize>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<pushChanges>false</pushChanges>
+					<localCheckout>true</localCheckout>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.9.1</version>
+				<dependencies>
+					<dependency>
+						<!-- This contains the eri_checks.xml file. -->
+						<groupId>com.datamininglab.commons</groupId>
+						<artifactId>eri-commons-checkstyle</artifactId>
+						<version>2.0</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<configLocation>eri_checks.xml</configLocation>
+					<enableRulesSummary>false</enableRulesSummary>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.1</version>
+				<executions>
+					<execution>
+						<id>attach-descriptor</id>
+						<goals>
+							<goal>attach-descriptor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>2.2</version>
-            </extension>
-        </extensions>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.2</version>
-                    <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
-                    </configuration>
-                </plugin>
-
-            </plugins>
-        </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.1.2</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.8.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <pushChanges>false</pushChanges>
-                    <localCheckout>true</localCheckout>
-                    <goals>deploy</goals>               
-                </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-checkstyle-plugin</artifactId>
-            <version>2.9.1</version>
-            <dependencies>
-                <dependency>
-                    <!-- This contains the eri_checks.xml file. -->
-                    <groupId>com.datamininglab.commons</groupId>
-                    <artifactId>eri-commons-checkstyle</artifactId>
-                    <version>2.0</version>
-                </dependency>
-            </dependencies>
-            <configuration>
-                <configLocation>eri_checks.xml</configLocation>
-                <enableRulesSummary>false</enableRulesSummary>
-            </configuration>
-        </plugin>
-        <plugin>
-            <artifactId>maven-site-plugin</artifactId>
-            <version>3.1</version>
-            <executions>
-                <execution>
-                    <id>attach-descriptor</id>
-                    <goals>
-                        <goal>attach-descriptor</goal>
-                    </goals>
-                </execution>
-            </executions>
-
-        </plugin>
-    </plugins>
-</build>
-
-<reporting>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jxr-plugin</artifactId>
-            <version>2.3</version>
-            <configuration>
-                <aggregate>true</aggregate>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.8</version>
-            <configuration>
-                <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-                <docletArtifact>
-                    <groupId>org.umlgraph</groupId>
-                    <artifactId>umlgraph</artifactId>
-                    <version>5.6</version>
-                </docletArtifact>
-                <additionalparam>
-                    -inferdep -inferrel -inferdepinpackage
-                    -enumerations -enumconstants
-                    -postfixpackage
-                    -collpackages java.util.* -hide java.*
-                </additionalparam>
-                <useStandardDocletOptions>true</useStandardDocletOptions>
-                <bottom>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<aggregate>true</aggregate>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+					<docletArtifact>
+						<groupId>org.umlgraph</groupId>
+						<artifactId>umlgraph</artifactId>
+						<version>5.6</version>
+					</docletArtifact>
+					<additionalparam>
+						-inferdep -inferrel -inferdepinpackage
+						-enumerations -enumconstants
+						-postfixpackage
+						-collpackages java.util.* -hide java.*
+					</additionalparam>
+					<useStandardDocletOptions>true</useStandardDocletOptions>
+					<bottom>
                     <![CDATA[Copyright 2012, <a href="http://www.datamininglab.com">Elder Research, Inc.</a><br>All Rights Reserved]]>
-                </bottom>
-                <links>
-                    <link>http://docs.oracle.com/javase/6/docs/api/</link>
-                </links>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-checkstyle-plugin</artifactId>
-            <version>2.9.1</version>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-changelog-plugin</artifactId>
-            <version>2.2</version>
-            <reportSets>
-                <reportSet>
-                    <id>dual-report</id>
-                    <configuration>
-                        <!-- Expecting dates from Hg like: "Wed May 30 16:29:20 2012 -0400" -->
-                        <dateFormat>EEE MMM d HH:mm:ss yyyy Z</dateFormat>
-                        <type>range</type>
-                        <range>30</range>
-                    </configuration>
-                    <reports>
-                        <report>changelog</report>
-                        <!--report>file-activity</report-->
-                    </reports>
-                </reportSet>
-            </reportSets>
-        </plugin>
-    </plugins>
-</reporting>
+					</bottom>
+					<links>
+						<link>http://docs.oracle.com/javase/6/docs/api/</link>
+					</links>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.9.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changelog-plugin</artifactId>
+				<version>2.2</version>
+				<reportSets>
+					<reportSet>
+						<id>dual-report</id>
+						<configuration>
+							<!-- Expecting dates from Hg like: "Wed May 30 16:29:20 2012 -0400" -->
+							<dateFormat>EEE MMM d HH:mm:ss yyyy Z</dateFormat>
+							<type>range</type>
+							<range>30</range>
+						</configuration>
+						<reports>
+							<report>changelog</report>
+							<!--report>file-activity</report -->
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+	
+   <!-- Some projects contain platform-specific dependencies. They should build separate
+        artifacts for each platform via the module mechanism. However, for development,
+        it is useful to be able to automatically select the correct one based on the 
+        developer's operating system. Use these profiles to define the correct value
+        for platform-specific code.
+        
+        It is recommended all properties start with "system" -->
+	<profiles>
+        <profile>
+            <id>mac32</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                    <arch>x86</arch>
+                </os>
+            </activation>
+            <properties>
+                <system.swt.artifactId>${swt.artifactId.mac32}</system.swt.artifactId>
+                <system.FoundationSWT.artifactId>FoundationSWT-mac32</system.FoundationSWT.artifactId>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>mac64</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                    <arch>x86_64</arch>
+                </os>
+            </activation>
+            <properties>
+                <system.swt.artifactId>${swt.artifactId.mac64}</system.swt.artifactId>
+                <system.FoundationSWT.artifactId>FoundationSWT-mac64</system.FoundationSWT.artifactId>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>win32</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                    <arch>x86</arch>
+                </os>
+            </activation>
+            <properties>
+                <system.swt.artifactId>${swt.artifactId.win32}</system.swt.artifactId>
+                <system.FoundationSWT.artifactId>FoundationSWT-win32</system.FoundationSWT.artifactId>
+            </properties>
+        </profile>
+        <profile>
+            <id>win64</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <system.swt.artifactId>${swt.artifactId.win64}</system.swt.artifactId>
+                <system.FoundationSWT.artifactId>FoundationSWT-win64</system.FoundationSWT.artifactId>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>linux</id>
+            <activation>
+                <os>
+                    <family>linux</family>
+                </os>
+            </activation>
+            <properties>
+                <system.swt.artifactId>${swt.artifactId.linux}</system.swt.artifactId>
+                <system.FoundationSWT.artifactId>FoundationSWT-linux</system.FoundationSWT.artifactId>
+            </properties>
+        </profile>
+    </profiles>
 </project>
