@@ -148,6 +148,9 @@
       <property name="tokens" value="METHOD_DEF,PARAMETER_DEF,VARIABLE_DEF"/>
     </module>
     <module name="ParameterAssignment"/>
+    <module name="MethodCount"/>
+    <module name="OuterTypeFilename"/>
+    <module name="MissingOverride"/>
   </module>
   <module name="Translation"/>
   <module name="FileLength"/>
@@ -162,7 +165,4 @@
     <property name="header" value="/*\n * Copyright \(c\) \d\d\d\d(-(\d\d){1,2}|, \d\d\d\d)* .+\n * All ([Rr])ights \1eserved.\n */"/>
     <property name="fileExtensions" value=".java"/>
   </module>
-  <module name="MissingOverride"/>
-  <module name="MethodCount"/>
-  <module name="OuterTypeFilename"/>
 </module>
