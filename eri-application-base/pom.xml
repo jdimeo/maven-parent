@@ -13,6 +13,47 @@
 	<name>ERI Cross-Project Application POM</name>
 	<description>Centralizes deployment configuration across ERI applications</description>
 
+    <!-- This POM configures commonly-used maven plugins to deploy Java applications across different platforms.
+         The following platforms are currently supported:
+         - All: runnable .jar via maven-shade-plugin
+           To use, you must specify the following properties:
+             - application.mainClass: tells the shade plugin which class to use
+                                      to launch the application
+                                      
+           And you must instantiate the plugin via:
+           <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-shade-plugin</artifactId>
+           </plugin>
+           
+         - Windows (32 and 64 bit): "Fat" .exe via launch4j
+           To use, you must specify the following properties:
+             - application.mainClass: tells the launch4j plugin which class to
+                                      use to launch the application
+             - application.headerType: either "gui" or "console" to determine
+                                       if the app has a console window
+             - application.iconWin: path to the icon file (relative to your POM,
+                                    not this POM) in .ico format
+             - You must fully specify project descriptors, like <name>, <description>, etc.
+                                    
+           And you must instantiate the plugin via:
+           <plugin>
+              <groupId>com.akathist.maven.plugins.launch4j</groupId>
+              <artifactId>launch4j-maven-plugin</artifactId>
+           </plugin>
+
+           Note: you must also instantiate the following plugin prereqs:
+           <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-shade-plugin</artifactId>
+           </plugin>
+           <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>build-helper-maven-plugin</artifactId>
+           </plugin>
+          
+         - Mac support coming soon via a suitable app bundler plugin!
+          -->
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -84,7 +125,6 @@
 								<goal>launch4j</goal>
 							</goals>
 							<configuration>
-								<!-- Either "gui" or "console" -->
 								<headerType>${application.headerType}</headerType>
 								<outfile>target/${project.artifactId}.exe</outfile>
 								<jar>target/${project.artifactId}-${project.version}-shaded.jar</jar>
@@ -92,7 +132,7 @@
 								<classPath>
 									<mainClass>${application.mainClass}</mainClass>
 								</classPath>
-								<icon>${application.icon}</icon>
+								<icon>${application.iconWin}</icon>
 								<jre>
 									<minVersion>1.7.0</minVersion>
 									<initialHeapSize>128</initialHeapSize>
