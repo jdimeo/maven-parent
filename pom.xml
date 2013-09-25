@@ -305,8 +305,8 @@
                 </os>
             </activation>
             <properties>
+                <system.platform>mac32</system.platform>
                 <system.swt.artifactId>${swt.artifactId.mac32}</system.swt.artifactId>
-                <system.FoundationSWT.artifactId>FoundationSWT-mac32</system.FoundationSWT.artifactId>
             </properties>
         </profile>
 
@@ -319,8 +319,8 @@
                 </os>
             </activation>
             <properties>
+                <system.platform>mac64</system.platform>
                 <system.swt.artifactId>${swt.artifactId.mac64}</system.swt.artifactId>
-                <system.FoundationSWT.artifactId>FoundationSWT-mac64</system.FoundationSWT.artifactId>
             </properties>
         </profile>
 
@@ -333,8 +333,8 @@
                 </os>
             </activation>
             <properties>
+                <system.platform>win32</system.platform>
                 <system.swt.artifactId>${swt.artifactId.win32}</system.swt.artifactId>
-                <system.FoundationSWT.artifactId>FoundationSWT-win32</system.FoundationSWT.artifactId>
             </properties>
         </profile>
         <profile>
@@ -346,8 +346,8 @@
                 </os>
             </activation>
             <properties>
+                <system.platform>win64</system.platform>
                 <system.swt.artifactId>${swt.artifactId.win64}</system.swt.artifactId>
-                <system.FoundationSWT.artifactId>FoundationSWT-win64</system.FoundationSWT.artifactId>
             </properties>
         </profile>
 
@@ -359,8 +359,8 @@
                 </os>
             </activation>
             <properties>
+                <system.platform>linux</system.platform>
                 <system.swt.artifactId>${swt.artifactId.linux}</system.swt.artifactId>
-                <system.FoundationSWT.artifactId>FoundationSWT-linux</system.FoundationSWT.artifactId>
             </properties>
         </profile>
     </profiles>
