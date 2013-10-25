@@ -108,7 +108,9 @@
     <module name="TrailingComment"/>
     <module name="CovariantEquals"/>
     <module name="DefaultComesLast"/>
-    <module name="FallThrough"/>
+    <module name="FallThrough">
+      <property name="reliefPattern" value="fallthru|falls? ?through|FALL-THROUGH"/>
+    </module>
     <module name="IllegalCatch"/>
     <module name="IllegalThrows"/>
     <module name="ModifiedControlVariable"/>
