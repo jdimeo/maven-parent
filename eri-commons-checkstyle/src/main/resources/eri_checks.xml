@@ -87,6 +87,7 @@
     <module name="InnerAssignment"/>
     <module name="MagicNumber">
       <property name="ignoreHashCodeMethod" value="true"/>
+      <property name="ignoreAnnotation" value="true"/>
     </module>
     <module name="MissingSwitchDefault"/>
     <module name="RedundantThrows"/>
@@ -160,7 +161,6 @@
   <module name="Translation"/>
   <module name="FileLength"/>
   <module name="SuppressionCommentFilter"/>
-  <module name="StrictDuplicateCode"/>
   <module name="SuppressWithNearbyCommentFilter">
     <property name="commentFormat" value="CHECKSTYLE\:DISABLE\(\s*([\w\|]+)\s*\,\s*(-?\d+)\s*\)\s*"/>
     <property name="checkFormat" value="$1"/>
