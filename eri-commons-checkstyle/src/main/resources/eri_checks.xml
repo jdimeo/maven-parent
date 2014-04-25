@@ -15,6 +15,7 @@
     <module name="JavadocMethod">
       <property name="severity" value="info"/>
       <property name="scope" value="protected"/>
+      <property name="allowUndeclaredRTE" value="true"/>
     </module>
     <module name="JavadocType">
       <property name="severity" value="info"/>

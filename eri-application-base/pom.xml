@@ -12,37 +12,36 @@
 
 	<name>ERI Cross-Project Application POM</name>
 	<description>Centralizes deployment configuration across ERI applications</description>
+	
+	<properties>
+	   <application.macStubPath>${basedir}/../tools/JavaApplicationStub</application.macStubPath>
+	   <application.maxHeapMB>1024</application.maxHeapMB>
+	   <application.minJavaVersion>1.7</application.minJavaVersion>
+	</properties>
 
     <!-- This POM configures commonly-used maven plugins to deploy Java applications across different platforms.
          The following platforms are currently supported:
          - All: runnable .jar via maven-shade-plugin
            To use, you must specify the following properties:
              - application.mainClass: tells the shade plugin which class to use
-                                      to launch the application
+                                      to launch the applicatio
+             - application.maxHeapMB: the maximum heap size in MB (defaults to 1024)
+             - application.minJavaVersion: the minimum JVM version (defaults to 1.7)
                                       
-           And you must instantiate the plugin via:
-           <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-shade-plugin</artifactId>
-           </plugin>
-           
          - Windows (32 and 64 bit): "Fat" .exe via launch4j
            To use, you must specify the following properties:
-             - application.mainClass: tells the launch4j plugin which class to
-                                      use to launch the application
              - application.headerType: either "gui" or "console" to determine
                                        if the app has a console window
              - application.iconWin: path to the icon file (relative to your POM,
                                     not this POM) in .ico format
              - You must fully specify project descriptors, like <name>, <description>, etc.
-                                    
+            
            And you must instantiate the plugin via:
            <plugin>
               <groupId>com.akathist.maven.plugins.launch4j</groupId>
               <artifactId>launch4j-maven-plugin</artifactId>
            </plugin>
-
-           Note: you must also instantiate the following plugin prereqs:
+           And the following prerequisite plugins:
            <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-shade-plugin</artifactId>
@@ -50,9 +49,21 @@
            <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>build-helper-maven-plugin</artifactId>
+           </plugin> 
+           
+         - Mac (32 and 64 bit): Application bundle .zip via Application Bundle Plugin
+           To use, you must specify the following properties:
+             - application.iconMac: path to the icon file (relative to your POM,
+                                    not this POM) in .icns format
+             - application.macStubPath: the path to the JavaApplicationStub executable
+                                        (defaults to the one included in this project)
+
+           And you must instantiate the plugin via:
+           <plugin>
+               <groupId>org.codehaus.mojo</groupId>
+               <artifactId>osxappbundle-maven-plugin</artifactId>
+               <version>1.0-alpha-2</version>
            </plugin>
-          
-         - Mac support coming soon via a suitable app bundler plugin!
           -->
 	<build>
 		<pluginManagement>
@@ -139,7 +150,7 @@
 								</classPath>
 								<icon>${application.iconWin}</icon>
 								<jre>
-									<minVersion>1.7.0</minVersion>
+									<minVersion>${application.minJavaVersion}.0</minVersion>
 									<initialHeapSize>128</initialHeapSize>
 									<maxHeapSize>1024</maxHeapSize>
 								</jre>
@@ -158,6 +169,26 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>osxappbundle-maven-plugin</artifactId>
+                    <version>1.0-alpha-2</version>
+                    <configuration>
+                        <mainClass>${application.mainClass}</mainClass>
+                        <iconFile>${application.iconMac}</iconFile>
+                        <javaApplicationStub>${application.macStubPath}</javaApplicationStub>
+                        <jvmVersion>${application.minJavaVersion}+</jvmVersion>
+                        <vmOptions>-Xmx${application.maxHeapMB}MB</vmOptions>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>bundle</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
