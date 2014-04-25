@@ -176,6 +176,7 @@
                     <version>1.0-alpha-2</version>
                     <configuration>
                         <zipFile>${project.build.directory}/${project.artifactId}-app.zip</zipFile>
+                        <buildDirectory>${project.build.directory}/appbundle</buildDirectory>
                         <version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
                         <mainClass>${application.mainClass}</mainClass>
                         <iconFile>${application.iconMac}</iconFile>
