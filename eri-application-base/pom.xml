@@ -27,6 +27,12 @@
                                       to launch the applicatio
              - application.maxHeapMB: the maximum heap size in MB (defaults to 1024)
              - application.minJavaVersion: the minimum JVM version (defaults to 1.7)
+             
+           All platforms require the following prerequisite plugin:
+           <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>build-helper-maven-plugin</artifactId>
+           </plugin>
                                       
          - Windows (32 and 64 bit): "Fat" .exe via launch4j
            To use, you must specify the following properties:
@@ -41,15 +47,11 @@
               <groupId>com.akathist.maven.plugins.launch4j</groupId>
               <artifactId>launch4j-maven-plugin</artifactId>
            </plugin>
-           And the following prerequisite plugins:
+           And the following prerequisite plugin:
            <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-shade-plugin</artifactId>
            </plugin>
-           <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>build-helper-maven-plugin</artifactId>
-           </plugin> 
            
          - Mac (32 and 64 bit): Application bundle .zip via Application Bundle Plugin
            To use, you must specify the following properties:
@@ -62,7 +64,6 @@
            <plugin>
                <groupId>org.codehaus.mojo</groupId>
                <artifactId>osxappbundle-maven-plugin</artifactId>
-               <version>1.0-alpha-2</version>
            </plugin>
           -->
 	<build>
@@ -174,6 +175,8 @@
                     <artifactId>osxappbundle-maven-plugin</artifactId>
                     <version>1.0-alpha-2</version>
                     <configuration>
+                        <zipFile>${project.build.directory}/${project.artifactId}-app.zip</zipFile>
+                        <version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
                         <mainClass>${application.mainClass}</mainClass>
                         <iconFile>${application.iconMac}</iconFile>
                         <javaApplicationStub>${application.macStubPath}</javaApplicationStub>
