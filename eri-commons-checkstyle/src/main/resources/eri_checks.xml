@@ -108,7 +108,6 @@
     <module name="MissingDeprecated"/>
     <module name="MethodTypeParameterName"/>
     <module name="ClassTypeParameterName"/>
-    <module name="GenericWhitespace"/>
     <module name="TrailingComment"/>
     <module name="CovariantEquals"/>
     <module name="DefaultComesLast"/>
