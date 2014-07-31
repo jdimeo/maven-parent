@@ -10,6 +10,7 @@
 	<properties>
 		<host>swdev.elderresearch.com</host>
 		<scm>swdev.elderresearch.com/mercurial</scm>
+		<gitscm>code.elderresearch.com</gitscm>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<eri.releases.repo>http://${host}/nexus/content/repositories/releases</eri.releases.repo>
 		<eri.snapshots.repo>http://${host}/nexus/content/repositories/snapshots</eri.snapshots.repo>
