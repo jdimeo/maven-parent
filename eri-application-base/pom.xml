@@ -153,7 +153,7 @@
 								<jre>
 									<minVersion>${application.minJavaVersion}.0</minVersion>
 									<initialHeapSize>128</initialHeapSize>
-									<maxHeapSize>1024</maxHeapSize>
+									<maxHeapSize>${application.maxHeapMB}</maxHeapSize>
 								</jre>
 								<versionInfo>
 									<fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
