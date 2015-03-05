@@ -182,7 +182,7 @@
                         <iconFile>${application.iconMac}</iconFile>
                         <javaApplicationStub>${application.macStubPath}</javaApplicationStub>
                         <jvmVersion>${application.minJavaVersion}+</jvmVersion>
-                        <vmOptions>-Xmx${application.maxHeapMB}MB</vmOptions>
+                        <vmOptions>-Xmx${application.maxHeapMB}M</vmOptions>
                     </configuration>
                     <executions>
                         <execution>
