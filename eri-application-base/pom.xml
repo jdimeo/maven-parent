@@ -17,6 +17,7 @@
 	   <application.macStubPath>${basedir}/../tools/JavaApplicationStub</application.macStubPath>
 	   <application.maxHeapMB>1024</application.maxHeapMB>
 	   <application.minJavaVersion>1.7</application.minJavaVersion>
+	   <application.vmArgs></application.vmArgs>
 	</properties>
 
     <!-- This POM configures commonly-used maven plugins to deploy Java applications across different platforms.
@@ -182,7 +183,7 @@
                         <iconFile>${application.iconMac}</iconFile>
                         <javaApplicationStub>${application.macStubPath}</javaApplicationStub>
                         <jvmVersion>${application.minJavaVersion}+</jvmVersion>
-                        <vmOptions>-Xmx${application.maxHeapMB}M</vmOptions>
+                        <vmOptions>-Xmx${application.maxHeapMB}M ${application.vmArgs}</vmOptions>
                     </configuration>
                     <executions>
                         <execution>
