@@ -183,6 +183,9 @@
 						<goals>
 							<goal>jar</goal>
 						</goals>
+						<configuration>
+							<additionalparam>${javadoc.opts}</additionalparam>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -368,5 +371,16 @@
                 <system.swt.artifactId>${swt.artifactId.linux}</system.swt.artifactId>
             </properties>
         </profile>
+		
+		<!-- Javadocs now return exit code 1 in JDK8+ which prevents any Maven build from completing unless the Javadocs are perfect -->
+		<profile>
+			<id>doclint-java8-disable</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<properties>
+				<javadoc.opts>-Xdoclint:none</javadoc.opts>
+			</properties>
+		</profile>
     </profiles>
 </project>
