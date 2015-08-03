@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.datamininglab</groupId>
+		<artifactId>eri-application-base</artifactId>
+		<version>2.9.4-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>eri-code-metrics</artifactId>
+	<packaging>jar</packaging>
+
+	<name>ERI Code Metrics</name>
+	<description>Tabulates agile development related code metrics in a project</description>
+
+	<properties>
+		<application.mainClass>com.datamininglab.code.CodeMetrics</application.mainClass>
+		<application.headerType>console</application.headerType>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>osxappbundle-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.beust</groupId>
+			<artifactId>jcommander</artifactId>
+			<version>1.20</version>
+		</dependency>
+	</dependencies>
+</project>

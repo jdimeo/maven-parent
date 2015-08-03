@@ -14,9 +14,9 @@
 	<description>Centralizes deployment configuration across ERI applications</description>
 	
 	<properties>
-	   <application.macStubPath>${basedir}/../tools/JavaApplicationStub</application.macStubPath>
+	   <application.macStubPath>../tools/universalJavaApplicationStub</application.macStubPath>
 	   <application.maxHeapMB>1024</application.maxHeapMB>
-	   <application.minJavaVersion>1.7</application.minJavaVersion>
+	   <application.minJavaVersion>1.8</application.minJavaVersion>
 	   <application.vmArgs />
 	</properties>
 
