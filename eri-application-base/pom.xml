@@ -8,7 +8,7 @@
 	</parent>
 
 	<artifactId>eri-application-base</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>ERI Cross-Project Application POM</name>
@@ -198,8 +198,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-  <scm>
-    <tag>eri-application-base-3.0.0</tag>
-  </scm>
 </project>
