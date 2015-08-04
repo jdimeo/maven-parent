@@ -9,6 +9,7 @@
 	</parent>
 
 	<artifactId>eri-code-metrics</artifactId>
+	<version>3.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>ERI Code Metrics</name>
