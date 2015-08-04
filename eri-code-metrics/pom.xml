@@ -6,6 +6,7 @@
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-application-base</artifactId>
 		<version>3.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>eri-code-metrics</artifactId>

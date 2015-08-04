@@ -5,6 +5,7 @@
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-maven-base</artifactId>
 		<version>3.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>eri-application-base</artifactId>
