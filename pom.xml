@@ -35,11 +35,6 @@
 	</properties>
 
 	<name>ERI Cross-Project Parent POM</name>
-	
-	<modules>
-		<module>eri-application-base</module>
-		<module>eri-code-metrics</module>
-	</modules>
 
 	<scm>
 		<developerConnection>scm:hg:http://${scm}/ERI-Dev-Settings</developerConnection>
