@@ -5,11 +5,10 @@
     <parent>
         <groupId>com.datamininglab</groupId>
         <artifactId>eri-maven-base</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.datamininglab.commons</groupId>
-	<version>3.0.0-SNAPSHOT</version>
     <artifactId>eri-commons-checkstyle</artifactId>
     <packaging>jar</packaging>
 

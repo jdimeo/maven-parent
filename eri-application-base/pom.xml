@@ -4,11 +4,10 @@
 	<parent>
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-maven-base</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>eri-application-base</artifactId>
-	<version>3.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>ERI Cross-Project Application POM</name>
