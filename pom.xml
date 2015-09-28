@@ -9,8 +9,7 @@
 
 	<properties>
 		<host>swdev.elderresearch.com</host>
-		<scm>swdev.elderresearch.com/mercurial</scm>
-		<gitscm>code.elderresearch.com</gitscm>
+		<scm>code.elderresearch.com</scm>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<eri.releases.repo>http://${host}/nexus/content/repositories/releases</eri.releases.repo>
 		<eri.snapshots.repo>http://${host}/nexus/content/repositories/snapshots</eri.snapshots.repo>
@@ -43,9 +42,9 @@
 	</modules>
 
 	<scm>
-		<developerConnection>scm:hg:http://${scm}/ERI-Dev-Settings</developerConnection>
-		<connection>scm:hg:http://${scm}/ERI-Dev-Settings</connection>
-		<url>http://${scm}/ERI-Dev-Settings</url>
+		<developerConnection>scm:git:ssh://${scm}:29418/eri-commons/eri-maven-base.git</developerConnection>
+		<connection>scm:git:ssh://${scm}:29418/eri-commons/eri-maven-base.git</connection>
+		<url>http://${scm}/summary/eri-commons%2Feri-maven-base.git</url>
 		<tag>HEAD</tag>
 	</scm>
 

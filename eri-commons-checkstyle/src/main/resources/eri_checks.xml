@@ -48,9 +48,6 @@
     </module>
     <module name="IllegalImport"/>
     <module name="RedundantImport"/>
-    <module name="UnusedImports">
-      <property name="processJavadoc" value="true"/>
-    </module>
     <module name="MethodLength"/>
     <module name="ParameterNumber"/>
     <module name="EmptyForIteratorPad"/>
@@ -64,7 +61,7 @@
     </module>
     <module name="WhitespaceAfter"/>
     <module name="WhitespaceAround">
-      <property name="tokens" value="BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,LITERAL_ASSERT,TYPE_EXTENSION_AND,WILDCARD_TYPE"/>
+      <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,DO_WHILE,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND"/>
       <property name="ignoreEnhancedForColon" value="false"/>
     </module>
     <module name="ModifierOrder"/>
@@ -73,11 +70,14 @@
     <module name="EmptyBlock">
       <property name="option" value="text"/>
     </module>
-    <module name="LeftCurly"/>
-    <module name="NeedBraces"/>
+    <module name="LeftCurly">
+      <property name="tokens" value="INTERFACE_DEF,CLASS_DEF,ANNOTATION_DEF,ENUM_DEF,ENUM_CONSTANT_DEF,LITERAL_TRY,LITERAL_CATCH,LITERAL_FINALLY,LITERAL_SYNCHRONIZED,LITERAL_SWITCH"/>
+    </module>
+    <module name="NeedBraces">
+      <property name="allowSingleLineStatement" value="true"/>
+    </module>
     <module name="RightCurly">
-      <property name="severity" value="ignore"/>
-      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+      <property name="tokens" value="LITERAL_TRY,LITERAL_CATCH,LITERAL_FINALLY,LITERAL_ELSE"/>
     </module>
     <module name="EmptyStatement"/>
     <module name="EqualsHashCode"/>
@@ -91,7 +91,10 @@
       <property name="ignoreAnnotation" value="true"/>
     </module>
     <module name="MissingSwitchDefault"/>
-    <module name="RedundantThrows"/>
+    <module name="RedundantThrows">
+      <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+    </module>
     <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>
     <module name="FinalClass"/>
@@ -144,7 +147,6 @@
       <metadata name="net.sf.eclipsecs.core.comment" value="Non-private members."/>
       <property name="applyToPrivate" value="false"/>
     </module>
-    <module name="NeedBraces"/>
     <module name="ExplicitInitialization"/>
     <module name="EqualsAvoidNull">
       <property name="ignoreEqualsIgnoreCase" value="true"/>
@@ -156,6 +158,13 @@
     <module name="MethodCount"/>
     <module name="OuterTypeFilename"/>
     <module name="MissingOverride"/>
+    <module name="AtclauseOrder"/>
+    <module name="SingleLineJavadoc"/>
+    <module name="UnusedImports">
+      <property name="processJavadoc" value="true"/>
+    </module>
+    <module name="GenericWhitespace"/>
+    <module name="EmptyCatchBlock"/>
   </module>
   <module name="Translation"/>
   <module name="FileLength"/>
