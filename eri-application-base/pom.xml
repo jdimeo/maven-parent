@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-maven-base</artifactId>
-		<version>3.0.3-SNAPSHOT</version>
+		<version>3.0.5-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -15,9 +15,9 @@
 	<description>Centralizes deployment configuration across ERI applications</description>
 	
 	<properties>
-	   <application.macStubPath>../tools/universalJavaApplicationStub</application.macStubPath>
 	   <application.maxHeapMB>1024</application.maxHeapMB>
 	   <application.minJavaVersion>1.8</application.minJavaVersion>
+	   <application.headerType>gui</application.headerType>
 	   <application.vmArgs />
 	</properties>
 
@@ -173,28 +173,27 @@
 					</executions>
 				</plugin>
 				<plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>osxappbundle-maven-plugin</artifactId>
-                    <version>1.0-alpha-2</version>
-                    <configuration>
-                        <zipFile>${project.build.directory}/${project.artifactId}-app.zip</zipFile>
-                        <buildDirectory>${project.build.directory}/appbundle</buildDirectory>
-                        <version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
-                        <mainClass>${application.mainClass}</mainClass>
-                        <iconFile>${application.iconMac}</iconFile>
-                        <javaApplicationStub>${application.macStubPath}</javaApplicationStub>
-                        <jvmVersion>${application.minJavaVersion}+</jvmVersion>
-                        <vmOptions>-Xmx${application.maxHeapMB}M ${application.vmArgs}</vmOptions>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>bundle</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+					<groupId>sh.tak.appbundler</groupId>
+					<artifactId>appbundle-maven-plugin</artifactId>
+					<version>1.0.4</version>
+					<configuration>
+						<mainClass>${application.mainClass}</mainClass>
+						<iconFile>${application.iconMac}</iconFile>
+						<jvmVersion>${application.minJavaVersion}+</jvmVersion>
+						<jvmOptions>
+							<jvmOption>-Xmx${application.maxHeapMB}M</jvmOption>
+							<jvmOption>${application.vmArgs}</jvmOption>
+						</jvmOptions>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>bundle</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>

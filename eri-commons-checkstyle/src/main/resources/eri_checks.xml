@@ -121,7 +121,7 @@
     <module name="IllegalThrows"/>
     <module name="ModifiedControlVariable"/>
     <module name="MultipleStringLiterals">
-      <property name="allowedDuplicates" value="5"/>
+      <property name="allowedDuplicates" value="4"/>
     </module>
     <module name="NoFinalizer"/>
     <module name="PackageDeclaration"/>
@@ -165,6 +165,7 @@
     </module>
     <module name="GenericWhitespace"/>
     <module name="EmptyCatchBlock"/>
+    <module name="NonEmptyAtclauseDescription"/>
   </module>
   <module name="Translation"/>
   <module name="FileLength"/>
@@ -177,5 +178,8 @@
   <module name="RegexpHeader">
     <property name="header" value="/*\n * Copyright \(c\) \d\d\d\d(-(\d\d){1,2}|, \d\d\d\d)* .+\n * All ([Rr])ights \1eserved.\n */"/>
     <property name="fileExtensions" value=".java"/>
+  </module>
+  <module name="SuppressionFilter">
+    <property name="file" value="${samedir}/suppressions.xml"/>
   </module>
 </module>
