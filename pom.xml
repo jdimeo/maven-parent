@@ -4,7 +4,7 @@
 
 	<groupId>com.datamininglab</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>3.0.4-SNAPSHOT</version>
+	<version>3.0.4</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -45,7 +45,7 @@
 		<developerConnection>scm:git:ssh://${scm}:29418/eri-commons/eri-maven-base.git</developerConnection>
 		<connection>scm:git:ssh://${scm}:29418/eri-commons/eri-maven-base.git</connection>
 		<url>http://${scm}/summary/eri-commons%2Feri-maven-base.git</url>
-		<tag>HEAD</tag>
+		<tag>eri-maven-base-3.0.4</tag>
 	</scm>
 
 	<distributionManagement>
