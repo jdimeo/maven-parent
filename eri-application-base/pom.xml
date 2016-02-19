@@ -28,7 +28,7 @@
              - application.mainClass: tells the shade plugin which class to use
                                       to launch the applicatio
              - application.maxHeapMB: the maximum heap size in MB (defaults to 1024)
-             - application.minJavaVersion: the minimum JVM version (defaults to 1.7)
+             - application.minJavaVersion: the minimum JVM version (defaults to 1.8)
              
            All platforms require the following prerequisite plugin:
            <plugin>
@@ -59,14 +59,12 @@
            To use, you must specify the following properties:
              - application.iconMac: path to the icon file (relative to your POM,
                                     not this POM) in .icns format
-             - application.macStubPath: the path to the JavaApplicationStub executable
-                                        (defaults to the one included in this project)
 
            And you must instantiate the plugin via:
-           <plugin>
-               <groupId>org.codehaus.mojo</groupId>
-               <artifactId>osxappbundle-maven-plugin</artifactId>
-           </plugin>
+           	<plugin>
+           		<groupId>sh.tak.appbundler</groupId>
+				<artifactId>appbundle-maven-plugin</artifactId>
+			</plugin>
           -->
 	<build>
 		<pluginManagement>
