@@ -200,6 +200,35 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>com.idfconnect.devtools</groupId>
+                    <artifactId>idfc-proguard-maven-plugin</artifactId>
+                    <version>1.0.1</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>obfuscate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <inputFile>${project.artifactId}-${project.version}-shaded.jar</inputFile>
+                        <includeDependencies>false</includeDependencies>
+                        <options>
+                            <keep>class ${application.mainClass} { public static void main(java.lang.String[]); }</keep>
+                            <keepattributes>*Annotation*,Signature,InnerClasses</keepattributes>
+                        </options>
+                    </configuration>
+                    <dependencies>
+                        <!-- Need a newer version than the one that comes with the plugin to support Java 8 -->
+                        <dependency>
+						    <groupId>net.sf.proguard</groupId>
+						    <artifactId>proguard-base</artifactId>
+						    <version>5.2.1</version>
+						</dependency>
+                    </dependencies>                    
+                </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
