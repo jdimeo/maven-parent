@@ -11,9 +11,10 @@
 		<host>swdev.elderresearch.com</host>
 		<scm>code.elderresearch.com</scm>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<eri.releases.repo>http://${host}/nexus/content/repositories/releases</eri.releases.repo>
-		<eri.snapshots.repo>http://${host}/nexus/content/repositories/snapshots</eri.snapshots.repo>
-		<thirdparty.repo>http://${host}/nexus/content/repositories/thirdparty</thirdparty.repo>
+		<eri.repo.base>http://${host}/nexus/content/repositories</eri.repo.base>
+		<eri.releases.repo>${eri.repo.base}/releases</eri.releases.repo>
+		<eri.snapshots.repo>${eri.repo.base}/snapshots</eri.snapshots.repo>
+		<eri.thirdparty.repo>${eri.repo.base}/thirdparty</eri.thirdparty.repo>
 		<site.write>dav:http://${host}/site-upload</site.write>
 		<site.read>http://${host}/site</site.read>
 
@@ -81,7 +82,7 @@
 		</repository>
 		<repository>
 			<id>eri-third-party</id>
-			<url>${thirdparty.repo}</url>
+			<url>${eri.thirdparty.repo}</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>daily</updatePolicy>
@@ -99,6 +100,13 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		
+		<!-- External repos -->
+        <repository>
+            <id>google-swt-repo</id>
+            <name>Google Code SWT Repo</name>
+            <url>${eri.repo.base}/swt-repo/</url>
+        </repository>
 	</repositories>
 
 	<pluginRepositories>
