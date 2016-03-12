@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-maven-base</artifactId>
-		<version>3.0.6-SNAPSHOT</version>
+		<version>3.0.7-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -15,11 +15,11 @@
 	<description>Centralizes deployment configuration across ERI applications</description>
 	
 	<properties>
-	   <application.macStubPath>../tools/universalJavaApplicationStub</application.macStubPath>
 	   <application.maxHeapMB>1024</application.maxHeapMB>
 	   <application.minJavaVersion>1.8</application.minJavaVersion>
 	   <application.headerType>gui</application.headerType>
-	   <application.vmArgs />
+	   <application.vmArgs>-da</application.vmArgs>
+	   <application.jar>target/${project.artifactId}-${project.version}-shaded.jar</application.jar>
 	</properties>
 
     <!-- This POM configures commonly-used maven plugins to deploy Java applications across different platforms.
@@ -147,7 +147,7 @@
 							<configuration>
 								<headerType>${application.headerType}</headerType>
 								<outfile>target/${project.artifactId}.exe</outfile>
-								<jar>target/${project.artifactId}-${project.version}-shaded.jar</jar>
+								<jar>${application.jar}</jar>
 								<errTitle>${project.name} Error</errTitle>
 								<classPath>
 									<mainClass>${application.mainClass}</mainClass>
@@ -157,6 +157,9 @@
 									<minVersion>${application.minJavaVersion}.0</minVersion>
 									<initialHeapSize>128</initialHeapSize>
 									<maxHeapSize>${application.maxHeapMB}</maxHeapSize>
+									<opts>
+									   <opt>${application.vmArgs}</opt>
+									</opts>
 								</jre>
 								<versionInfo>
 									<fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
@@ -174,18 +177,19 @@
 					</executions>
 				</plugin>
 				<plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>osxappbundle-maven-plugin</artifactId>
-                    <version>1.0-alpha-2</version>
+                    <groupId>sh.tak.appbundler</groupId>
+                    <artifactId>appbundle-maven-plugin</artifactId>
+                    <version>1.0.4</version>
                     <configuration>
-                        <zipFile>${project.build.directory}/${project.artifactId}-app.zip</zipFile>
-                        <buildDirectory>${project.build.directory}/app</buildDirectory>
-                        <version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
                         <mainClass>${application.mainClass}</mainClass>
                         <iconFile>${application.iconMac}</iconFile>
-                        <javaApplicationStub>${application.macStubPath}</javaApplicationStub>
                         <jvmVersion>${application.minJavaVersion}+</jvmVersion>
-                        <vmOptions>-Xmx${application.maxHeapMB}M ${application.vmArgs}</vmOptions>
+                        <jvmOptions>
+                            <jvmOption>-Xmx${application.maxHeapMB}M</jvmOption>
+                            <jvmOption>${application.vmArgs}</jvmOption>
+                        </jvmOptions>
+                        <version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
+                        <diskImageInternetEnable>true</diskImageInternetEnable>
                     </configuration>
                     <executions>
                         <execution>
@@ -195,6 +199,35 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.idfconnect.devtools</groupId>
+                    <artifactId>idfc-proguard-maven-plugin</artifactId>
+                    <version>1.0.1</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>obfuscate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <inputFile>${project.artifactId}-${project.version}-shaded.jar</inputFile>
+                        <includeDependencies>false</includeDependencies>
+                        <options>
+                            <keep>class ${application.mainClass} { public static void main(java.lang.String[]); }</keep>
+                            <keepattributes>*Annotation*,Signature,InnerClasses</keepattributes>
+                        </options>
+                    </configuration>
+                    <dependencies>
+                        <!-- Need a newer version than the one that comes with the plugin to support Java 8 -->
+                        <dependency>
+						    <groupId>net.sf.proguard</groupId>
+						    <artifactId>proguard-base</artifactId>
+						    <version>5.2.1</version>
+						</dependency>
+                    </dependencies>                    
                 </plugin>
 			</plugins>
 		</pluginManagement>
