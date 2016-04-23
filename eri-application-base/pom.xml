@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-maven-base</artifactId>
-		<version>3.0.7-SNAPSHOT</version>
+		<version>3.0.8-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -146,7 +146,7 @@
 							</goals>
 							<configuration>
 								<headerType>${application.headerType}</headerType>
-								<outfile>target/${project.artifactId}.exe</outfile>
+								<outfile>target/${project.name}.exe</outfile>
 								<jar>${application.jar}</jar>
 								<errTitle>${project.name} Error</errTitle>
 								<classPath>
@@ -179,8 +179,9 @@
 				<plugin>
                     <groupId>sh.tak.appbundler</groupId>
                     <artifactId>appbundle-maven-plugin</artifactId>
-                    <version>1.0.4</version>
+                    <version>1.1.0</version>
                     <configuration>
+                        <bundleName>${project.name}</bundleName>
                         <mainClass>${application.mainClass}</mainClass>
                         <iconFile>${application.iconMac}</iconFile>
                         <jvmVersion>${application.minJavaVersion}+</jvmVersion>
