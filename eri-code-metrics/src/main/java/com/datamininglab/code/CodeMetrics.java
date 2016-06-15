@@ -32,13 +32,13 @@ import com.datamininglab.code.metrics.UnitTests;
  * @since Jun 5, 2015
  */
 public class CodeMetrics extends SimpleFileVisitor<Path> {
-	@Parameter(names="-root", description="The root directory to scan")
+	@Parameter(names = "-root", description = "The root directory to scan")
 	private String root;
 	
-	@Parameter(names="-ext", description="One or more extensions to include (defaults to .java and .scala)")
+	@Parameter(names = "-ext", description = "One or more extensions to include (defaults to .java and .scala)")
 	private List<String> extensions = new LinkedList<>();
 	
-	@Parameter(names="-skip", description="Directories to skip, for example folders with auto-generated source")
+	@Parameter(names = "-skip", description = "Directories to skip, for example folders with auto-generated source")
 	private List<String> exclusions = new LinkedList<>();
 	
 	private boolean measureFileNameLength;
