@@ -60,8 +60,6 @@
            To use, you must specify the following properties:
              - application.iconMac: path to the icon file (relative to your POM,
                                     not this POM) in .icns format
-             - application.macStubPath: the path to the JavaApplicationStub executable
-                                        (defaults to the one included in this project)
 
            And you must instantiate the plugin via:
            <plugin>
