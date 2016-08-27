@@ -220,7 +220,7 @@
 	
 	                    <!-- (optional) name for binary executable, if not set will just -->
 	                    <!-- make the regular jar artifact executable -->
-	                    <programFile>${project.artifactId}</programFile>
+	                    <programFile>${project.name}</programFile>
 	                </configuration>
 	                <executions>
 	                    <execution>
