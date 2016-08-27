@@ -32,6 +32,8 @@ import com.datamininglab.code.metrics.UnitTests;
  * @since Jun 5, 2015
  */
 public class CodeMetrics extends SimpleFileVisitor<Path> {
+	private static final int METRIC_NAME_MAX_LEN = 40;
+	
 	@Parameter(names = "-root", description = "The root directory to scan")
 	private String root;
 	
@@ -105,7 +107,7 @@ public class CodeMetrics extends SimpleFileVisitor<Path> {
 		out.println(System.lineSeparator() + "Summary:");
 		for (CodeMetric<?> cm : metrics) {
 			out.print(cm.getCharacter() + " " + cm.getName());
-			for (int i = 0; i < 40 - cm.getName().length(); i++) { out.print("."); }
+			for (int i = 0; i < METRIC_NAME_MAX_LEN - cm.getName().length(); i++) { out.print("."); }
 			out.println(cm.getSummary());
 		}
 	}

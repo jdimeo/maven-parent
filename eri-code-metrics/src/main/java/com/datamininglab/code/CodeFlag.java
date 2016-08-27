@@ -5,6 +5,8 @@
 package com.datamininglab.code;
 
 public abstract class CodeFlag implements CodeMetric<String> {
+	private static final float PCT = 100.0f;
+	
 	private char character;
 	private String name;
 	private int matched, total;
@@ -32,6 +34,6 @@ public abstract class CodeFlag implements CodeMetric<String> {
 	
 	@Override
 	public String getSummary() {
-		return String.format("%3d out of %3d (%.1f%%)", matched, total, 100.0f * matched / total);
+		return String.format("%3d out of %3d (%.1f%%)", matched, total, PCT * matched / total);
 	}
 }
