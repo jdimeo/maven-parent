@@ -34,8 +34,8 @@
 				<artifactId>launch4j-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>osxappbundle-maven-plugin</artifactId>
+				<groupId>sh.tak.appbundler</groupId>
+				<artifactId>appbundle-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
