@@ -1,7 +1,7 @@
-/*
- * Copyright (c) 2015 Elder Research, Inc.
+/*******************************************************************************
+ * Copyright (c) 2016 Elder Research, Inc.
  * All rights reserved.
- */
+ *******************************************************************************/
 package com.datamininglab.code.metrics;
 
 import java.util.Iterator;

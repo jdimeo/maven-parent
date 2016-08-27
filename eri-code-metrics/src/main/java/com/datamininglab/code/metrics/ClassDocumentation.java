@@ -1,7 +1,7 @@
-/*
- * Copyright (c) 2015 Elder Research, Inc.
+/*******************************************************************************
+ * Copyright (c) 2016 Elder Research, Inc.
  * All rights reserved.
- */
+ *******************************************************************************/
 package com.datamininglab.code.metrics;
 
 import java.util.Iterator;
@@ -19,7 +19,7 @@ public class ClassDocumentation extends CodeFlag {
 		while (iter.hasNext()) {
 			line = iter.next().trim().toLowerCase();
 			if (!line.isEmpty()
-			 && !line.equals("/*")
+			 && !"/*".equals(line)
 			 && !line.startsWith("*")
 			 && !line.startsWith("import")
 			 && !line.startsWith("package")) { break; }

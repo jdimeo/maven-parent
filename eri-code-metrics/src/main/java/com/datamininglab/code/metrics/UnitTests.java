@@ -1,7 +1,7 @@
-/*
- * Copyright (c) 2015 Elder Research, Inc.
+/*******************************************************************************
+ * Copyright (c) 2016 Elder Research, Inc.
  * All rights reserved.
- */
+ *******************************************************************************/
 package com.datamininglab.code.metrics;
 
 import java.util.List;
@@ -15,9 +15,8 @@ public class UnitTests extends CodeCount {
 	public Integer compute(List<String> lines) {
 		int ret = 0;
 		for (String line : lines) {
-			line = line.trim();
-			if (line.startsWith("public void test")
-			 || line.startsWith("it(")) { ret++; }
+			if (line.trim().startsWith("public void test")
+			 || line.trim().startsWith("it(")) { ret++; }
 		}
 		total += ret;
 		return ret;

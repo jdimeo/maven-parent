@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: ERI Checks
+    Checkstyle-Configuration: ERI Checkstyle
     Description: none
 -->
 <module name="Checker">
@@ -99,7 +99,6 @@
     <module name="SimplifyBooleanReturn"/>
     <module name="FinalClass"/>
     <module name="HideUtilityClassConstructor"/>
-    <module name="InterfaceIsType"/>
     <module name="VisibilityModifier">
       <property name="packageAllowed" value="true"/>
       <property name="protectedAllowed" value="true"/>
@@ -160,9 +159,7 @@
     <module name="MissingOverride"/>
     <module name="AtclauseOrder"/>
     <module name="SingleLineJavadoc"/>
-    <module name="UnusedImports">
-      <property name="processJavadoc" value="true"/>
-    </module>
+    <module name="UnusedImports"/>
     <module name="GenericWhitespace"/>
     <module name="EmptyCatchBlock"/>
     <module name="NonEmptyAtclauseDescription"/>

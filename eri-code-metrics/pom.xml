@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-application-base</artifactId>
-		<version>3.0.8-SNAPSHOT</version>
+		<version>3.1.1-SNAPSHOT</version>
 		<relativePath>../eri-application-base/pom.xml</relativePath>
 	</parent>
 
@@ -34,8 +34,8 @@
 				<artifactId>launch4j-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>osxappbundle-maven-plugin</artifactId>
+				<groupId>sh.tak.appbundler</groupId>
+				<artifactId>appbundle-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

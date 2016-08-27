@@ -1,7 +1,7 @@
-/*
- * Copyright (c) 2015 Elder Research, Inc.
+/*******************************************************************************
+ * Copyright (c) 2016 Elder Research, Inc.
  * All rights reserved.
- */
+ *******************************************************************************/
 package com.datamininglab.code;
 
 import java.io.IOException;
@@ -32,13 +32,15 @@ import com.datamininglab.code.metrics.UnitTests;
  * @since Jun 5, 2015
  */
 public class CodeMetrics extends SimpleFileVisitor<Path> {
-	@Parameter(names="-root", description="The root directory to scan")
+	private static final int METRIC_NAME_MAX_LEN = 40;
+	
+	@Parameter(names = "-root", description = "The root directory to scan")
 	private String root;
 	
-	@Parameter(names="-ext", description="One or more extensions to include (defaults to .java and .scala)")
+	@Parameter(names = "-ext", description = "One or more extensions to include (defaults to .java and .scala)")
 	private List<String> extensions = new LinkedList<>();
 	
-	@Parameter(names="-skip", description="Directories to skip, for example folders with auto-generated source")
+	@Parameter(names = "-skip", description = "Directories to skip, for example folders with auto-generated source")
 	private List<String> exclusions = new LinkedList<>();
 	
 	private boolean measureFileNameLength;
@@ -105,7 +107,7 @@ public class CodeMetrics extends SimpleFileVisitor<Path> {
 		out.println(System.lineSeparator() + "Summary:");
 		for (CodeMetric<?> cm : metrics) {
 			out.print(cm.getCharacter() + " " + cm.getName());
-			for (int i = 0; i < 40 - cm.getName().length(); i++) { out.print("."); }
+			for (int i = 0; i < METRIC_NAME_MAX_LEN - cm.getName().length(); i++) { out.print("."); }
 			out.println(cm.getSummary());
 		}
 	}
