@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.datamininglab</groupId>
         <artifactId>eri-maven-base</artifactId>
-        <version>3.1.1</version>
+        <version>3.1.2-SNAPSHOT</version>
 	<relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -18,7 +18,7 @@
     <scm>
         <developerConnection>scm:hg:http://${scm}/General/ERI-Dev-Settings</developerConnection>
         <connection>scm:hg:http://${scm}/General/ERI-Dev-Settings</connection>
-      <tag>eri-maven-base-3.1.1</tag>
+      <tag>HEAD</tag>
   </scm>
     
     <build>
