@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-maven-base</artifactId>
-		<version>3.1.2-SNAPSHOT</version>
+		<version>3.1.3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -13,12 +13,13 @@
 
 	<name>ERI Cross-Project Application POM</name>
 	<description>Centralizes deployment configuration across ERI applications</description>
-	
+
 	<properties>
-	   <application.maxHeapMB>1024</application.maxHeapMB>
-	   <application.minJavaVersion>1.8</application.minJavaVersion>
-	   <application.vmArgs>-da</application.vmArgs>
-	   <application.headerType>gui</application.headerType>
+		<application.maxHeapMB>1024</application.maxHeapMB>
+		<application.minJavaVersion>1.8</application.minJavaVersion>
+		<application.vmArgs>-da</application.vmArgs>
+		<application.headerType>gui</application.headerType>
+		<application.vendor>Elder Research, Inc.</application.vendor>
 	</properties>
 
     <!-- This POM configures commonly-used maven plugins to deploy Java applications across different platforms.
@@ -132,13 +133,14 @@
 							</filter>
 						</filters>
 						<transformers>
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 							<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 								<mainClass>${application.mainClass}</mainClass>
 								<manifestEntries>
-								    <Implementation-Title>${project.name}</Implementation-Title>
-								    <Implementation-Version>${project.version}</Implementation-Version>
-								    <Implementation-Vendor>Elder Research, Inc.</Implementation-Vendor>
-							     </manifestEntries>
+									<Implementation-Title>${project.name}</Implementation-Title>
+									<Implementation-Version>${project.version}</Implementation-Version>
+									<Implementation-Vendor>${application.vendor}</Implementation-Vendor>
+								</manifestEntries>
 							</transformer>
 						</transformers>
 					</configuration>
@@ -157,80 +159,80 @@
 						</execution>
 					</executions>
 					<configuration>
-                        <headerType>${application.headerType}</headerType>
-                        <outfile>${project.build.directory}/${project.name}.exe</outfile>
-                        <jar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</jar>
-                        <errTitle>${project.name} Error</errTitle>
-                        <classPath>
-                            <mainClass>${application.mainClass}</mainClass>
-                        </classPath>
-                        <icon>${application.iconWin}</icon>
-                        <jre>
-                            <minVersion>${application.minJavaVersion}.0</minVersion>
-                            <initialHeapSize>128</initialHeapSize>
-                            <maxHeapSize>${application.maxHeapMB}</maxHeapSize>
-                            <opts>
-                               <opt>${application.vmArgs}</opt>
-                            </opts>
-                        </jre>
-                        <versionInfo>
-                            <fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
-                            <txtFileVersion>${project.version}</txtFileVersion>
-                            <fileDescription>${project.description}</fileDescription>
-                            <copyright>${year.current} Elder Research, Inc.</copyright>
-                            <productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</productVersion>
-                            <txtProductVersion>${project.version}</txtProductVersion>
-                            <productName>${project.name}</productName>
-                            <internalName>${project.name}</internalName>
-                            <originalFilename>${project.artifactId}.exe</originalFilename>
-                        </versionInfo>
-                    </configuration>
+						<headerType>${application.headerType}</headerType>
+						<outfile>${project.build.directory}/${project.name}.exe</outfile>
+						<jar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</jar>
+						<errTitle>${project.name} Error</errTitle>
+						<classPath>
+							<mainClass>${application.mainClass}</mainClass>
+						</classPath>
+						<icon>${application.iconWin}</icon>
+						<jre>
+							<minVersion>${application.minJavaVersion}.0</minVersion>
+							<initialHeapSize>128</initialHeapSize>
+							<maxHeapSize>${application.maxHeapMB}</maxHeapSize>
+							<opts>
+								<opt>${application.vmArgs}</opt>
+							</opts>
+						</jre>
+						<versionInfo>
+							<fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
+							<txtFileVersion>${project.version}</txtFileVersion>
+							<fileDescription>${project.description}</fileDescription>
+							<copyright>${year.current} Elder Research, Inc.</copyright>
+							<productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</productVersion>
+							<txtProductVersion>${project.version}</txtProductVersion>
+							<productName>${project.name}</productName>
+							<internalName>${project.name}</internalName>
+							<originalFilename>${project.artifactId}.exe</originalFilename>
+						</versionInfo>
+					</configuration>
 				</plugin>
 				<plugin>
-                    <groupId>sh.tak.appbundler</groupId>
-                    <artifactId>appbundle-maven-plugin</artifactId>
-                    <version>1.1.0</version>
-                    <configuration>
-                        <bundleName>${project.name}</bundleName>
-                        <mainClass>${application.mainClass}</mainClass>
-                        <iconFile>${application.iconMac}</iconFile>
-                        <jvmVersion>${application.minJavaVersion}+</jvmVersion>
-                        <jvmOptions>
-                            <jvmOption>-Xmx${application.maxHeapMB}M</jvmOption>
-                            <jvmOption>${application.vmArgs}</jvmOption>
-                        </jvmOptions>
-                        <version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
-                        <diskImageInternetEnable>true</diskImageInternetEnable>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>bundle</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-	            <plugin>
-	                <groupId>org.skife.maven</groupId>
-	                <artifactId>really-executable-jar-maven-plugin</artifactId>
-	                <version>1.4.1</version>
-	                <configuration>
-	                    <flags>-Xmx${application.maxHeapMB}M ${application.vmArgs}</flags>
-	
-	                    <!-- (optional) name for binary executable, if not set will just -->
-	                    <!-- make the regular jar artifact executable -->
-	                    <programFile>${project.name}</programFile>
-	                </configuration>
-	                <executions>
-	                    <execution>
-	                        <phase>package</phase>
-	                        <goals>
-	                            <goal>really-executable-jar</goal>
-	                        </goals>
-	                    </execution>
-	                </executions>
-	            </plugin>
+					<groupId>sh.tak.appbundler</groupId>
+					<artifactId>appbundle-maven-plugin</artifactId>
+					<version>1.1.0</version>
+					<configuration>
+						<bundleName>${project.name}</bundleName>
+						<mainClass>${application.mainClass}</mainClass>
+						<iconFile>${application.iconMac}</iconFile>
+						<jvmVersion>${application.minJavaVersion}+</jvmVersion>
+						<jvmOptions>
+							<jvmOption>-Xmx${application.maxHeapMB}M</jvmOption>
+							<jvmOption>${application.vmArgs}</jvmOption>
+						</jvmOptions>
+						<version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
+						<diskImageInternetEnable>true</diskImageInternetEnable>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>bundle</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.skife.maven</groupId>
+					<artifactId>really-executable-jar-maven-plugin</artifactId>
+					<version>1.4.1</version>
+					<configuration>
+						<flags>-Xmx${application.maxHeapMB}M ${application.vmArgs}</flags>
+
+						<!-- (optional) name for binary executable, if not set will just -->
+						<!-- make the regular jar artifact executable -->
+						<programFile>${project.name}</programFile>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>really-executable-jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
