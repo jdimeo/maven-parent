@@ -4,7 +4,7 @@
 
 	<groupId>com.datamininglab</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>3.1.3-SNAPSHOT</version>
+	<version>3.1.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -23,19 +23,21 @@
 		<dependency.details.enabled>false</dependency.details.enabled>
 		<dependency.locations.enabled>false</dependency.locations.enabled>
 		
-		<!-- These are referenced multiple places so are located here to avoid
-		     redundancy and allow for convenient change since currently there isn't
-		     an "official" version of SWT in central -->
+		<!-- Don't include Swagger files by default, only create service.json for most artifacts which aren't web services -->
+		<swagger.opts>-skipUiFiles</swagger.opts>
+
+		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient change since currently there isn't an "official" 
+			version of SWT in central -->
 		<swt.groupId>org.eclipse.swt</swt.groupId>
 		<swt.artifactId.win32>org.eclipse.swt.win32.win32.x86</swt.artifactId.win32>
-        <swt.artifactId.win64>org.eclipse.swt.win32.win32.x86_64</swt.artifactId.win64>
-        <swt.artifactId.mac32>org.eclipse.swt.cocoa.macosx</swt.artifactId.mac32>
-        <swt.artifactId.mac64>org.eclipse.swt.cocoa.macosx.x86_64</swt.artifactId.mac64>
-        <swt.artifactId.linux>org.eclipse.swt.gtk.linux.x86</swt.artifactId.linux>
+		<swt.artifactId.win64>org.eclipse.swt.win32.win32.x86_64</swt.artifactId.win64>
+		<swt.artifactId.mac32>org.eclipse.swt.cocoa.macosx</swt.artifactId.mac32>
+		<swt.artifactId.mac64>org.eclipse.swt.cocoa.macosx.x86_64</swt.artifactId.mac64>
+		<swt.artifactId.linux>org.eclipse.swt.gtk.linux.x86</swt.artifactId.linux>
 	</properties>
 
 	<name>ERI Cross-Project Parent POM</name>
-	
+
 	<modules>
 		<module>eri-application-base</module>
 		<module>eri-code-metrics</module>
@@ -100,13 +102,13 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		
+
 		<!-- External repos -->
-        <repository>
-            <id>google-swt-repo</id>
-            <name>Google Code SWT Repo</name>
-            <url>${eri.repo.base}/swt-repo/</url>
-        </repository>
+		<repository>
+			<id>google-swt-repo</id>
+			<name>Google Code SWT Repo</name>
+			<url>${eri.repo.base}/swt-repo/</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -145,36 +147,59 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.12</version>
-            <scope>provided</scope>
-        </dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.12</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-webdav-jackrabbit</artifactId>
-				<version>2.2</version>
-			</extension>
-		</extensions>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.3</version>
-					<configuration>
-						<optimize>true</optimize>
-						<source>1.8</source>
-						<target>1.8</target>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<additionalparam>${javadoc.opts}</additionalparam>
+						</configuration>
+					</execution>
+					<execution>
+						<id>generate-service-docs</id>
+						<goals>
+							<goal>javadoc</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<doclet>com.tenxerconsulting.swagger.doclet.ServiceDoclet</doclet>
+							<docletArtifact>
+								<groupId>com.tenxerconsulting</groupId>
+								<artifactId>swagger-doclet</artifactId>
+								<version>1.0.7</version>
+							</docletArtifact>
+							<reportOutputDirectory>${project.build.outputDirectory}</reportOutputDirectory>
+							<useStandardDocletOptions>false</useStandardDocletOptions>
+							<additionalparam>${swagger.opts}</additionalparam>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<optimize>true</optimize>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -190,22 +215,6 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.3</version>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<additionalparam>${javadoc.opts}</additionalparam>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.5.2</version>
 				<configuration>
@@ -213,23 +222,6 @@
 					<pushChanges>false</pushChanges>
 					<localCheckout>true</localCheckout>
 					<goals>deploy</goals>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.15</version>
-				<dependencies>
-					<dependency>
-						<!-- This contains the eri_checks.xml file. -->
-						<groupId>com.datamininglab.commons</groupId>
-						<artifactId>eri-commons-checkstyle</artifactId>
-						<version>2.0</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<configLocation>eri_checks.xml</configLocation>
-					<enableRulesSummary>false</enableRulesSummary>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -310,86 +302,82 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	
-   <!-- Some projects contain platform-specific dependencies. They should build separate
-        artifacts for each platform via the module mechanism. However, for development,
-        it is useful to be able to automatically select the correct one based on the 
-        developer's operating system. Use these profiles to define the correct value
-        for platform-specific code.
-        
-        It is recommended all properties start with "system" -->
+
+	<!-- Some projects contain platform-specific dependencies. They should build separate artifacts for each platform via the module mechanism. However, for 
+		development, it is useful to be able to automatically select the correct one based on the developer's operating system. Use these profiles to define the 
+		correct value for platform-specific code. It is recommended all properties start with "system" -->
 	<profiles>
-        <profile>
-            <id>mac32</id>
-            <activation>
-                <os>
-                    <family>mac</family>
-                    <arch>x86</arch>
-                </os>
-            </activation>
-            <properties>
-                <system.platform>mac32</system.platform>
-                <system.swt.artifactId>${swt.artifactId.mac32}</system.swt.artifactId>
-            </properties>
-        </profile>
+		<profile>
+			<id>mac32</id>
+			<activation>
+				<os>
+					<family>mac</family>
+					<arch>x86</arch>
+				</os>
+			</activation>
+			<properties>
+				<system.platform>mac32</system.platform>
+				<system.swt.artifactId>${swt.artifactId.mac32}</system.swt.artifactId>
+			</properties>
+		</profile>
 
-        <profile>
-            <id>mac64</id>
-            <activation>
-                <os>
-                    <family>mac</family>
-                    <arch>x86_64</arch>
-                </os>
-            </activation>
-            <properties>
-                <system.platform>mac64</system.platform>
-                <system.swt.artifactId>${swt.artifactId.mac64}</system.swt.artifactId>
-            </properties>
-        </profile>
+		<profile>
+			<id>mac64</id>
+			<activation>
+				<os>
+					<family>mac</family>
+					<arch>x86_64</arch>
+				</os>
+			</activation>
+			<properties>
+				<system.platform>mac64</system.platform>
+				<system.swt.artifactId>${swt.artifactId.mac64}</system.swt.artifactId>
+			</properties>
+		</profile>
 
-        <profile>
-            <id>win32</id>
-            <activation>
-                <os>
-                    <family>windows</family>
-                    <arch>x86</arch>
-                </os>
-            </activation>
-            <properties>
-                <system.platform>win32</system.platform>
-                <system.swt.artifactId>${swt.artifactId.win32}</system.swt.artifactId>
-            </properties>
-        </profile>
-        <profile>
-            <id>win64</id>
-            <activation>
-                <os>
-                    <family>windows</family>
-                    <arch>amd64</arch>
-                </os>
-            </activation>
-            <properties>
-                <system.platform>win64</system.platform>
-                <system.swt.artifactId>${swt.artifactId.win64}</system.swt.artifactId>
-            </properties>
-        </profile>
+		<profile>
+			<id>win32</id>
+			<activation>
+				<os>
+					<family>windows</family>
+					<arch>x86</arch>
+				</os>
+			</activation>
+			<properties>
+				<system.platform>win32</system.platform>
+				<system.swt.artifactId>${swt.artifactId.win32}</system.swt.artifactId>
+			</properties>
+		</profile>
+		<profile>
+			<id>win64</id>
+			<activation>
+				<os>
+					<family>windows</family>
+					<arch>amd64</arch>
+				</os>
+			</activation>
+			<properties>
+				<system.platform>win64</system.platform>
+				<system.swt.artifactId>${swt.artifactId.win64}</system.swt.artifactId>
+			</properties>
+		</profile>
 
-        <profile>
-            <id>linux</id>
-            <activation>
-                <os>
-                    <family>linux</family>
-                </os>
-            </activation>
-            <properties>
-                <system.platform>linux</system.platform>
-                <system.swt.artifactId>${swt.artifactId.linux}</system.swt.artifactId>
-            </properties>
-        </profile>
-		
+		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<family>linux</family>
+				</os>
+			</activation>
+			<properties>
+				<system.platform>linux</system.platform>
+				<system.swt.artifactId>${swt.artifactId.linux}</system.swt.artifactId>
+			</properties>
+		</profile>
+
 		<!-- Javadocs now return exit code 1 in JDK8+ which prevents any Maven build from completing unless the Javadocs are perfect -->
 		<profile>
-			<id>doclint-java8-disable</id>
+			<id>javadoc-doclint-disable</id>
 			<activation>
 				<jdk>[1.8,)</jdk>
 			</activation>
@@ -397,5 +385,5 @@
 				<javadoc.opts>-Xdoclint:none</javadoc.opts>
 			</properties>
 		</profile>
-    </profiles>
+	</profiles>
 </project>
