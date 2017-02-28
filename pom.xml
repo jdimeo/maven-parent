@@ -11,9 +11,9 @@
 		<host>swdev.elderresearch.com</host>
 		<scm>code.elderresearch.com</scm>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<eri.repo.base>http://${host}/nexus/content/repositories</eri.repo.base>
+		<eri.repo.base>http://nexus:8081/repository</eri.repo.base>
 		<eri.releases.repo>${eri.repo.base}/releases</eri.releases.repo>
-		<eri.snapshots.repo>${eri.repo.base}/snapshots</eri.snapshots.repo>
+		<eri.snapshots.repo>${eri.repo.base}/maven-snapshots</eri.snapshots.repo>
 		<eri.thirdparty.repo>${eri.repo.base}/thirdparty</eri.thirdparty.repo>
 		<site.write>dav:http://${host}/site-upload</site.write>
 		<site.read>http://${host}/site</site.read>
@@ -50,7 +50,7 @@
 		<url>http://${scm}/summary/eri-commons%2Feri-maven-base.git</url>
 		<tag>HEAD</tag>
 	</scm>
-
+	
 	<distributionManagement>
 		<downloadUrl>${eri.snapshots.repo}</downloadUrl>
 		<repository>
@@ -96,7 +96,7 @@
 			<url>${eri.releases.repo}</url>
 			<releases>
 				<enabled>true</enabled>
-				<updatePolicy>interval:30</updatePolicy>
+				<updatePolicy>daily</updatePolicy>
 			</releases>
 			<snapshots>
 				<enabled>false</enabled>
