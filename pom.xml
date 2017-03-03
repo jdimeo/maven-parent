@@ -22,9 +22,10 @@
 		<!-- Disable dependency reporting stuff that really slows deployment down. -->
 		<dependency.details.enabled>false</dependency.details.enabled>
 		<dependency.locations.enabled>false</dependency.locations.enabled>
-		
+
 		<!-- Don't include Swagger files by default, only create service.json for most artifacts which aren't web services -->
 		<swagger.opts>-skipUiFiles</swagger.opts>
+		<swagger.dir>docs</swagger.dir>
 
 		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient change since currently there isn't an "official" 
 			version of SWT in central -->
@@ -50,7 +51,7 @@
 		<url>http://${scm}/summary/eri-commons%2Feri-maven-base.git</url>
 		<tag>HEAD</tag>
 	</scm>
-	
+
 	<distributionManagement>
 		<downloadUrl>${eri.snapshots.repo}</downloadUrl>
 		<repository>
@@ -177,6 +178,7 @@
 						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
+							<destDir>${swagger.dir}</destDir>
 							<doclet>com.tenxerconsulting.swagger.doclet.ServiceDoclet</doclet>
 							<docletArtifact>
 								<groupId>com.tenxerconsulting</groupId>
