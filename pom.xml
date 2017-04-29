@@ -237,73 +237,29 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<generateReports>false</generateReports>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>lt.velykis.maven.skins</groupId>
+						<artifactId>reflow-velocity-tools</artifactId>
+						<version>1.1.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.velocity</groupId>
+						<artifactId>velocity</artifactId>
+						<version>1.7</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-module-markdown</artifactId>
+						<version>1.6</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<aggregate>true</aggregate>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
-				<configuration>
-					<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-					<docletArtifact>
-						<groupId>org.umlgraph</groupId>
-						<artifactId>umlgraph</artifactId>
-						<version>5.6</version>
-					</docletArtifact>
-					<additionalparam>
-						-inferdep -inferrel -inferdepinpackage
-						-enumerations -enumconstants
-						-postfixpackage
-						-collpackages java.util.* -hide java.*
-					</additionalparam>
-					<useStandardDocletOptions>true</useStandardDocletOptions>
-					<bottom>
-                    <![CDATA[Copyright 2012, <a href="http://www.datamininglab.com">Elder Research, Inc.</a><br>All Rights Reserved]]>
-					</bottom>
-					<links>
-						<link>http://docs.oracle.com/javase/6/docs/api/</link>
-					</links>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.9.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-changelog-plugin</artifactId>
-				<version>2.2</version>
-				<reportSets>
-					<reportSet>
-						<id>dual-report</id>
-						<configuration>
-							<!-- Expecting dates from Hg like: "Wed May 30 16:29:20 2012 -0400" -->
-							<dateFormat>EEE MMM d HH:mm:ss yyyy Z</dateFormat>
-							<type>range</type>
-							<range>30</range>
-						</configuration>
-						<reports>
-							<report>changelog</report>
-							<!--report>file-activity</report -->
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-		</plugins>
-	</reporting>
 
 	<!-- Some projects contain platform-specific dependencies. They should build separate artifacts for each platform via the module mechanism. However, for 
 		development, it is useful to be able to automatically select the correct one based on the developer's operating system. Use these profiles to define the 
