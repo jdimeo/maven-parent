@@ -8,24 +8,15 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<host>swdev.elderresearch.com</host>
 		<scm>code.elderresearch.com</scm>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<eri.repo.base>http://nexus:8081/repository</eri.repo.base>
 		<eri.releases.repo>${eri.repo.base}/releases</eri.releases.repo>
 		<eri.snapshots.repo>${eri.repo.base}/maven-snapshots</eri.snapshots.repo>
 		<eri.thirdparty.repo>${eri.repo.base}/thirdparty</eri.thirdparty.repo>
-		<site.write>dav:http://${host}/site-upload</site.write>
-		<site.read>http://${host}/site</site.read>
 
-		<wagon.webdav.continueOnFailure>true</wagon.webdav.continueOnFailure>
-		<!-- Disable dependency reporting stuff that really slows deployment down. -->
-		<dependency.details.enabled>false</dependency.details.enabled>
-		<dependency.locations.enabled>false</dependency.locations.enabled>
-
-		<!-- Don't include Swagger files by default, only create service.json for most artifacts which aren't web services -->
-		<swagger.opts>-skipUiFiles</swagger.opts>
-		<swagger.dir>docs</swagger.dir>
+		<enunciate.version>2.9.1</enunciate.version>
+		<enunciate.disabled>true</enunciate.disabled>
 
 		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient change since currently there isn't an "official" 
 			version of SWT in central -->
@@ -128,16 +119,16 @@
 	</pluginRepositories>
 
 	<issueManagement>
-		<system>Redmine</system>
-		<url>http://${host}/redmine</url>
+		<system>YouTrack</system>
+		<url>https://eri.myjetbrains.com/youtrack</url>
 	</issueManagement>
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>http://${host}/jenkins</url>
+		<url>http://fangorn:8080</url>
 	</ciManagement>
 	<organization>
 		<name>Elder Research, Inc.</name>
-		<url>http://datamininglab.com</url>
+		<url>http://www.elderresearch.com</url>
 	</organization>
 
 	<dependencies>
@@ -150,7 +141,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.12</version>
+			<version>1.16.16</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
@@ -169,25 +160,6 @@
 						</goals>
 						<configuration>
 							<additionalparam>${javadoc.opts}</additionalparam>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate-service-docs</id>
-						<goals>
-							<goal>javadoc</goal>
-						</goals>
-						<phase>generate-resources</phase>
-						<configuration>
-							<destDir>${swagger.dir}</destDir>
-							<doclet>com.tenxerconsulting.swagger.doclet.ServiceDoclet</doclet>
-							<docletArtifact>
-								<groupId>com.tenxerconsulting</groupId>
-								<artifactId>swagger-doclet</artifactId>
-								<version>1.0.7</version>
-							</docletArtifact>
-							<reportOutputDirectory>${project.build.outputDirectory}</reportOutputDirectory>
-							<useStandardDocletOptions>false</useStandardDocletOptions>
-							<additionalparam>${swagger.opts}</additionalparam>
 						</configuration>
 					</execution>
 				</executions>
@@ -225,6 +197,29 @@
 					<localCheckout>true</localCheckout>
 					<goals>deploy</goals>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.webcohesion.enunciate</groupId>
+				<artifactId>enunciate-maven-plugin</artifactId>
+				<version>${enunciate.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>docs</goal>
+						</goals>
+						<configuration>
+							<docsDir>${project.build.outputDirectory}</docsDir>
+							<skipEnunciate>${enunciate.disabled}</skipEnunciate>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.webcohesion.enunciate</groupId>
+						<artifactId>enunciate-lombok</artifactId>
+						<version>${enunciate.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
