@@ -34,12 +34,6 @@
              - application.minJavaVersion: the minimum JVM version (defaults to 1.8)
              - application.file: the name of the resulting executable file (defaults to ${project.name})
              
-           All platforms require the following prerequisite plugin:
-           <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>build-helper-maven-plugin</artifactId>
-           </plugin>
-                                      
          - Windows (32 and 64 bit): "Fat" .exe via launch4j
            To use, you must specify the following properties:
              - application.headerType: either "gui" or "console" to determine
@@ -85,30 +79,6 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>1.8</version>
-					<executions>
-						<execution>
-							<id>parse-version</id>
-							<goals>
-								<goal>parse-version</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>timestamp-property</id>
-							<goals>
-								<goal>timestamp-property</goal>
-							</goals>
-							<configuration>
-								<name>year.current</name>
-								<pattern>yyyy</pattern>
-								<units>year</units>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-shade-plugin</artifactId>
