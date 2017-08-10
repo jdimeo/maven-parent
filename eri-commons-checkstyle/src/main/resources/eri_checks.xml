@@ -29,19 +29,27 @@
       <property name="severity" value="info"/>
     </module>
     <module name="ConstantName"/>
-    <module name="LocalFinalVariableName"/>
-    <module name="LocalVariableName"/>
+    <module name="LocalFinalVariableName">
+      <property name="format" value="^[a-z$][a-zA-Z0-9]*$"/>
+    </module>
+    <module name="LocalVariableName">
+      <property name="format" value="^[a-z$][a-zA-Z0-9]*$"/>
+    </module>
     <module name="MemberName">
       <metadata name="net.sf.eclipsecs.core.comment" value="Private members"/>
       <property name="applyToPublic" value="false"/>
       <property name="applyToProtected" value="false"/>
       <property name="applyToPackage" value="false"/>
-      <property name="format" value="^[_a-z][a-zA-Z0-9]*$"/>
+      <property name="format" value="^[_a-z$][a-zA-Z0-9]*$"/>
     </module>
     <module name="MethodName"/>
     <module name="PackageName"/>
-    <module name="ParameterName"/>
-    <module name="StaticVariableName"/>
+    <module name="ParameterName">
+      <property name="format" value="^[a-z$][a-zA-Z0-9]*$"/>
+    </module>
+    <module name="StaticVariableName">
+      <property name="format" value="^[a-z$][a-zA-Z0-9]*$"/>
+    </module>
     <module name="TypeName"/>
     <module name="AvoidStarImport">
       <property name="allowStaticMemberImports" value="true"/>
@@ -144,6 +152,7 @@
     <module name="MemberName">
       <metadata name="net.sf.eclipsecs.core.comment" value="Non-private members."/>
       <property name="applyToPrivate" value="false"/>
+      <property name="format" value="^[a-z$][a-zA-Z0-9]*$"/>
     </module>
     <module name="ExplicitInitialization"/>
     <module name="EqualsAvoidNull">
