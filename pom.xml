@@ -94,13 +94,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
-		<!-- External repos -->
-		<repository>
-			<id>google-swt-repo</id>
-			<name>Google Code SWT Repo</name>
-			<url>${eri.repo.base}/swt-repo/</url>
-		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -108,13 +101,10 @@
 			<id>eri-releases-repo</id>
 			<name>ERI Release Artifact Repository</name>
 			<url>${eri.releases.repo}</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>interval:30</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>eri-third-party</id>
+			<url>${eri.thirdparty.repo}</url>
 		</pluginRepository>
 	</pluginRepositories>
 
@@ -141,7 +131,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.16</version>
+			<version>1.16.18</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
