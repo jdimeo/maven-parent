@@ -20,6 +20,7 @@
 		<application.vmArgs>-da</application.vmArgs>
 		<application.headerType>gui</application.headerType>
 		<application.vendor>Elder Research, Inc.</application.vendor>
+		<application.file>${project.name}</application.file>
 	</properties>
 
     <!-- This POM configures commonly-used maven plugins to deploy Java applications across different platforms.
@@ -31,6 +32,7 @@
              - application.maxHeapMB: the maximum heap size in MB (defaults to 1024)
              - application.vmArgs: additional arguments to pass to the JVM
              - application.minJavaVersion: the minimum JVM version (defaults to 1.8)
+             - application.file: the name of the resulting executable file (defaults to ${project.name})
              
            All platforms require the following prerequisite plugin:
            <plugin>
@@ -160,7 +162,7 @@
 					</executions>
 					<configuration>
 						<headerType>${application.headerType}</headerType>
-						<outfile>${project.build.directory}/${project.name}.exe</outfile>
+						<outfile>${project.build.directory}/${application.file}.exe</outfile>
 						<jar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</jar>
 						<errTitle>${project.name} Error</errTitle>
 						<classPath>
@@ -193,7 +195,7 @@
 					<artifactId>appbundle-maven-plugin</artifactId>
 					<version>1.1.0</version>
 					<configuration>
-						<bundleName>${project.name}</bundleName>
+						<bundleName>${application.file}</bundleName>
 						<mainClass>${application.mainClass}</mainClass>
 						<iconFile>${application.iconMac}</iconFile>
 						<jvmVersion>${application.minJavaVersion}+</jvmVersion>
@@ -219,10 +221,7 @@
 					<version>1.4.1</version>
 					<configuration>
 						<flags>-Xmx${application.maxHeapMB}M ${application.vmArgs}</flags>
-
-						<!-- (optional) name for binary executable, if not set will just -->
-						<!-- make the regular jar artifact executable -->
-						<programFile>${project.name}</programFile>
+						<programFile>${application.file}</programFile>
 					</configuration>
 					<executions>
 						<execution>
