@@ -4,22 +4,20 @@
  *******************************************************************************/
 package com.datamininglab.code;
 
+import lombok.Getter;
+
 public abstract class CodeFlag implements CodeMetric<String> {
 	private static final float PCT = 100.0f;
 	
-	private char character;
-	private String name;
+	@Getter private String code;
+	@Getter private String name;
 	private int matched, total;
 	
-	protected CodeFlag(char character, String name) {
-		this.character = character;
+	protected CodeFlag(String code, String name) {
+		this.code = code;
 		this.name = name;
 	}
 	
-	@Override
-	public char getCharacter() { return character; }
-	@Override
-	public String getName() { return name; }
 	@Override
 	public String getFormatString() { return " %s "; }
 	

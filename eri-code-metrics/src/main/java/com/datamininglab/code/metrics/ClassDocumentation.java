@@ -10,7 +10,7 @@ import java.util.List;
 import com.datamininglab.code.CodeFlag;
 
 public class ClassDocumentation extends CodeFlag {
-	public ClassDocumentation() { super('D', "Has top-level/class comments"); }
+	public ClassDocumentation() { super("/**", "Has top-level/class comments"); }
 	
 	@Override
 	public String compute(List<String> lines) {

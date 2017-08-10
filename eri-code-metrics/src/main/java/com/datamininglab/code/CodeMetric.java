@@ -9,7 +9,7 @@ import java.util.List;
 public interface CodeMetric<T> {
 	T compute(List<String> lines);
 	
-	char getCharacter();
+	String getCode();
 	String getName();
 	String getFormatString();
 	String getSummary();

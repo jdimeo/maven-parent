@@ -9,7 +9,7 @@ import java.util.List;
 import com.datamininglab.code.CodeCount;
 
 public class UnitTests extends CodeCount {
-	public UnitTests() { super('U', "Number of unit tests"); }
+	public UnitTests() { super(" U ", "Number of unit tests"); }
 	
 	@Override
 	public Integer compute(List<String> lines) {

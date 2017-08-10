@@ -4,7 +4,7 @@
 
 	<groupId>com.datamininglab</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>3.3.1-SNAPSHOT</version>
+	<version>3.3.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -94,13 +94,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
-		<!-- External repos -->
-		<repository>
-			<id>google-swt-repo</id>
-			<name>Google Code SWT Repo</name>
-			<url>${eri.repo.base}/swt-repo/</url>
-		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -108,13 +101,10 @@
 			<id>eri-releases-repo</id>
 			<name>ERI Release Artifact Repository</name>
 			<url>${eri.releases.repo}</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>interval:30</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>eri-third-party</id>
+			<url>${eri.thirdparty.repo}</url>
 		</pluginRepository>
 	</pluginRepositories>
 
@@ -141,7 +131,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.16</version>
+			<version>1.16.18</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
@@ -198,6 +188,44 @@
 					<goals>deploy</goals>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>parse-version</id>
+						<goals>
+							<goal>parse-version</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>timestamp-property</id>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+						<configuration>
+							<name>year.current</name>
+							<pattern>yyyy</pattern>
+							<units>year</units>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/xjc</source>
+								<source>${project.build.directory}/generated-sources/jooq</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
 			<plugin>
 				<groupId>com.webcohesion.enunciate</groupId>
 				<artifactId>enunciate-maven-plugin</artifactId>

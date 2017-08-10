@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-application-base</artifactId>
-		<version>3.3.1-SNAPSHOT</version>
+		<version>3.3.2-SNAPSHOT</version>
 		<relativePath>../eri-application-base/pom.xml</relativePath>
 	</parent>
 
@@ -22,10 +22,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 			</plugin>
@@ -34,8 +30,8 @@
 				<artifactId>launch4j-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>sh.tak.appbundler</groupId>
-				<artifactId>appbundle-maven-plugin</artifactId>
+				<groupId>org.skife.maven</groupId>
+				<artifactId>really-executable-jar-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
