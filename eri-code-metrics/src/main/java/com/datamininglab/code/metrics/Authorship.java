@@ -9,7 +9,7 @@ import java.util.List;
 import com.datamininglab.code.CodeFlag;
 
 public class Authorship extends CodeFlag {
-	public Authorship() { super('A', "Has authorship information"); }
+	public Authorship() { super(" @ ", "Has authorship information"); }
 	
 	@Override
 	public String compute(List<String> lines) {

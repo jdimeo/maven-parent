@@ -4,21 +4,18 @@
  *******************************************************************************/
 package com.datamininglab.code;
 
+import lombok.Getter;
 
 public abstract class CodeCount implements CodeMetric<Integer> {
-	private char character;
-	private String name;
+	@Getter private String code;
+	@Getter private String name;
 	protected int total;
 	
-	protected CodeCount(char character, String name) {
-		this.character = character;
+	protected CodeCount(String code, String name) {
+		this.code = code;
 		this.name = name;
 	}
 	
-	@Override
-	public char getCharacter() { return character; }
-	@Override
-	public String getName() { return name; }
 	@Override
 	public String getFormatString() { return "%3d"; }
 	

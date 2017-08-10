@@ -9,7 +9,7 @@ import java.util.List;
 import com.datamininglab.code.CodeFlag;
 
 public class Creation extends CodeFlag {
-	public Creation() { super('C', "Has date of creation information"); }
+	public Creation() { super(" # ", "Has date of creation information"); }
 	
 	@Override
 	public String compute(List<String> lines) {

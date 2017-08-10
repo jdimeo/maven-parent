@@ -35,7 +35,7 @@ public class CodeMetrics extends SimpleFileVisitor<Path> {
 	private static final int METRIC_NAME_MAX_LEN = 40;
 	
 	@Parameter(names = "-root", description = "The root directory to scan")
-	private String root;
+	private String root = ".";
 	
 	@Parameter(names = "-ext", description = "One or more extensions to include (defaults to .java and .scala)")
 	private List<String> extensions = new LinkedList<>();
@@ -88,14 +88,16 @@ public class CodeMetrics extends SimpleFileVisitor<Path> {
 			setMetrics(new CopyrightHeader(), new ClassDocumentation(), new Authorship(), new Creation(), new UnitTests());
 		}
 		
-		Path start = Paths.get(root == null? "." : root); 
+		Path start = Paths.get(root);
+		root = start.toString();
+		
 		try {
 			measureFileNameLength = true;
 			Files.walkFileTree(start, this);
 			metricsFmt = "%-" + maxFileNameLength + "s" + metricsFmt;
 			
 			out.print(String.format("%-" + maxFileNameLength + "s", "File:"));
-			for (CodeMetric<?> cm : metrics) { out.print("| " + cm.getCharacter() + " "); }
+			for (CodeMetric<?> cm : metrics) { out.print("|" + cm.getCode()); }
 			out.println();
 			
 			measureFileNameLength = false;
@@ -106,7 +108,7 @@ public class CodeMetrics extends SimpleFileVisitor<Path> {
 		
 		out.println(System.lineSeparator() + "Summary:");
 		for (CodeMetric<?> cm : metrics) {
-			out.print(cm.getCharacter() + " " + cm.getName());
+			out.print(cm.getCode() + " " + cm.getName());
 			for (int i = 0; i < METRIC_NAME_MAX_LEN - cm.getName().length(); i++) { out.print("."); }
 			out.println(cm.getSummary());
 		}
