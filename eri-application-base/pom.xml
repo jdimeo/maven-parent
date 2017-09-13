@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.datamininglab</groupId>
 		<artifactId>eri-maven-base</artifactId>
-		<version>3.3.2-SNAPSHOT</version>
+		<version>3.4.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -19,63 +19,10 @@
 		<application.minJavaVersion>1.8</application.minJavaVersion>
 		<application.vmArgs>-da</application.vmArgs>
 		<application.headerType>gui</application.headerType>
-		<application.vendor>Elder Research, Inc.</application.vendor>
+		<application.vendor>${project.organization.name}</application.vendor>
 		<application.file>${project.name}</application.file>
 	</properties>
 
-    <!-- This POM configures commonly-used maven plugins to deploy Java applications across different platforms.
-         The following platforms are currently supported:
-         - All: runnable .jar via maven-shade-plugin
-           To use, you must specify the following properties:
-             - application.mainClass: tells the shade plugin which class to use
-                                      to launch the applicatio
-             - application.maxHeapMB: the maximum heap size in MB (defaults to 1024)
-             - application.vmArgs: additional arguments to pass to the JVM
-             - application.minJavaVersion: the minimum JVM version (defaults to 1.8)
-             - application.file: the name of the resulting executable file (defaults to ${project.name})
-             
-         - Windows (32 and 64 bit): "Fat" .exe via launch4j
-           To use, you must specify the following properties:
-             - application.headerType: either "gui" or "console" to determine
-                                       if the app has a console window
-             - application.iconWin: path to the icon file (relative to your POM,
-                                    not this POM) in .ico format
-             - You must fully specify project descriptors, like <name>, <description>, etc.
-            
-           And you must instantiate the plugin via:
-           <plugin>
-              <groupId>com.akathist.maven.plugins.launch4j</groupId>
-              <artifactId>launch4j-maven-plugin</artifactId>
-           </plugin>
-           And the following prerequisite plugin:
-           <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-shade-plugin</artifactId>
-           </plugin>
-           
-         - Mac (32 and 64 bit): Application bundle .zip via Application Bundle Plugin
-           To use, you must specify the following properties:
-             - application.iconMac: path to the icon file (relative to your POM,
-                                    not this POM) in .icns format
-
-           And you must instantiate the plugin via:
-           <plugin>
-              <groupId>sh.tak.appbundler</groupId>
-              <artifactId>appbundle-maven-plugin</artifactId>
-           </plugin>
-           
-         - Linux: adds a basic sh script to the zip/jar file that makes it self-executable.
-           To use, you must instantiate the plugin via:
-           <plugin>
-              <groupId>org.skife.maven</groupId>
-              <artifactId>really-executable-jar-maven-plugin</artifactId>
-           </plugin>
-           And the following prerequisite plugin:
-           <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-shade-plugin</artifactId>
-           </plugin>
-          -->
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -151,7 +98,7 @@
 							<fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
 							<txtFileVersion>${project.version}</txtFileVersion>
 							<fileDescription>${project.description}</fileDescription>
-							<copyright>${year.current} Elder Research, Inc.</copyright>
+							<copyright>${year.current} ${project.organization.name}</copyright>
 							<productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</productVersion>
 							<txtProductVersion>${project.version}</txtProductVersion>
 							<productName>${project.name}</productName>

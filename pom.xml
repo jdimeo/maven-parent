@@ -4,7 +4,7 @@
 
 	<groupId>com.datamininglab</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>3.3.2-SNAPSHOT</version>
+	<version>3.4.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -117,23 +117,39 @@
 		<url>http://fangorn:8080</url>
 	</ciManagement>
 	<organization>
-		<name>Elder Research, Inc.</name>
+		<name>Elder Research</name>
 		<url>http://www.elderresearch.com</url>
 	</organization>
 
 	<dependencies>
+		<!-- Always bring in JUnit - test scope won't bloat binaries -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Always bring in Lombok - provided scope won't bloat binaries (APT only) -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.16.18</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Stanardize logging (children can always exclude) -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<!-- For colors in the console window, include this dependency
+		<dependency>
+			<groupId>org.fusesource.jansi</groupId>
+			<artifactId>jansi</artifactId>
+			<version>1.16</version>
+		</dependency>
+		-->
 	</dependencies>
 
 	<build>

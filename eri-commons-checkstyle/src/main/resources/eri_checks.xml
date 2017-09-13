@@ -174,11 +174,11 @@
   </module>
   <module name="Translation"/>
   <module name="FileLength"/>
-  <module name="SuppressionCommentFilter"/>
-  <module name="SuppressWithNearbyCommentFilter">
-    <property name="commentFormat" value="CHECKSTYLE\:DISABLE\(\s*([\w\|]+)\s*\,\s*(-?\d+)\s*\)\s*"/>
+  <module name="SuppressionCommentFilter">
+    <metadata name="net.sf.eclipsecs.core.comment" value="Suppress named rule"/>
+    <property name="offCommentFormat" value="CHECKSTYLE\:([\w\|]+)\:OFF"/>
+    <property name="onCommentFormat" value="CHECKSTYLE\:([\w\|]+)\:ON"/>
     <property name="checkFormat" value="$1"/>
-    <property name="influenceFormat" value="$2"/>
   </module>
   <module name="RegexpHeader">
     <property name="header" value="/*\n * Copyright \(c\) \d\d\d\d(-(\d\d){1,2}|, \d\d\d\d)* .+\n * All ([Rr])ights \1eserved.\n */"/>
@@ -186,5 +186,8 @@
   </module>
   <module name="SuppressionFilter">
     <property name="file" value="${samedir}/suppressions.xml"/>
+  </module>
+  <module name="SuppressionCommentFilter">
+    <metadata name="net.sf.eclipsecs.core.comment" value="Suppress all"/>
   </module>
 </module>
