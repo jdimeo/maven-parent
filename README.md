@@ -8,6 +8,7 @@ It includes:
 The parent POM provides a top-level POM from which all of our ERI artifacts can inherit and centralizes plugins, respositories, and other configuration.
 
 Included:
+
 - Our organization name
 - Our Nexus repositories, both for dependencies and plugins
 - Our CI information (currently Jenkins)
@@ -31,6 +32,7 @@ Included:
 The application base POM descends from the parent POM and it itself functions as a parent POM. It configures several plugins used for wrapping up Java .jars as runnable executables.
 
 The following platforms are supported:
+
 - **All**: A runnable .jar via the `maven-shade-plugin`. To use, you must specify the following properties in your POM:
 	- `application.mainClass`: tells the plugin which class to use to launch the application
 	- `application.maxHeapMB`: the maximum heap size in MB (defaults to 1024)
@@ -103,9 +105,9 @@ Simple code metrics that check Java and Scala files against some of our in-house
 	Summary:
 	(c) Has copyright header at top of file.....  9 out of   9 (100.0%)
 	/** Has top-level/class comments............  9 out of   9 (100.0%)
- 	 @  Has authorship information..............  2 out of   9 (22.2%)
- 	 #  Has date of creation information........  2 out of   9 (22.2%)
- 	 U  Number of unit tests....................  0 total
+ 	 @  Has authorship information..............  2 out of   9 (22.2%)
+ 	 #  Has date of creation information........  2 out of   9 (22.2%)
+ 	 U  Number of unit tests....................  0 total
 
 ## ERI Checkstyle ##
 
