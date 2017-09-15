@@ -105,9 +105,9 @@ Simple code metrics that check Java and Scala files against some of our in-house
 	Summary:
 	(c) Has copyright header at top of file.....  9 out of   9 (100.0%)
 	/** Has top-level/class comments............  9 out of   9 (100.0%)
- 	 @  Has authorship information..............  2 out of   9 (22.2%)
- 	 #  Has date of creation information........  2 out of   9 (22.2%)
- 	 U  Number of unit tests....................  0 total
+ 	@   Has authorship information..............  2 out of   9 (22.2%)
+ 	#   Has date of creation information........  2 out of   9 (22.2%)
+ 	U   Number of unit tests....................  0 total
 
 ## ERI Checkstyle ##
 
