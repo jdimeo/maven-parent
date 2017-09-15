@@ -2,7 +2,7 @@
  * Copyright (c) 2016 Elder Research, Inc.
  * All rights reserved.
  *******************************************************************************/
-package com.datamininglab.code;
+package com.elderresearch.code;
 
 import java.util.List;
 
