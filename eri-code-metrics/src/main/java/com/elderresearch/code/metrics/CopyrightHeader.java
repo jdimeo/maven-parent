@@ -2,12 +2,12 @@
  * Copyright (c) 2016 Elder Research, Inc.
  * All rights reserved.
  *******************************************************************************/
-package com.datamininglab.code.metrics;
+package com.elderresearch.code.metrics;
 
 import java.util.Iterator;
 import java.util.List;
 
-import com.datamininglab.code.CodeFlag;
+import com.elderresearch.code.CodeFlag;
 
 public class CopyrightHeader extends CodeFlag {
 	public CopyrightHeader() { super("(c)", "Has copyright header at top of file"); }

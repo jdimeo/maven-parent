@@ -2,7 +2,7 @@
  * Copyright (c) 2016 Elder Research, Inc.
  * All rights reserved.
  *******************************************************************************/
-package com.datamininglab.code;
+package com.elderresearch.code;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -19,11 +19,11 @@ import java.util.Scanner;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
-import com.datamininglab.code.metrics.Authorship;
-import com.datamininglab.code.metrics.ClassDocumentation;
-import com.datamininglab.code.metrics.CopyrightHeader;
-import com.datamininglab.code.metrics.Creation;
-import com.datamininglab.code.metrics.UnitTests;
+import com.elderresearch.code.metrics.Authorship;
+import com.elderresearch.code.metrics.ClassDocumentation;
+import com.elderresearch.code.metrics.CopyrightHeader;
+import com.elderresearch.code.metrics.Creation;
+import com.elderresearch.code.metrics.UnitTests;
 
 /**
  * Outputs ERI code metrics.

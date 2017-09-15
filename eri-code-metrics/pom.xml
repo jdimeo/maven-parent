@@ -2,20 +2,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.datamininglab</groupId>
+		<groupId>com.elderresearch</groupId>
 		<artifactId>eri-application-base</artifactId>
 		<version>3.4.2-SNAPSHOT</version>
 		<relativePath>../eri-application-base/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>eri-code-metrics</artifactId>
-	<packaging>jar</packaging>
-
 	<name>ERI Code Metrics</name>
 	<description>Tabulates agile development related code metrics in a project</description>
 
 	<properties>
-		<application.mainClass>com.datamininglab.code.CodeMetrics</application.mainClass>
+		<application.mainClass>com.elderresearch.code.CodeMetrics</application.mainClass>
 		<application.headerType>console</application.headerType>
 	</properties>
 

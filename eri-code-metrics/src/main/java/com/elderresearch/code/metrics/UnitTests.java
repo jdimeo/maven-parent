@@ -2,11 +2,11 @@
  * Copyright (c) 2016 Elder Research, Inc.
  * All rights reserved.
  *******************************************************************************/
-package com.datamininglab.code.metrics;
+package com.elderresearch.code.metrics;
 
 import java.util.List;
 
-import com.datamininglab.code.CodeCount;
+import com.elderresearch.code.CodeCount;
 
 public class UnitTests extends CodeCount {
 	public UnitTests() { super(" U ", "Number of unit tests"); }
