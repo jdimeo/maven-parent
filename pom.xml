@@ -4,13 +4,13 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>3.4.3-SNAPSHOT</version>
+	<version>3.4.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<scm>code.elderresearch.com</scm>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<eri.repo.base>http://nexus:8081/repository</eri.repo.base>
+		<eri.repo.base>http://nexus.cho.elderresearch.com:8081/repository</eri.repo.base>
 		<eri.releases.repo>${eri.repo.base}/releases</eri.releases.repo>
 		<eri.snapshots.repo>${eri.repo.base}/maven-snapshots</eri.snapshots.repo>
 		<eri.thirdparty.repo>${eri.repo.base}/thirdparty</eri.thirdparty.repo>
