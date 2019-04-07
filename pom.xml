@@ -19,6 +19,7 @@
 		<enunciate.disabled>true</enunciate.disabled>
 		
 		<lombok.version>1.18.6</lombok.version>
+		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
 
 		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient
 		     change since currently there isn't an "official" version of SWT in central -->
@@ -171,7 +172,7 @@
 						<configuration>
 							<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
 							<addOutputDirectory>false</addOutputDirectory>
-							<outputDirectory>${project.build.directory}/delombok-for-javadoc</outputDirectory>
+							<outputDirectory>${lombok.delombok.dir}</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -188,7 +189,7 @@
 						</goals>
 						<configuration>
 							<additionalparam>${javadoc.opts}</additionalparam>
-							<sourcepath>${project.build.directory}/delombok-for-javadoc</sourcepath>
+							<sourcepath>${lombok.delombok.dir}</sourcepath>
 						</configuration>
 					</execution>
 				</executions>
@@ -277,7 +278,7 @@
 						<configuration>
 							<docsDir>${project.build.outputDirectory}</docsDir>
 							<skipEnunciate>${enunciate.disabled}</skipEnunciate>
-							<sources>${project.build.directory}/delombok-for-javadoc</sources>
+							<sources>${lombok.delombok.dir}</sources>
 						</configuration>
 					</execution>
 				</executions>
