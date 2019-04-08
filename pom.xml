@@ -170,6 +170,7 @@
 				<version>${lombok.version}.0</version>
 				<executions>
 					<execution>
+					    <id>main-source</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>delombok</goal>
@@ -180,6 +181,18 @@
 							<outputDirectory>${lombok.delombok.dir}</outputDirectory>
 						</configuration>
 					</execution>
+					<execution>
+                        <id>unpacked-dependencies-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>delombok</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.build.directory}/generated-sources/dependencies</sourceDirectory>
+                            <addOutputDirectory>false</addOutputDirectory>
+                            <outputDirectory>${lombok.delombok.dir}</outputDirectory>
+                        </configuration>
+                    </execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -306,6 +319,7 @@
 							<sources>
 								<source>${project.build.directory}/generated-sources/xjc</source>
 								<source>${project.build.directory}/generated-sources/jooq</source>
+								<source>${project.build.directory}/generated-sources/dependencies</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -324,7 +338,9 @@
 						<configuration>
 							<docsDir>${project.build.outputDirectory}</docsDir>
 							<skipEnunciate>${enunciate.disabled}</skipEnunciate>
-							<sources>${lombok.delombok.dir}</sources>
+							<sources>
+								<source>${lombok.delombok.dir}</source>
+							</sources>
 						</configuration>
 					</execution>
 				</executions>
