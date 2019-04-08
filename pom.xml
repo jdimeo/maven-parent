@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>3.4.4-SNAPSHOT</version>
+	<version>3.5.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -225,6 +225,7 @@
 				<executions>
 					<execution>
 						<id>attach-sources</id>
+						<phase>install</phase>
 						<goals>
 							<goal>jar-no-fork</goal>
 						</goals>
@@ -240,6 +241,7 @@
 					<pushChanges>false</pushChanges>
 					<localCheckout>true</localCheckout>
 					<goals>deploy</goals>
+					<useReleaseProfile>false</useReleaseProfile>
 				</configuration>
 			</plugin>
 			<plugin>
