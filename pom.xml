@@ -20,6 +20,9 @@
 		
 		<lombok.version>1.18.6</lombok.version>
 		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
+		
+		<!-- Defined as a property so it can be changed by a profile -->
+		<src.dir>src/main/java</src.dir>
 
 		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient
 		     change since currently there isn't an "official" version of SWT in central -->
@@ -158,6 +161,8 @@
 	</dependencies>
 
 	<build>
+	   <sourceDirectory>${src.dir}</sourceDirectory>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.projectlombok</groupId>
@@ -176,6 +181,47 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+                <groupId>ru.yaal.maven</groupId>
+                <artifactId>write-text-files-maven-plugin</artifactId>
+                <version>1.1</version>
+			    <executions>
+			     <execution>
+			         <id>write-marker-during-packaging</id>
+			         <phase>prepare-package</phase>
+			         <goals><goal>write-text-files</goal></goals>
+			         <configuration>
+			             <files>
+			                 <file>
+			                     <path>packaging.marker</path>
+			                     <lines>
+			                         <line>Currently packaging ${project.artifactId}...</line>
+			                     </lines>
+			                 </file>
+			             </files>
+			         </configuration>
+			     </execution>
+			    </executions>
+			</plugin>
+			<plugin>
+			     <artifactId>maven-clean-plugin</artifactId>
+			     <executions>
+			         <execution>
+			             <id>clean-packaging-marker</id>
+			             <phase>install</phase>
+			             <goals><goal>clean</goal></goals>
+			             <configuration>
+			                 <excludeDefaultDirectories>true</excludeDefaultDirectories>
+			                 <filesets>
+			                     <fileset>
+			                         <directory>${project.basedir}</directory>
+			                         <includes>packaging.marker</includes>
+			                     </fileset>
+			                 </filesets>
+			             </configuration>
+			         </execution>
+			     </executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -369,6 +415,19 @@
 			<properties>
 				<javadoc.opts>-Xdoclint:none</javadoc.opts>
 			</properties>
+		</profile>
+		
+		<!-- When installing or packaging, use the delomboked source -->
+		<profile>
+            <id>use-delombok-as-source</id>
+            <activation>
+                <file>
+                    <exists>packaging.marker</exists>
+                </file>
+            </activation>
+            <properties>
+                <src.dir>${lombok.delombok.dir}</src.dir>
+            </properties>
 		</profile>
 	</profiles>
 </project>
