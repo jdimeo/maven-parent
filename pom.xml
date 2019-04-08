@@ -241,6 +241,7 @@
 					<pushChanges>false</pushChanges>
 					<localCheckout>true</localCheckout>
 					<goals>deploy</goals>
+					<useReleaseProfile>false</useReleaseProfile>
 				</configuration>
 			</plugin>
 			<plugin>
