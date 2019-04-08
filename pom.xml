@@ -196,45 +196,35 @@
 				</executions>
 			</plugin>
 			<plugin>
-                <groupId>ru.yaal.maven</groupId>
-                <artifactId>write-text-files-maven-plugin</artifactId>
-                <version>1.1</version>
-			    <executions>
-			     <execution>
-			         <id>write-marker-during-packaging</id>
-			         <phase>prepare-package</phase>
-			         <goals><goal>write-text-files</goal></goals>
-			         <configuration>
-			             <files>
-			                 <file>
-			                     <path>packaging.marker</path>
-			                     <lines>
-			                         <line>Currently packaging ${project.artifactId}...</line>
-			                     </lines>
-			                 </file>
-			             </files>
-			         </configuration>
-			     </execution>
-			    </executions>
-			</plugin>
-			<plugin>
-			     <artifactId>maven-clean-plugin</artifactId>
-			     <executions>
-			         <execution>
-			             <id>clean-packaging-marker</id>
-			             <phase>install</phase>
-			             <goals><goal>clean</goal></goals>
-			             <configuration>
-			                 <excludeDefaultDirectories>true</excludeDefaultDirectories>
-			                 <filesets>
-			                     <fileset>
-			                         <directory>${project.basedir}</directory>
-			                         <includes>packaging.marker</includes>
-			                     </fileset>
-			                 </filesets>
-			             </configuration>
-			         </execution>
-			     </executions>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<id>set-property-during-packaging</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>set-system-properties</goal>
+						</goals>
+						<configuration>
+							<properties>
+								<currently.packaging>true</currently.packaging>
+							</properties>
+						</configuration>
+					</execution>
+					<execution>
+						<id>clear-property-after-packaging</id>
+						<phase>install</phase>
+						<goals>
+							<goal>set-system-properties</goal>
+						</goals>
+						<configuration>
+							<properties>
+								<currently.packaging>false</currently.packaging>
+							</properties>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -271,7 +261,7 @@
 					<execution>
 						<id>attach-sources</id>
 						<goals>
-							<goal>jar-no-fork</goal>
+							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -432,18 +422,19 @@
 				<javadoc.opts>-Xdoclint:none</javadoc.opts>
 			</properties>
 		</profile>
-		
+
 		<!-- When installing or packaging, use the delomboked source -->
 		<profile>
-            <id>use-delombok-as-source</id>
-            <activation>
-                <file>
-                    <exists>packaging.marker</exists>
-                </file>
-            </activation>
-            <properties>
-                <src.dir>${lombok.delombok.dir}</src.dir>
-            </properties>
+			<id>use-delombok-as-source</id>
+			<activation>
+				<property>
+					<name>currently.packaging</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<src.dir>${lombok.delombok.dir}</src.dir>
+			</properties>
 		</profile>
 	</profiles>
 </project>
