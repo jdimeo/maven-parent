@@ -21,9 +21,6 @@
 		<lombok.version>1.18.6</lombok.version>
 		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
 		
-		<!-- Defined as a property so it can be changed by a profile -->
-		<src.dir>src/main/java</src.dir>
-
 		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient
 		     change since currently there isn't an "official" version of SWT in central -->
 		<swt.groupId>org.eclipse.swt</swt.groupId>
@@ -161,8 +158,6 @@
 	</dependencies>
 
 	<build>
-	   <sourceDirectory>${src.dir}</sourceDirectory>
-	
 		<plugins>
 			<plugin>
 				<groupId>org.projectlombok</groupId>
@@ -170,7 +165,7 @@
 				<version>${lombok.version}.0</version>
 				<executions>
 					<execution>
-					    <id>main-source</id>
+					    <id>delombok-source</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>delombok</goal>
@@ -179,49 +174,6 @@
 							<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
 							<addOutputDirectory>false</addOutputDirectory>
 							<outputDirectory>${lombok.delombok.dir}</outputDirectory>
-						</configuration>
-					</execution>
-					<execution>
-                        <id>unpacked-dependencies-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>delombok</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirectory>${project.build.directory}/generated-sources/dependencies</sourceDirectory>
-                            <addOutputDirectory>false</addOutputDirectory>
-                            <outputDirectory>${lombok.delombok.dir}</outputDirectory>
-                        </configuration>
-                    </execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0.0</version>
-				<executions>
-					<execution>
-						<id>set-property-during-packaging</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>set-system-properties</goal>
-						</goals>
-						<configuration>
-							<properties>
-								<currently.packaging>true</currently.packaging>
-							</properties>
-						</configuration>
-					</execution>
-					<execution>
-						<id>clear-property-after-packaging</id>
-						<phase>install</phase>
-						<goals>
-							<goal>set-system-properties</goal>
-						</goals>
-						<configuration>
-							<properties>
-								<currently.packaging>false</currently.packaging>
-							</properties>
 						</configuration>
 					</execution>
 				</executions>
@@ -261,7 +213,7 @@
 					<execution>
 						<id>attach-sources</id>
 						<goals>
-							<goal>jar</goal>
+							<goal>jar-no-fork</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -309,7 +261,6 @@
 							<sources>
 								<source>${project.build.directory}/generated-sources/xjc</source>
 								<source>${project.build.directory}/generated-sources/jooq</source>
-								<source>${project.build.directory}/generated-sources/dependencies</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -420,20 +371,6 @@
 			</activation>
 			<properties>
 				<javadoc.opts>-Xdoclint:none</javadoc.opts>
-			</properties>
-		</profile>
-
-		<!-- When installing or packaging, use the delomboked source -->
-		<profile>
-			<id>use-delombok-as-source</id>
-			<activation>
-				<property>
-					<name>currently.packaging</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<properties>
-				<src.dir>${lombok.delombok.dir}</src.dir>
 			</properties>
 		</profile>
 	</profiles>
