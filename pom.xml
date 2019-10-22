@@ -8,17 +8,16 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<scm>code.elderresearch.com</scm>
+		<scm>gitlab.com/ElderResearch</scm>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<eri.repo.base>http://nexus.cho.elderresearch.com:8081/repository</eri.repo.base>
-		<eri.releases.repo>${eri.repo.base}/releases</eri.releases.repo>
-		<eri.snapshots.repo>${eri.repo.base}/maven-snapshots</eri.snapshots.repo>
-		<eri.thirdparty.repo>${eri.repo.base}/thirdparty</eri.thirdparty.repo>
+		<eri.artifacts.base>https://elderresearch.jfrog.io/elderresearch</eri.artifacts.base>
+		<eri.artifacts.releases>${eri.repo.base}/libs-release</eri.artifacts.releases>
+		<eri.artifacts.snapshots>${eri.repo.base}/libs-snapshots</eri.artifacts.snapshots>
 
 		<enunciate.version>2.11.1</enunciate.version>
 		<enunciate.disabled>true</enunciate.disabled>
 		
-		<lombok.version>1.18.6</lombok.version>
+		<lombok.version>1.18.10</lombok.version>
 		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
 		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
 		
@@ -46,82 +45,59 @@
 	</scm>
 
 	<distributionManagement>
-		<downloadUrl>${eri.snapshots.repo}</downloadUrl>
 		<repository>
-			<id>eri-releases-repo</id>
-			<name>ERI Release Artifact Repository</name>
-			<url>${eri.releases.repo}</url>
+			<id>eri-releases</id>
+			<url>${eri.artifacts.releases}</url>
 		</repository>
 		<snapshotRepository>
-			<id>eri-snapshots-repo</id>
-			<name>ERI Snapshot Artifact Repository</name>
-			<url>${eri.snapshots.repo}</url>
+			<id>eri-snapshots</id>
+			<url>${eri.artifacts.snapshots}</url>
 		</snapshotRepository>
-		<site>
-			<id>eri-mvn-site</id>
-			<name>ERI Maven Site</name>
-			<url>${site.write}</url>
-		</site>
 	</distributionManagement>
 
 	<repositories>
 		<repository>
+			<id>eri-releases</id>
+			<url>${eri.releases.repo}</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>false</enabled></snapshots>
+		</repository>
+		<repository>
 			<id>eri-snapshots</id>
 			<url>${eri.snapshots.repo}</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>eri-third-party</id>
-			<url>${eri.thirdparty.repo}</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-			</releases>
-		</repository>
-		<repository>
-			<id>eri-releases-repo</id>
-			<name>ERI Release Artifact Repository</name>
-			<url>${eri.releases.repo}</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
+			<releases><enabled>false</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
 	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>eri-releases-repo</id>
-			<name>ERI Release Artifact Repository</name>
+			<id>eri-releases</id>
 			<url>${eri.releases.repo}</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>false</enabled></snapshots>
 		</pluginRepository>
 		<pluginRepository>
-			<id>eri-third-party</id>
-			<url>${eri.thirdparty.repo}</url>
+			<id>eri-snapshots</id>
+			<url>${eri.snapshots.repo}</url>
+			<releases><enabled>false</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
 		</pluginRepository>
 	</pluginRepositories>
 
 	<issueManagement>
-		<system>YouTrack</system>
-		<url>https://eri.myjetbrains.com/youtrack</url>
+		<system>Jira</system>
+		<url>https://elderresearch.atlassian.net/jira</url>
 	</issueManagement>
 	<ciManagement>
-		<system>Jenkins</system>
-		<url>http://fangorn:8080</url>
+		<system>Gitlab CI/CD</system>
+		<url>https://gitlab.com/ElderResearch/</url>
 	</ciManagement>
 	<organization>
 		<name>Elder Research</name>
 		<url>http://www.elderresearch.com</url>
 	</organization>
+	<inceptionYear>1995</inceptionYear>
 
 	<dependencies>
 		<!-- Always bring in JUnit - test scope won't bloat binaries -->
