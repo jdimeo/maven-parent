@@ -11,8 +11,8 @@
 		<scm>gitlab.com/ElderResearch</scm>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<eri.artifacts.base>https://elderresearch.jfrog.io/elderresearch</eri.artifacts.base>
-		<eri.artifacts.releases>${eri.repo.base}/libs-release</eri.artifacts.releases>
-		<eri.artifacts.snapshots>${eri.repo.base}/libs-snapshots</eri.artifacts.snapshots>
+		<eri.artifacts.releases>${eri.artifacts.base}/libs-release</eri.artifacts.releases>
+		<eri.artifacts.snapshots>${eri.artifacts.base}/libs-snapshots</eri.artifacts.snapshots>
 
 		<enunciate.version>2.11.1</enunciate.version>
 		<enunciate.disabled>true</enunciate.disabled>
@@ -58,13 +58,13 @@
 	<repositories>
 		<repository>
 			<id>eri-releases</id>
-			<url>${eri.releases.repo}</url>
+			<url>${eri.artifacts.releases}</url>
 			<releases><enabled>true</enabled></releases>
 			<snapshots><enabled>false</enabled></snapshots>
 		</repository>
 		<repository>
 			<id>eri-snapshots</id>
-			<url>${eri.snapshots.repo}</url>
+			<url>${eri.artifacts.snapshots}</url>
 			<releases><enabled>false</enabled></releases>
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
@@ -73,13 +73,13 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>eri-releases</id>
-			<url>${eri.releases.repo}</url>
+			<url>${eri.artifacts.releases}</url>
 			<releases><enabled>true</enabled></releases>
 			<snapshots><enabled>false</enabled></snapshots>
 		</pluginRepository>
 		<pluginRepository>
 			<id>eri-snapshots</id>
-			<url>${eri.snapshots.repo}</url>
+			<url>${eri.artifacts.snapshots}</url>
 			<releases><enabled>false</enabled></releases>
 			<snapshots><enabled>true</enabled></snapshots>
 		</pluginRepository>
@@ -211,7 +211,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.3</version>
 				<configuration>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 					<pushChanges>false</pushChanges>
