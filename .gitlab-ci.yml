@@ -1,1 +1,2 @@
-include: 'https://gitlab.com/ElderResearch/devops/gitlab-ci/raw/master/templates/Maven.gitlab-ci.yml'
+---
+include: "https://gitlab.com/ElderResearch/devops/gitlab-ci/raw/master/templates/Maven.gitlab-ci.yml"
