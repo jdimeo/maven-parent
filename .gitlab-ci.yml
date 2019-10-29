@@ -1,5 +1,5 @@
 ---
 include:
-  project: "/ElderResearch/devops/gitlab-ci/"
+  project: "ElderResearch/devops/gitlab-ci"
   ref: "master"
-  file: "Maven.deploy.gitlab-ci.yml"
+  file: "/templates/Maven.deploy.gitlab-ci.yml"
