@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>4.0.3-SNAPSHOT</version>
+	<version>4.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -55,36 +55,6 @@
 			<url>${eri.artifacts.snapshots}</url>
 		</snapshotRepository>
 	</distributionManagement>
-
-	<repositories>
-		<repository>
-			<id>eri-releases</id>
-			<url>${eri.artifacts.releases}</url>
-			<releases><enabled>true</enabled></releases>
-			<snapshots><enabled>false</enabled></snapshots>
-		</repository>
-		<repository>
-			<id>eri-snapshots</id>
-			<url>${eri.artifacts.snapshots}</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>eri-releases</id>
-			<url>${eri.artifacts.releases}</url>
-			<releases><enabled>true</enabled></releases>
-			<snapshots><enabled>false</enabled></snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>eri-snapshots</id>
-			<url>${eri.artifacts.snapshots}</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<issueManagement>
 		<system>Jira</system>
