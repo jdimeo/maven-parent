@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>4.0.3-SNAPSHOT</version>
+	<version>4.0.3</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -42,7 +42,7 @@
 		<connection>scm:git:git://${scm.commons}/maven.git</connection>
 		<developerConnection>scm:git:git://${scm.commons}/maven.git</developerConnection>
 		<url>https://${scm.commons}/maven</url>
-	  <tag>HEAD</tag>
+	  <tag>4.0.3</tag>
   </scm>
 
 	<distributionManagement>
