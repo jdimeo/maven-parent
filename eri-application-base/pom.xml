@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.elderresearch</groupId>
 		<artifactId>eri-maven-base</artifactId>
-		<version>4.0.4-SNAPSHOT</version>
+		<version>4.1.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -108,29 +108,30 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>sh.tak.appbundler</groupId>
-					<artifactId>appbundle-maven-plugin</artifactId>
-					<version>1.2.0</version>
+					<groupId>fvarrui.maven</groupId>
+					<artifactId>javapackager</artifactId>
+					<version>0.8.7E</version>
 					<configuration>
-						<bundleName>${application.file}</bundleName>
+						<platform>mac</platform>
+						<bundleJre>false</bundleJre>
+						<name>${application.file}</name>
+						<displayName>${project.name}</displayName>
 						<mainClass>${application.mainClass}</mainClass>
+						<administratorRequired>false</administratorRequired>
+						<generateInstaller>false</generateInstaller>
+						<runnableJar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</runnableJar>
+						<copyDependencies>false</copyDependencies>
+						<vmArgs>-Xmx${application.maxHeapMB}M ${application.vmArgs}</vmArgs>
 						<iconFile>${application.iconMac}</iconFile>
-						<jvmVersion>${application.minJavaVersion}+</jvmVersion>
-						<jvmOptions>
-							<jvmOption>-Xmx${application.maxHeapMB}M</jvmOption>
-							<jvmOption>${application.vmArgs}</jvmOption>
-						</jvmOptions>
-						<version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</version>
-						<diskImageInternetEnable>true</diskImageInternetEnable>
 					</configuration>
 					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>bundle</goal>
-							</goals>
-						</execution>
-					</executions>
+	                    <execution>
+	                        <phase>package</phase>
+	                        <goals>
+	                            <goal>package</goal>
+	                        </goals>
+	                    </execution>
+	                </executions>
 				</plugin>
 				<plugin>
 					<groupId>org.skife.maven</groupId>
