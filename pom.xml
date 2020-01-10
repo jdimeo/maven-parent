@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>4.0.4-SNAPSHOT</version>
+	<version>4.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
