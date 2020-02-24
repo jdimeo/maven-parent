@@ -17,8 +17,6 @@
 
 		<enunciate.version>2.11.1</enunciate.version>
 		<enunciate.disabled>true</enunciate.disabled>
-		
-		<lombok.version>1.18.12</lombok.version>
 		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
 		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
 		
@@ -82,7 +80,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
+			<version>1.18.12</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -91,6 +89,7 @@
 			<groupId>com.google.auto.service</groupId>
 			<artifactId>auto-service</artifactId>
 			<version>1.0-rc6</version>
+            <scope>provided</scope>
 		</dependency>
 		
 		<!-- Stanardize logging (children can always exclude) -->
