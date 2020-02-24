@@ -18,7 +18,7 @@
 		<enunciate.version>2.11.1</enunciate.version>
 		<enunciate.disabled>true</enunciate.disabled>
 		
-		<lombok.version>1.18.10</lombok.version>
+		<lombok.version>1.18.12</lombok.version>
 		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
 		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
 		
@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>4.13</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- Always bring in Lombok - provided scope won't bloat binaries (APT only) -->
@@ -85,23 +85,30 @@
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- Provide Auto Service for picking up implementing classes and adding to manifest -->
+		<dependency>
+			<groupId>com.google.auto.service</groupId>
+			<artifactId>auto-service</artifactId>
+			<version>1.0-rc6</version>
+		</dependency>
 		
 		<!-- Stanardize logging (children can always exclude) -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.11.2</version>
+			<version>2.13.0</version>
 		</dependency>
 		<!-- For YAML syntax for config files (much more concise than XML), and Jackson is generally awesome -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
-		    <version>2.9.8</version>
+		    <version>2.10.2</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.fasterxml.jackson.dataformat</groupId>
 		    <artifactId>jackson-dataformat-yaml</artifactId>
-		    <version>2.9.8</version>
+		    <version>2.10.2</version>
 		</dependency>
 	</dependencies>
 
@@ -110,7 +117,7 @@
 			<plugin>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok-maven-plugin</artifactId>
-				<version>${lombok.version}.0</version>
+				<version>1.18.10.0</version>
 				<executions>
 					<execution>
 						<id>delombok-main-source</id>
