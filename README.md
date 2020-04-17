@@ -10,13 +10,14 @@ The parent POM provides a top-level POM from which all of our ERI artifacts can 
 Included:
 
 - Our organization name
-- Our Nexus repositories, both for dependencies and plugins
-- Our CI information (currently Jenkins)
-- Our issue management information (currently YouTrack)
+- Our Artifactory repositories, both for dependencies and plugins
+- Our CI information (currently GitLab)
+- Our issue management information (currently Jira)
 - Common dependencies across all projects
 	- JUnit
 	- [Lombok](http://www.projectlombok.org)
 	- Log4j2
+	- [AutoService](https://github.com/google/auto/tree/master/service)
 - Common plugin configuration
 	- Javadoc plugin (ignores Javadoc errors for JDK 1.8+)
 	- Compiler plugin (source code at **1.8**)
