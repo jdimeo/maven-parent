@@ -34,7 +34,6 @@
 	<modules>
 		<module>eri-application-base</module>
 		<module>eri-code-metrics</module>
-		<module>eri-commons-checkstyle</module>
 	</modules>
 
 	<scm>
