@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.elderresearch</groupId>
 		<artifactId>eri-application-base</artifactId>
-		<version>4.1.1</version>
+		<version>5.0.0</version>
 		<relativePath>../eri-application-base/pom.xml</relativePath>
 	</parent>
 
@@ -27,6 +27,16 @@
 				<groupId>org.skife.maven</groupId>
 				<artifactId>really-executable-jar-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -34,23 +44,7 @@
 		<dependency>
 			<groupId>com.beust</groupId>
 			<artifactId>jcommander</artifactId>
-			<version>1.20</version>
+			<version>1.78</version>
 		</dependency>
 	</dependencies>
-	
-	<profiles>
-	   <profile>
-	       <activation>
-	           <os><family>win</family></os>
-	       </activation>
-	       <build>
-	           <plugins>
-	               <plugin>
-		                <groupId>com.akathist.maven.plugins.launch4j</groupId>
-		                <artifactId>launch4j-maven-plugin</artifactId>
-	               </plugin>
-	           </plugins>
-	       </build>
-	   </profile>
-	</profiles>
 </project>
