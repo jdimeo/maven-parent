@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.elderresearch</groupId>
 		<artifactId>eri-application-base</artifactId>
-		<version>4.1.2-SNAPSHOT</version>
+		<version>5.0.0</version>
 		<relativePath>../eri-application-base/pom.xml</relativePath>
 	</parent>
 
@@ -30,6 +30,12 @@
 			<plugin>
 				<groupId>com.akathist.maven.plugins.launch4j</groupId>
 				<artifactId>launch4j-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
