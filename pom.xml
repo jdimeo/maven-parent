@@ -34,6 +34,7 @@
 	<modules>
 		<module>eri-application-base</module>
 		<module>eri-code-metrics</module>
+		<module>eri-scala-base</module>
 	</modules>
 
 	<scm>
@@ -103,7 +104,7 @@
             <scope>provided</scope>
 		</dependency>
 		
-		<!-- Stanardize logging (children can always exclude) -->
+		<!-- Standardize logging (children can always exclude) -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
