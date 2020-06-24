@@ -1,4 +1,4 @@
-# mvn release:prepare release:perform
+mvn release:prepare release:perform
 $curr = ((git rev-parse HEAD) | Out-String).trim()
 $prev = ((git rev-parse HEAD^1) | Out-String).trim()
 git checkout master

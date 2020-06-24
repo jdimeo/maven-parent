@@ -339,6 +339,23 @@
 				<system.swt.artifactId>${swt.artifactId.linux}</system.swt.artifactId>
 			</properties>
 		</profile>
+		
+		<!-- Provide a profile that will target Java 8 for backwards compatibility if -Djava.major.version=8 -->
+		<profile>
+			<id>java8</id>
+			<properties>
+				<!-- Compile code for Java 8 compatibility -->
+				<maven.compiler.release>8</maven.compiler.release>
+				<!-- Instruct Javadoc plugin that code is Java 8 -->
+				<source>1.8</source>
+			</properties>
+			<activation>
+				<property>
+					<name>java.major.version</name>
+					<value>8</value>
+				</property>
+			</activation>
+		</profile>
 
 		<!-- Javadocs now return exit code 1 in JDK8+ which prevents any Maven build from completing unless the Javadocs are perfect -->
 		<profile>
