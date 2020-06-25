@@ -16,7 +16,7 @@
 
 	<properties>
 		<application.maxHeapMB>1024</application.maxHeapMB>
-		<application.minJavaVersion>1.8</application.minJavaVersion>
+		<application.minJavaVersion>11.0</application.minJavaVersion>
 		<application.vmArgs>-da</application.vmArgs>
 		<application.headerType>gui</application.headerType>
 		<application.vendor>${project.organization.name}</application.vendor>
@@ -108,9 +108,9 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>fvarrui.maven</groupId>
+					<groupId>io.github.fvarrui</groupId>
 					<artifactId>javapackager</artifactId>
-					<version>0.8.7E</version>
+					<version>1.0.3</version>
 					<configuration>
 						<platform>mac</platform>
 						<bundleJre>false</bundleJre>
