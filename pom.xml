@@ -22,10 +22,12 @@
 		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
 		
 		<project.generatedSource.directory>${project.build.directory}/generated-sources</project.generatedSource.directory>
-		
-		<!-- This is used to skip copying source code (for cross-compiling)
-		     if the relative.source.path property isn't defined  -->
-		<skip.source.copy>true</skip.source.copy>
+	
+		<!-- These properties help with cross-compiling to a different Java version for backwards compatibility. If you
+		     bind the copy phase to "generate-sources" and specify the sibling module with the current sources, the
+		     plugin will copy over the sources to a folder in target to allow recompilation with a different release. -->
+		<source.copy.phase>none</source.copy.phase>
+		<relative.source.path>../core/src/main/java</relative.source.path>
 		<maven.compiler.release>11</maven.compiler.release>
 		
 		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient
@@ -320,12 +322,11 @@
 				<executions>
 					<execution>
 						<id>copy-java-source</id>
-						<phase>generate-sources</phase>
+						<phase>${source.copy.phase}</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<skip>${skip.source.copy}</skip>
 							<outputDirectory>${project.generatedSource.directory}/java</outputDirectory>
 							<resources>
 								<resource>
@@ -383,18 +384,6 @@
 			</activation>
 			<properties>
 				<javadoc.opts>-Xdoclint:none</javadoc.opts>
-			</properties>
-		</profile>
-		
-		<!-- Copy source located at relative.source.path and recompile for release 8 -->
-		<profile>
-			<id>copy-source-for-java8</id>
-			<activation>
-				<property><name>relative.source.path</name></property>
-			</activation>
-			<properties>
-				<skip.source.copy>false</skip.source.copy>
-				<maven.compiler.release>8</maven.compiler.release>
 			</properties>
 		</profile>
 	</profiles>
