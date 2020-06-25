@@ -11,6 +11,7 @@
 		<scm>gitlab.com/ElderResearch</scm>
 		<scm.commons>${scm}/toolbox/commons/jvm</scm.commons>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.release>11</maven.compiler.release>
 		<eri.artifacts.base>https://elderresearch.jfrog.io/elderresearch</eri.artifacts.base>
 		<eri.artifacts.releases>${eri.artifacts.base}/libs-release</eri.artifacts.releases>
 		<eri.artifacts.snapshots>${eri.artifacts.base}/libs-snapshot</eri.artifacts.snapshots>
@@ -175,9 +176,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
-				<configuration>
-					<release>11</release>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
