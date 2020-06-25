@@ -2,7 +2,9 @@
 
 This repository contains several core/foundational artifacts for developing software with Maven at ERI.
 
-It includes:
+| ℹ Compatibility information |
+| --- |
+| Projects descending from `eri-maven-base` **5.x.x** must be built with [**JDK 11+**](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) (even if they are targeting Java 8) and Maven **3.5.x+**.
 
 ## ERI parent POM ##
 
