@@ -139,10 +139,4 @@ Simple code metrics that check Java and Scala files against some of our in-house
  	#   Has date of creation information........  2 out of   9 (22.2%)
  	U   Number of unit tests....................  0 total
 
-## ERI Checkstyle ##
-
-A shared configuration for the Checkstyle plugin which allows your IDE to check that you are meeting ERI's coding style.
-    
-
-
 
