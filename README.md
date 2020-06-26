@@ -1,32 +1,63 @@
 # ERI Maven Base #
 
-This repository contains several core/foundational artifacts for developming software with Maven.
+This repository contains several core/foundational artifacts for developing software with Maven at ERI.
 
-It includes:
+| ℹ Compatibility information |
+| --- |
+| Projects descending from `eri-maven-base` **5.x.x** must be built with [**JDK 11+**](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) (even if they are targeting Java 8) and Maven **3.5.x+**.
+
 ## ERI parent POM ##
 
-The parent POM provides a top-level POM from which all of our ERI artifacts can inherit and centralizes plugins, respositories, and other configuration.
+The parent POM provides a top-level POM from which all of our ERI artifacts can inherit and centralizes plugins, repositories, and other configuration. This includes:
 
-Included:
-
-- Our organization name
-- Our Artifactory repositories, both for dependencies and plugins
-- Our CI information (currently GitLab)
-- Our issue management information (currently Jira)
+- Our organization name and inception year (which you should always override so that your project doesn't have an inception in the '90s 😊)
+- Our artifact repositories, both for dependencies and plugins (Artifactory and JitPack.io)
+- Our CI information (GitLab)
+- Our issue management information (Jira)
 - Common dependencies across all projects
-	- JUnit
+	- JUnit 4.x
 	- [Lombok](http://www.projectlombok.org)
 	- Log4j2
 	- [AutoService](https://github.com/google/auto/tree/master/service)
 - Common plugin configuration
 	- Javadoc plugin (ignores Javadoc errors for JDK 1.8+)
-	- Compiler plugin (source code at **1.8**)
+	- Compiler plugin (source code at **release 11**)
 	- Source plugin
 	- Release plugin
-	- Build helper plugin (parses build version and adds two common code generated folders `target/generated-sources/xjc` and `target/generated-sources/jooq` as source)
+	- Build helper plugin (parses build version and adds common code generated folders like `target/generated-sources/java` and `target/generated-sources/jooq` as source)
 	- [Enunciate](https://github.com/stoicflame/enunciate/wiki) which is disabled by default (set `enunciate.disabled` to `false` to enable)
 	- Site plugin, which configures a Markdown renderer and a responsive, modern skin/theme
 	- The current system in a property `system.platform` (either `win32`, `win64`, `mac32`, `mac64`, or `linux`), as well as the corresponding SWT artifact name
+
+### Java 8 backwards compatibility
+
+Since our parent POM is now on Java 11, you may need to cross-compile your code to target both Java 8 and Java 11+. This POM is configured to make that easier than methods like controversial [mult-release .jars](https://www.baeldung.com/java-multi-release-jar).
+
+Set up two child modules like so:
+```
+/pom.xml             Aggregator POM that descends from eri-maven-base 5.x.x
+  /core              "Main" or core child module with Java 11+ source code
+    /src/main/java  
+    pom.xml
+  /java8             Sibling module that is initially empty
+    pom.xml          
+```
+
+In `java8`'s `pom.xml`, define the following properties:
+```
+<properties>
+	<source.copy.phase>generate-sources</source.copy.phase>
+	<relative.source.path>../core/src/main/java</relative.source.path>
+	<maven.compiler.release>8</maven.compiler.release>
+</properties>
+```
+
+This will bind the `maven-resource-plugin` to the `generate-sources` phase so it will copy the main sources from `core`'s source folder into `java8`'s `target/generated-sources` folder before compiling. This allows the `maven-compiler-plugin`, now overridden to target release **8**, to recompile the sources for the sibling module.
+
+If there are any APIs that are Java 11+ only, you will get a compile error in the `java8` module. You can then [exclude them from the copy](https://maven.apache.org/plugins/maven-resources-plugin/examples/include-exclude.html) using the `<excludes>` configuration of the `maven-resource-plugin`. Then, reimplement the excluded classes in `java8`'s `src/main/java` so that it will be compiled along with the copied Java-8-compatible sources from `core`.
+
+Dependencies should be declared in the parent POM so they are shared across both modules.
+
 
 ## ERI application base ##
 
@@ -44,7 +75,6 @@ The following platforms are supported:
 You also must instantiate the following plugin:
 
 	<plugin>
-    	<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-shade-plugin</artifactId>
 	</plugin>
 
@@ -56,10 +86,6 @@ You also must instantiate the following plugin:
 You also must instantiate the following plugins:
 
 	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-shade-plugin</artifactId>
-	</plugin>
-	<plugin>
 		<groupId>com.akathist.maven.plugins.launch4j</groupId>
 		<artifactId>launch4j-maven-plugin</artifactId>
 	</plugin>
@@ -70,8 +96,8 @@ You also must instantiate the following plugins:
 You also must instantiate the following plugin:
 
 	<plugin>
-		<groupId>sh.tak.appbundler</groupId>
-		<artifactId>appbundle-maven-plugin</artifactId>
+		<groupId>io.github.fvarrui</groupId>
+		<artifactId>javapackager</artifactId>
 	</plugin>
            
 - **Linux**: adds a basic **.sh** script to the runnable jar file that makes it self-executable. You must specify properties common to all platforms above.
@@ -80,40 +106,14 @@ You also must instantiate the following plugin:
 You also must instantiate the following plugins:
 
 	<plugin>
-    	<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-shade-plugin</artifactId>
-	</plugin>
-	<plugin>
 		<groupId>org.skife.maven</groupId>
 		<artifactId>really-executable-jar-maven-plugin</artifactId>
 	</plugin>
 	
-## ERI Code Metrics ##
+## ERI Scala Base ##
 
-Simple code metrics that check Java and Scala files against some of our in-house coding standards. Pre-built Linux/Mac and Windows binaries can be found in Box under **Projects Software**. An example of the output of the tool on the project itself:
-
-	File:                                                          |(c)|/**| @ | # | U
-	src\main\java\com\datamininglab\code\CodeCount                 | Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\CodeFlag                  | Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\CodeMetric                | Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\CodeMetrics               | Y | Y | Y | Y |  0
-	src\main\java\com\datamininglab\code\metrics\Authorship        | Y | Y | Y | ! |  0
-	src\main\java\com\datamininglab\code\metrics\ClassDocumentation| Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\metrics\CopyrightHeader   | Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\metrics\Creation          | Y | Y | ! | Y |  0
-	src\main\java\com\datamininglab\code\metrics\UnitTests         | Y | Y | ! | ! |  0
-	
-	Summary:
-	(c) Has copyright header at top of file.....  9 out of   9 (100.0%)
-	/** Has top-level/class comments............  9 out of   9 (100.0%)
- 	@   Has authorship information..............  2 out of   9 (22.2%)
- 	#   Has date of creation information........  2 out of   9 (22.2%)
- 	U   Number of unit tests....................  0 total
-
-## ERI Checkstyle ##
-
-A shared configuration for the Checkstyle plugin which allows your IDE to check that you are meeting ERI's coding style.
-    
-
-
+This POM inherits from `eri-application-base` and sets up Maven for Scala or Java/Scala codebases by configuring the `scala-maven-plugin` to compile Scala code in `src/main/scala` and `src/test/scala` with version **2.11.12**. You can change the compiler's version and compile order with the following 3 properties:
+* `scala.major.version`
+* `scala.version` (usually a patch version appended to `${scala.major.version}`)
+* `scala.compile.order` (defaults to `JavaThenScala`)
 

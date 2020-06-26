@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>5.1.0</version>
+	<version>5.2.0</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -21,6 +21,15 @@
 		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
 		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
 		
+		<project.generatedSource.directory>${project.build.directory}/generated-sources</project.generatedSource.directory>
+	
+		<!-- These properties help with cross-compiling to a different Java version for backwards compatibility. If you
+		     bind the copy phase to "generate-sources" and specify the sibling module with the current sources, the
+		     plugin will copy over the sources to a folder in target to allow recompilation with a different release. -->
+		<source.copy.phase>none</source.copy.phase>
+		<relative.source.path>../core/src/main/java</relative.source.path>
+		<maven.compiler.release>11</maven.compiler.release>
+		
 		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient
 		     change since currently there isn't an "official" version of SWT in central -->
 		<swt.groupId>org.eclipse.swt</swt.groupId>
@@ -33,7 +42,6 @@
 
 	<modules>
 		<module>eri-application-base</module>
-		<module>eri-code-metrics</module>
 		<module>eri-scala-base</module>
 	</modules>
 
@@ -41,7 +49,7 @@
 		<connection>scm:git:git://${scm.commons}/maven.git</connection>
 		<developerConnection>scm:git:git://${scm.commons}/maven.git</developerConnection>
 		<url>https://${scm.commons}/maven</url>
-	  <tag>5.1.0</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<distributionManagement>
@@ -74,7 +82,7 @@
         	<dependency>
             	<groupId>com.fasterxml.jackson</groupId>
             	<artifactId>jackson-bom</artifactId>
-            	<version>2.11.0</version>
+            	<version>2.11.1</version>
             	<scope>import</scope>
 	            <type>pom</type>
 	        </dependency>
@@ -88,6 +96,7 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<!-- Always bring in Lombok - provided scope won't bloat binaries (APT only) -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -175,9 +184,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
-				<configuration>
-					<release>11</release>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -235,9 +241,14 @@
 							<goal>add-source</goal>
 						</goals>
 						<configuration>
+							<!-- Doesn't hurt to declare all folders here - they'll get picked up if they exist -->
 							<sources>
-								<source>${project.build.directory}/generated-sources/xjc</source>
-								<source>${project.build.directory}/generated-sources/jooq</source>
+								<!-- Generic folder for generated Java sources -->
+								<source>${project.generatedSource.directory}/java</source>
+								<!-- Folder for generated JOOQ database models -->
+								<source>${project.generatedSource.directory}/jooq</source>
+								<!-- Folder for generated JAXB/XSD models -->
+								<source>${project.generatedSource.directory}/xjc</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -302,6 +313,30 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			
+			<!-- Copy sources to a generated source folder so it can be recompiled for a different Java version -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>copy-java-source</id>
+						<phase>${source.copy.phase}</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.generatedSource.directory}/java</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${relative.source.path}</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -340,23 +375,6 @@
 			</properties>
 		</profile>
 		
-		<!-- Provide a profile that will target Java 8 for backwards compatibility if -Djava.major.version=8 -->
-		<profile>
-			<id>java8</id>
-			<properties>
-				<!-- Compile code for Java 8 compatibility -->
-				<maven.compiler.release>8</maven.compiler.release>
-				<!-- Instruct Javadoc plugin that code is Java 8 -->
-				<source>1.8</source>
-			</properties>
-			<activation>
-				<property>
-					<name>java.major.version</name>
-					<value>8</value>
-				</property>
-			</activation>
-		</profile>
-
 		<!-- Javadocs now return exit code 1 in JDK8+ which prevents any Maven build from completing unless the Javadocs are perfect -->
 		<profile>
 			<id>javadoc-doclint-disable</id>
