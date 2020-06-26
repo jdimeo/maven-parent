@@ -117,26 +117,3 @@ This POM inherits from `eri-application-base` and sets up Maven for Scala or Jav
 * `scala.version` (usually a patch version appended to `${scala.major.version}`)
 * `scala.compile.order` (defaults to `JavaThenScala`)
 
-## ERI Code Metrics ##
-
-Simple code metrics that check Java and Scala files against some of our in-house coding standards. Pre-built Linux/Mac and Windows binaries can be found in Box under **Projects Software**. An example of the output of the tool on the project itself:
-
-	File:                                                          |(c)|/**| @ | # | U
-	src\main\java\com\datamininglab\code\CodeCount                 | Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\CodeFlag                  | Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\CodeMetric                | Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\CodeMetrics               | Y | Y | Y | Y |  0
-	src\main\java\com\datamininglab\code\metrics\Authorship        | Y | Y | Y | ! |  0
-	src\main\java\com\datamininglab\code\metrics\ClassDocumentation| Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\metrics\CopyrightHeader   | Y | Y | ! | ! |  0
-	src\main\java\com\datamininglab\code\metrics\Creation          | Y | Y | ! | Y |  0
-	src\main\java\com\datamininglab\code\metrics\UnitTests         | Y | Y | ! | ! |  0
-	
-	Summary:
-	(c) Has copyright header at top of file.....  9 out of   9 (100.0%)
-	/** Has top-level/class comments............  9 out of   9 (100.0%)
- 	@   Has authorship information..............  2 out of   9 (22.2%)
- 	#   Has date of creation information........  2 out of   9 (22.2%)
- 	U   Number of unit tests....................  0 total
-
-
