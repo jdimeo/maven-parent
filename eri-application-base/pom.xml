@@ -121,7 +121,10 @@
 						<generateInstaller>false</generateInstaller>
 						<runnableJar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</runnableJar>
 						<copyDependencies>false</copyDependencies>
-						<vmArgs>-Xmx${application.maxHeapMB}M ${application.vmArgs}</vmArgs>
+						<vmArgs>
+							<vmArg>-Xmx${application.maxHeapMB}M</vmArg>
+							<vmArg>${application.vmArgs}</vmArg>
+						</vmArgs>
 						<iconFile>${application.iconMac}</iconFile>
 					</configuration>
 					<executions>
