@@ -331,6 +331,7 @@
 								<resource>
 									<directory>${relative.source.path}</directory>
 									<filtering>false</filtering>
+									<exclude>${source.copy.exclude}</exclude>
 								</resource>
 							</resources>
 						</configuration>
