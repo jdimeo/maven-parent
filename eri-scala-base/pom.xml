@@ -15,8 +15,8 @@
 	<inceptionYear>2020</inceptionYear>
 
 	<properties>
-		<scala.major.version>2.11</scala.major.version>
-		<scala.version>${scala.major.version}.12</scala.version>
+		<scala.major.version>2.13</scala.major.version>
+		<scala.version>${scala.major.version}.3</scala.version>
 		<scala.compile.order>JavaThenScala</scala.compile.order>
 	</properties>
 
