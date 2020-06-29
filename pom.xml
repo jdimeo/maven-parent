@@ -111,6 +111,13 @@
 			<artifactId>auto-service</artifactId>
 			<version>1.0-rc6</version>
             <scope>provided</scope>
+          	<exclusions>
+	    		<!-- See https://groups.google.com/forum/#!topic/guava-discuss/AKBGPca9unw -->
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>listenablefuture</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- Standardize logging (children can always exclude) -->
