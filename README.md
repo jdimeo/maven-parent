@@ -46,15 +46,16 @@ Set up two child modules like so:
 In `java8`'s `pom.xml`, define the following properties:
 ```
 <properties>
-	<source.copy.phase>generate-sources</source.copy.phase>
 	<relative.source.path>../core/src/main/java</relative.source.path>
+	<source.copy.phase>generate-sources</source.copy.phase>
+	<source.copy.exclude>**/FileUsingJDK9+APIs.java</source.copy.exclude>
 	<maven.compiler.release>8</maven.compiler.release>
 </properties>
 ```
 
 This will bind the `maven-resource-plugin` to the `generate-sources` phase so it will copy the main sources from `core`'s source folder into `java8`'s `target/generated-sources` folder before compiling. This allows the `maven-compiler-plugin`, now overridden to target release **8**, to recompile the sources for the sibling module.
 
-If there are any APIs that are Java 11+ only, you will get a compile error in the `java8` module. You can then [exclude them from the copy](https://maven.apache.org/plugins/maven-resources-plugin/examples/include-exclude.html) using the `<excludes>` configuration of the `maven-resource-plugin`. Then, reimplement the excluded classes in `java8`'s `src/main/java` so that it will be compiled along with the copied Java-8-compatible sources from `core`.
+If there are any APIs that are Java 11+ only, you will get a compile error in the `java8` module. You can then [exclude them from the copy](https://maven.apache.org/plugins/maven-resources-plugin/examples/include-exclude.html) using the `<excludes>` configuration of the `maven-resource-plugin`. Then, reimplement the excluded classes in `java8`'s `src/main/java` so that it will be compiled along with the copied Java-8-compatible sources from `core`. The property `source.copy.exclude` is provided for convenience so you don't have to override the plugin configuration for simple cases. 
 
 Dependencies should be declared in the parent POM so they are shared across both modules.
 

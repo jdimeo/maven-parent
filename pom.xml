@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>eri-maven-base</artifactId>
-	<version>5.2.0</version>
+	<version>5.2.1</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -49,7 +49,7 @@
 		<connection>scm:git:git://${scm.commons}/maven.git</connection>
 		<developerConnection>scm:git:git://${scm.commons}/maven.git</developerConnection>
 		<url>https://${scm.commons}/maven</url>
-	  <tag>HEAD</tag>
+	  <tag>5.2.1</tag>
   </scm>
 
 	<distributionManagement>
@@ -111,6 +111,13 @@
 			<artifactId>auto-service</artifactId>
 			<version>1.0-rc6</version>
             <scope>provided</scope>
+          	<exclusions>
+	    		<!-- See https://groups.google.com/forum/#!topic/guava-discuss/AKBGPca9unw -->
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>listenablefuture</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- Standardize logging (children can always exclude) -->
@@ -331,6 +338,7 @@
 								<resource>
 									<directory>${relative.source.path}</directory>
 									<filtering>false</filtering>
+									<exclude>${source.copy.exclude}</exclude>
 								</resource>
 							</resources>
 						</configuration>
