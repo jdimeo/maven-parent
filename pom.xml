@@ -21,7 +21,7 @@
 	</issueManagement>
 	<ciManagement>
 		<system>Gitlab CI/CD</system>
-		<url>https://gitlab.com/ElderResearch/</url>
+		<url>https://gitlab.com/ElderResearch</url>
 	</ciManagement>
 	<distributionManagement>
 		<repository>
@@ -55,8 +55,9 @@
 		<maven.compiler.release>11</maven.compiler.release>
 	
 		<!-- Git URLs -->
+		<!-- Also set the project directory to get SCM URLs working. See https://stackoverflow.com/a/48492290/5162458 -->
 		<git.url.base>github.com/ElderResearch</git.url.base>
-		<git.url.path>maven-parent</git.url.path>
+		<project.directory>maven-parent</project.directory>
 		
 		<!-- Artifact distribution -->
 		<eri.artifacts.base>https://elderresearch.jfrog.io/elderresearch</eri.artifacts.base>
@@ -96,10 +97,11 @@
 		<module>scala-parent</module>
 	</modules>
 
+	<url>https://${git.url.base}</url>
+
 	<scm>
-		<connection>scm:git:ssh://${git.url.base}/${git.url.path}</connection>
-		<url>https://${git.url.base}/${git.url.path}</url>
-		<tag>HEAD</tag>
+		<connection>scm:git:ssh://${git.url.base}</connection>
+		<url>https://${git.url.base}</url>
 	</scm>
 
 	<!-- Standardize Jackson versions across all modules -->

@@ -15,8 +15,9 @@
 	<name>Elder Research Parent (Internal)</name>
 	
 	<properties>
+		<project.directory></project.directory>
 		<git.url.base>gitlab.com/ElderResearch</git.url.base>
-		<git.url.commons>${git.url.base}/toolbox/commons/jvm</git.url.commons>
+		<git.url.commons>toolbox/commons/jvm</git.url.commons>
 	</properties>
 
 	<!-- TOOD: Override/remove MIT license? -->
