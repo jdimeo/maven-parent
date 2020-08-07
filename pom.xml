@@ -76,6 +76,9 @@
 		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
 		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
 		
+		<!-- This is automatically set to "none" for JDK8+ since javadoc issues break the build -->
+		<javadoc.doclint>all</javadoc.doclint>
+		
 		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient
 		     change since currently there isn't an "official" version of SWT in central -->
 		<swt.groupId>org.eclipse.swt</swt.groupId>
@@ -213,9 +216,7 @@
 							<goal>jar</goal>
 						</goals>
 						<configuration>
-							<additionalOptions>
-								<additionalOption>${javadoc.opts}</additionalOption>
-							</additionalOptions>
+							<doclint>${javadoc.doclint}</doclint>
 							<sourcepath>${lombok.delombok.dir}</sourcepath>
 						</configuration>
 					</execution>
@@ -558,7 +559,7 @@
 				<jdk>[1.8,)</jdk>
 			</activation>
 			<properties>
-				<javadoc.opts>-Xdoclint:none</javadoc.opts>
+				<javadoc.doclint>none</javadoc.doclint>
 			</properties>
 		</profile>
 	</profiles>
