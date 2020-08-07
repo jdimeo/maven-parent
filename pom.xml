@@ -283,6 +283,9 @@
 						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+				    <locale>en_US</locale>
+				</configuration>
 			</plugin>
 			<!-- Enunciate generates documentation (like swagger.json) From Javadocs -->
 			<plugin>
