@@ -44,7 +44,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.generatedSource.dir>${project.build.directory}/generated-sources</project.generatedSource.dir>
+		<project.generatedSource.directory>${project.build.directory}/generated-sources</project.generatedSource.directory>
 		
 		<!-- These properties help with cross-compiling to a different Java version for backwards compatibility. If you
 		     bind the copy phase to "generate-sources" and specify the sibling module with the current sources, the
