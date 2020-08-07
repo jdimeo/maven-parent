@@ -20,16 +20,20 @@
 		<git.url.commons>toolbox/commons/jvm</git.url.commons>
 	</properties>
 
-	<!-- TOOD: Override/remove MIT license? -->
+	<!-- Remove inherited OSS license -->
+	<licenses combine.self="override">
+		<license>
+		</license>
+	</licenses>
 
 	<build>
 		<pluginManagement>
 			<plugins>
 				<!-- Configures the release plugin for use to deploy to Artifactory -->
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-release-plugin</artifactId>
-	    			<version>3.0.0-M1</version><!--$NO-MVN-MAN-VER$-->
+				    <groupId>org.apache.maven.plugins</groupId>
+    				<artifactId>maven-release-plugin</artifactId>
+    				<version>3.0.0-M1</version>
 					<configuration>
 						<generateReleasePoms>false</generateReleasePoms>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
