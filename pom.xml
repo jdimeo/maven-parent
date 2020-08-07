@@ -63,6 +63,9 @@
 		<eri.artifacts.releases>${eri.artifacts.base}/libs-release</eri.artifacts.releases>
 		<eri.artifacts.snapshots>${eri.artifacts.base}/libs-snapshot</eri.artifacts.snapshots>
 
+		<!-- Declare logging version as a property for children to use -->
+		<log4j.version>2.13.3</log4j.version>
+
 		<!-- For generating swagger.json by scraping source models and javadoc -->
 		<enunciate.version>2.13.0</enunciate.version>
 		<enunciate.disabled>true</enunciate.disabled>
@@ -147,7 +150,7 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.13.3</version>
+			<version>${log4j.version}</version>
 		</dependency>
 		<!-- For YAML syntax for config files (much more concise than XML), and Jackson is generally awesome -->
 		<dependency>
@@ -258,7 +261,7 @@
 						<configuration>
 							<name>year.current</name>
 							<pattern>yyyy</pattern>
-							<units>year</units>
+							<unit>year</unit>
 						</configuration>
 					</execution>
 					<execution>
@@ -487,9 +490,9 @@
 				</plugin>
 				<!-- Wrap the shaded jar as a .sh for Linux -->
 				<plugin>
-					<groupId>org.skife.maven</groupId>
-					<artifactId>really-executable-jar-maven-plugin</artifactId>
-					<version>1.4.1</version>
+				    <groupId>org.skife.maven</groupId>
+    				<artifactId>really-executable-jar-maven-plugin</artifactId>
+					<version>1.5.0</version>
 					<configuration>
 						<flags>-Xmx${application.maxHeapMB}M ${application.vmArgs}</flags>
 						<programFile>${application.file}</programFile>
