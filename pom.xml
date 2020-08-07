@@ -50,6 +50,7 @@
 		     bind the copy phase to "generate-sources" and specify the sibling module with the current sources, the
 		     plugin will copy over the sources to a folder in target to allow recompilation with a different release. -->
 		<source.copy.phase>none</source.copy.phase>
+		<source.copy.exclude></source.copy.exclude>
 		<relative.source.path>../core/src/main/java</relative.source.path>
 		<maven.compiler.release>11</maven.compiler.release>
 	
@@ -340,7 +341,6 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			
 			<!-- Copy sources to a generated source folder so it can be recompiled for a different Java version -->
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -364,142 +364,147 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-
-			<!-- Create a "fat"/shaded jar that is executable and contains all dependencies -->			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.3</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<shadedArtifactAttached>true</shadedArtifactAttached>
-					<shadedClassifierName>shaded</shadedClassifierName>
-					<filters>
-						<filter>
-							<artifact>*:*</artifact>
-							<excludes>
-								<exclude>META-INF/*.SF</exclude>
-								<exclude>META-INF/*.DSA</exclude>
-								<exclude>META-INF/*.RSA</exclude>
-							</excludes>
-						</filter>
-					</filters>
-					<transformers>
-						<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-							<mainClass>${application.mainClass}</mainClass>
-							<manifestEntries>
-								<Implementation-Title>${project.name}</Implementation-Title>
-								<Implementation-Version>${project.version}</Implementation-Version>
-								<Implementation-Vendor>${application.vendor}</Implementation-Vendor>
-								<!-- Log4j2 is multi-release even if we aren't -->
-								<Multi-Release>true</Multi-Release>
-							</manifestEntries>
-						</transformer>
-					</transformers>
-				</configuration>
-			</plugin>
-			<!-- Wrap the shaded jar as an .exe for Windows -->
-			<plugin>
-				<groupId>com.akathist.maven.plugins.launch4j</groupId>
-				<artifactId>launch4j-maven-plugin</artifactId>
-				<version>1.7.25</version>
-				<executions>
-					<execution>
-						<id>l4j-gui</id>
-						<phase>package</phase>
-						<goals>
-							<goal>launch4j</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<headerType>${application.headerType}</headerType>
-					<outfile>${project.build.directory}/${application.file}.exe</outfile>
-					<jar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</jar>
-					<errTitle>${project.name} Error</errTitle>
-					<classPath>
-						<mainClass>${application.mainClass}</mainClass>
-					</classPath>
-					<icon>${application.iconWin}</icon>
-					<jre>
-						<minVersion>${application.minJavaVersion}.0</minVersion>
-						<initialHeapSize>128</initialHeapSize>
-						<maxHeapSize>${application.maxHeapMB}</maxHeapSize>
-						<opts>
-							<opt>${application.vmArgs}</opt>
-						</opts>
-					</jre>
-					<versionInfo>
-						<fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
-						<txtFileVersion>${project.version}</txtFileVersion>
-						<fileDescription>${project.description}</fileDescription>
-						<copyright>${year.current} ${project.organization.name}</copyright>
-						<productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</productVersion>
-						<txtProductVersion>${project.version}</txtProductVersion>
-						<productName>${project.name}</productName>
-						<internalName>${project.name}</internalName>
-						<originalFilename>${project.artifactId}.exe</originalFilename>
-					</versionInfo>
-				</configuration>
-			</plugin>
-			<!-- Wrap the shaded jar as a .app for Mac OSX -->
-			<plugin>
-				<groupId>io.github.fvarrui</groupId>
-				<artifactId>javapackager</artifactId>
-				<version>1.0.3</version>
-				<configuration>
-					<platform>mac</platform>
-					<bundleJre>false</bundleJre>
-					<name>${application.file}</name>
-					<displayName>${project.name}</displayName>
-					<mainClass>${application.mainClass}</mainClass>
-					<administratorRequired>false</administratorRequired>
-					<generateInstaller>false</generateInstaller>
-					<runnableJar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</runnableJar>
-					<copyDependencies>false</copyDependencies>
-					<vmArgs>
-						<vmArg>-Xmx${application.maxHeapMB}M</vmArg>
-						<vmArg>${application.vmArgs}</vmArg>
-					</vmArgs>
-					<iconFile>${application.iconMac}</iconFile>
-				</configuration>
-				<executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>package</goal>
-                        </goals>
-                    </execution>
-                </executions>
-			</plugin>
-			<!-- Wrap the shaded jar as a .sh for Linux -->
-			<plugin>
-				<groupId>org.skife.maven</groupId>
-				<artifactId>really-executable-jar-maven-plugin</artifactId>
-				<version>1.4.1</version>
-				<configuration>
-					<flags>-Xmx${application.maxHeapMB}M ${application.vmArgs}</flags>
-					<programFile>${application.file}</programFile>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>really-executable-jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			</plugin>			
 		</plugins>
+		
+		<!-- These plugins are used to create platform specific executables and must be instantiated by children -->
+		<pluginManagement>
+			<plugins>
+				<!-- Create a "fat"/shaded jar that is executable and contains all dependencies -->			
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>2.3</version>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>shade</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<shadedArtifactAttached>true</shadedArtifactAttached>
+						<shadedClassifierName>shaded</shadedClassifierName>
+						<filters>
+							<filter>
+								<artifact>*:*</artifact>
+								<excludes>
+									<exclude>META-INF/*.SF</exclude>
+									<exclude>META-INF/*.DSA</exclude>
+									<exclude>META-INF/*.RSA</exclude>
+								</excludes>
+							</filter>
+						</filters>
+						<transformers>
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+							<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<mainClass>${application.mainClass}</mainClass>
+								<manifestEntries>
+									<Implementation-Title>${project.name}</Implementation-Title>
+									<Implementation-Version>${project.version}</Implementation-Version>
+									<Implementation-Vendor>${application.vendor}</Implementation-Vendor>
+									<!-- Log4j2 is multi-release even if we aren't -->
+									<Multi-Release>true</Multi-Release>
+								</manifestEntries>
+							</transformer>
+						</transformers>
+					</configuration>
+				</plugin>
+				<!-- Wrap the shaded jar as an .exe for Windows -->
+				<plugin>
+					<groupId>com.akathist.maven.plugins.launch4j</groupId>
+					<artifactId>launch4j-maven-plugin</artifactId>
+					<version>1.7.25</version>
+					<executions>
+						<execution>
+							<id>l4j-gui</id>
+							<phase>package</phase>
+							<goals>
+								<goal>launch4j</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<headerType>${application.headerType}</headerType>
+						<outfile>${project.build.directory}/${application.file}.exe</outfile>
+						<jar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</jar>
+						<errTitle>${project.name} Error</errTitle>
+						<classPath>
+							<mainClass>${application.mainClass}</mainClass>
+						</classPath>
+						<icon>${application.iconWin}</icon>
+						<jre>
+							<minVersion>${application.minJavaVersion}.0</minVersion>
+							<initialHeapSize>128</initialHeapSize>
+							<maxHeapSize>${application.maxHeapMB}</maxHeapSize>
+							<opts>
+								<opt>${application.vmArgs}</opt>
+							</opts>
+						</jre>
+						<versionInfo>
+							<fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
+							<txtFileVersion>${project.version}</txtFileVersion>
+							<fileDescription>${project.description}</fileDescription>
+							<copyright>${year.current} ${project.organization.name}</copyright>
+							<productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</productVersion>
+							<txtProductVersion>${project.version}</txtProductVersion>
+							<productName>${project.name}</productName>
+							<internalName>${project.name}</internalName>
+							<originalFilename>${project.artifactId}.exe</originalFilename>
+						</versionInfo>
+					</configuration>
+				</plugin>
+				<!-- Wrap the shaded jar as a .app for Mac OSX -->
+				<plugin>
+					<groupId>io.github.fvarrui</groupId>
+					<artifactId>javapackager</artifactId>
+					<version>1.1.0</version>
+					<configuration>
+						<platform>mac</platform>
+						<bundleJre>false</bundleJre>
+						<name>${application.file}</name>
+						<displayName>${project.name}</displayName>
+						<mainClass>${application.mainClass}</mainClass>
+						<administratorRequired>false</administratorRequired>
+						<generateInstaller>false</generateInstaller>
+						<runnableJar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</runnableJar>
+						<copyDependencies>false</copyDependencies>
+						<vmArgs>
+							<vmArg>-Xmx${application.maxHeapMB}M</vmArg>
+							<vmArg>${application.vmArgs}</vmArg>
+						</vmArgs>
+						<iconFile>${application.iconMac}</iconFile>
+					</configuration>
+					<executions>
+	                    <execution>
+	                        <phase>package</phase>
+	                        <goals>
+	                            <goal>package</goal>
+	                        </goals>
+	                    </execution>
+	                </executions>
+				</plugin>
+				<!-- Wrap the shaded jar as a .sh for Linux -->
+				<plugin>
+					<groupId>org.skife.maven</groupId>
+					<artifactId>really-executable-jar-maven-plugin</artifactId>
+					<version>1.4.1</version>
+					<configuration>
+						<flags>-Xmx${application.maxHeapMB}M ${application.vmArgs}</flags>
+						<programFile>${application.file}</programFile>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>really-executable-jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<!-- Some projects contain platform-specific dependencies. They should build separate artifacts for each platform via the module mechanism. However, for 

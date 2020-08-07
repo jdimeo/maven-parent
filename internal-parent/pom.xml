@@ -19,6 +19,7 @@
 		<git.url.commons>${git.url.base}/toolbox/commons/jvm</git.url.commons>
 	</properties>
 
+	<!-- TOOD: Override/remove MIT license? -->
 
 	<build>
 		<pluginManagement>
