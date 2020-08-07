@@ -2,16 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.elderresearch</groupId>
-		<artifactId>eri-application-base</artifactId>
-		<version>5.2.2</version>
-		<relativePath>../eri-application-base/pom.xml</relativePath>
+		<groupId>com.github.ElderResearch</groupId>
+		<artifactId>maven-parent</artifactId>
+		<version>6.0.0</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>eri-scala-base</artifactId>
+	<artifactId>scala-parent</artifactId>
 	<packaging>pom</packaging>
-
-	<name>ERI Scala Base</name>
+	<name>Elder Research Parent (Scala)</name>
 	<inceptionYear>2020</inceptionYear>
 
 	<properties>
