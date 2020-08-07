@@ -2,56 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.elderresearch</groupId>
-	<artifactId>eri-maven-base</artifactId>
-	<version>5.2.3-SNAPSHOT</version>
+	<groupId>com.github.ElderResearch</groupId>
+	<artifactId>maven-parent</artifactId>
+	<version>6.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
-	<properties>
-		<scm>gitlab.com/ElderResearch</scm>
-		<scm.commons>${scm}/toolbox/commons/jvm</scm.commons>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<eri.artifacts.base>https://elderresearch.jfrog.io/elderresearch</eri.artifacts.base>
-		<eri.artifacts.releases>${eri.artifacts.base}/libs-release</eri.artifacts.releases>
-		<eri.artifacts.snapshots>${eri.artifacts.base}/libs-snapshot</eri.artifacts.snapshots>
-
-		<enunciate.version>2.13.0</enunciate.version>
-		<enunciate.disabled>true</enunciate.disabled>
-		<lombok.version>1.18.12</lombok.version>
-		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
-		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
-		
-		<project.generatedSource.directory>${project.build.directory}/generated-sources</project.generatedSource.directory>
 	
-		<!-- These properties help with cross-compiling to a different Java version for backwards compatibility. If you
-		     bind the copy phase to "generate-sources" and specify the sibling module with the current sources, the
-		     plugin will copy over the sources to a folder in target to allow recompilation with a different release. -->
-		<source.copy.phase>none</source.copy.phase>
-		<relative.source.path>../core/src/main/java</relative.source.path>
-		<maven.compiler.release>11</maven.compiler.release>
-		
-		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient
-		     change since currently there isn't an "official" version of SWT in central -->
-		<swt.groupId>org.eclipse.swt</swt.groupId>
-		<swt.artifactId.win>org.eclipse.swt.win32.win32.x86_64</swt.artifactId.win>
-		<swt.artifactId.mac>org.eclipse.swt.cocoa.macosx.x86_64</swt.artifactId.mac>
-		<swt.artifactId.linux>org.eclipse.swt.gtk.linux.x86_64</swt.artifactId.linux>
-	</properties>
-
-	<name>ERI Cross-Project Parent POM</name>
-
-	<modules>
-		<module>eri-application-base</module>
-		<module>eri-scala-base</module>
-	</modules>
-
-	<scm>
-		<connection>scm:git:git://${scm.commons}/maven.git</connection>
-		<developerConnection>scm:git:git://${scm.commons}/maven.git</developerConnection>
-		<url>https://${scm.commons}/maven</url>
-	  <tag>HEAD</tag>
-  </scm>
-
+	<name>Elder Research Parent</name>
+	<description>Elder Research parent POM defining repositories, metadata, and dependencies that all internal and open-source projects inherit</description>
+	<organization>
+		<name>Elder Research</name>
+		<url>http://www.elderresearch.com</url>
+	</organization>
+	<inceptionYear>1995</inceptionYear>
+	
+	<issueManagement>
+		<system>Jira</system>
+		<url>https://elderresearch.atlassian.net/jira</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Gitlab CI/CD</system>
+		<url>https://gitlab.com/ElderResearch/</url>
+	</ciManagement>
 	<distributionManagement>
 		<repository>
 			<id>eri-releases</id>
@@ -62,27 +33,78 @@
 			<url>${eri.artifacts.snapshots}</url>
 		</snapshotRepository>
 	</distributionManagement>
+	
+	<licenses>
+		<license>
+			<name>MIT</name>
+			<url>http://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-	<issueManagement>
-		<system>Jira</system>
-		<url>https://elderresearch.atlassian.net/jira</url>
-	</issueManagement>
-	<ciManagement>
-		<system>Gitlab CI/CD</system>
-		<url>https://gitlab.com/ElderResearch/</url>
-	</ciManagement>
-	<organization>
-		<name>Elder Research</name>
-		<url>http://www.elderresearch.com</url>
-	</organization>
-	<inceptionYear>1995</inceptionYear>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.generatedSource.dir>${project.build.directory}/generated-sources</project.generatedSource.dir>
+		
+		<!-- These properties help with cross-compiling to a different Java version for backwards compatibility. If you
+		     bind the copy phase to "generate-sources" and specify the sibling module with the current sources, the
+		     plugin will copy over the sources to a folder in target to allow recompilation with a different release. -->
+		<source.copy.phase>none</source.copy.phase>
+		<relative.source.path>../core/src/main/java</relative.source.path>
+		<maven.compiler.release>11</maven.compiler.release>
+	
+		<!-- Git URLs -->
+		<git.url.base>github.com/ElderResearch</git.url.base>
+		<git.url.path>maven-parent</git.url.path>
+		
+		<!-- Artifact distribution -->
+		<eri.artifacts.base>https://elderresearch.jfrog.io/elderresearch</eri.artifacts.base>
+		<eri.artifacts.releases>${eri.artifacts.base}/libs-release</eri.artifacts.releases>
+		<eri.artifacts.snapshots>${eri.artifacts.base}/libs-snapshot</eri.artifacts.snapshots>
 
+		<!-- For generating swagger.json by scraping source models and javadoc -->
+		<enunciate.version>2.13.0</enunciate.version>
+		<enunciate.disabled>true</enunciate.disabled>
+		
+		<!-- For boilerplate reduction and delomboking for javadoc -->
+		<lombok.version>1.18.12</lombok.version>
+		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
+		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
+		
+		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient
+		     change since currently there isn't an "official" version of SWT in central -->
+		<swt.groupId>org.eclipse.swt</swt.groupId>
+		<swt.artifactId.win>org.eclipse.swt.win32.win32.x86_64</swt.artifactId.win>
+		<swt.artifactId.mac>org.eclipse.swt.cocoa.macosx.x86_64</swt.artifactId.mac>
+		<swt.artifactId.linux>org.eclipse.swt.gtk.linux.x86_64</swt.artifactId.linux>
+		
+		<!-- These properties are used to create platform-specific executables -->
+		<application.maxHeapMB>1024</application.maxHeapMB>
+		<application.minJavaVersion>11.0</application.minJavaVersion>
+		<application.vmArgs>-da</application.vmArgs>
+		<application.headerType>gui</application.headerType>
+		<application.vendor>${project.organization.name}</application.vendor>
+		<application.file>${project.name}</application.file>
+	</properties>
+	
+	<modules>
+		<module>internal-parent</module>
+		<module>scala-parent</module>
+	</modules>
+
+	<scm>
+		<connection>scm:git:ssh://${git.url.base}/${git.url.path}</connection>
+		<url>https://${git.url.base}/${git.url.path}</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<!-- Standardize Jackson versions across all modules -->
 	<dependencyManagement>
 		<dependencies>
         	<dependency>
             	<groupId>com.fasterxml.jackson</groupId>
             	<artifactId>jackson-bom</artifactId>
-            	<version>2.11.1</version>
+            	<version>2.11.2</version>
             	<scope>import</scope>
 	            <type>pom</type>
 	        </dependency>
@@ -136,9 +158,11 @@
 		    <artifactId>jackson-dataformat-yaml</artifactId>
 		</dependency>
 	</dependencies>
-
+	
 	<build>
+		<defaultGoal>verify</defaultGoal>
 		<plugins>
+			<!-- Delombok sources for plugins (like Javadoc) that expect "vanilla" Java sources -->
 			<plugin>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok-maven-plugin</artifactId>
@@ -170,6 +194,8 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Generate Javadocs from delomboked source. Also disables doclint (which will fail the build)
+			     with the javadoc.opts property that gets set by profile activation below. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -181,17 +207,21 @@
 							<goal>jar</goal>
 						</goals>
 						<configuration>
-							<additionalparam>${javadoc.opts}</additionalparam>
+							<additionalOptions>
+								<additionalOption>${javadoc.opts}</additionalOption>
+							</additionalOptions>
 							<sourcepath>${lombok.delombok.dir}</sourcepath>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Declare compiler plugin to pin version -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 			</plugin>
+			<!-- Don't fork process when installing a jar and pin version -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -206,19 +236,8 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-    			<version>3.0.0-M1</version><!--$NO-MVN-MAN-VER$-->
-				<configuration>
-					<generateReleasePoms>false</generateReleasePoms>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<pushChanges>false</pushChanges>
-					<localCheckout>true</localCheckout>
-					<goals>deploy</goals>
-					<tagNameFormat>@{project.version}</tagNameFormat>
-				</configuration>
-			</plugin>
+			<!-- Sets useful properties (like timestamp and version) to be made available to the build.
+			     Additionally, attaches 3 common generated source folders (java, jooq, and xjc) as source folders. -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -261,7 +280,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+			<!-- Enunciate generates documentation (like swagger.json) From Javadocs -->
 			<plugin>
 				<groupId>com.webcohesion.enunciate</groupId>
 				<artifactId>enunciate-maven-plugin</artifactId>
@@ -288,6 +307,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<!-- Maven site plugin configured to use Velocity and Markdown templates -->
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.9.0</version>
@@ -345,6 +365,140 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Create a "fat"/shaded jar that is executable and contains all dependencies -->			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<shadedArtifactAttached>true</shadedArtifactAttached>
+					<shadedClassifierName>shaded</shadedClassifierName>
+					<filters>
+						<filter>
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>META-INF/*.SF</exclude>
+								<exclude>META-INF/*.DSA</exclude>
+								<exclude>META-INF/*.RSA</exclude>
+							</excludes>
+						</filter>
+					</filters>
+					<transformers>
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<mainClass>${application.mainClass}</mainClass>
+							<manifestEntries>
+								<Implementation-Title>${project.name}</Implementation-Title>
+								<Implementation-Version>${project.version}</Implementation-Version>
+								<Implementation-Vendor>${application.vendor}</Implementation-Vendor>
+								<!-- Log4j2 is multi-release even if we aren't -->
+								<Multi-Release>true</Multi-Release>
+							</manifestEntries>
+						</transformer>
+					</transformers>
+				</configuration>
+			</plugin>
+			<!-- Wrap the shaded jar as an .exe for Windows -->
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+				<version>1.7.25</version>
+				<executions>
+					<execution>
+						<id>l4j-gui</id>
+						<phase>package</phase>
+						<goals>
+							<goal>launch4j</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<headerType>${application.headerType}</headerType>
+					<outfile>${project.build.directory}/${application.file}.exe</outfile>
+					<jar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</jar>
+					<errTitle>${project.name} Error</errTitle>
+					<classPath>
+						<mainClass>${application.mainClass}</mainClass>
+					</classPath>
+					<icon>${application.iconWin}</icon>
+					<jre>
+						<minVersion>${application.minJavaVersion}.0</minVersion>
+						<initialHeapSize>128</initialHeapSize>
+						<maxHeapSize>${application.maxHeapMB}</maxHeapSize>
+						<opts>
+							<opt>${application.vmArgs}</opt>
+						</opts>
+					</jre>
+					<versionInfo>
+						<fileVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</fileVersion>
+						<txtFileVersion>${project.version}</txtFileVersion>
+						<fileDescription>${project.description}</fileDescription>
+						<copyright>${year.current} ${project.organization.name}</copyright>
+						<productVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0</productVersion>
+						<txtProductVersion>${project.version}</txtProductVersion>
+						<productName>${project.name}</productName>
+						<internalName>${project.name}</internalName>
+						<originalFilename>${project.artifactId}.exe</originalFilename>
+					</versionInfo>
+				</configuration>
+			</plugin>
+			<!-- Wrap the shaded jar as a .app for Mac OSX -->
+			<plugin>
+				<groupId>io.github.fvarrui</groupId>
+				<artifactId>javapackager</artifactId>
+				<version>1.0.3</version>
+				<configuration>
+					<platform>mac</platform>
+					<bundleJre>false</bundleJre>
+					<name>${application.file}</name>
+					<displayName>${project.name}</displayName>
+					<mainClass>${application.mainClass}</mainClass>
+					<administratorRequired>false</administratorRequired>
+					<generateInstaller>false</generateInstaller>
+					<runnableJar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</runnableJar>
+					<copyDependencies>false</copyDependencies>
+					<vmArgs>
+						<vmArg>-Xmx${application.maxHeapMB}M</vmArg>
+						<vmArg>${application.vmArgs}</vmArg>
+					</vmArgs>
+					<iconFile>${application.iconMac}</iconFile>
+				</configuration>
+				<executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+			</plugin>
+			<!-- Wrap the shaded jar as a .sh for Linux -->
+			<plugin>
+				<groupId>org.skife.maven</groupId>
+				<artifactId>really-executable-jar-maven-plugin</artifactId>
+				<version>1.4.1</version>
+				<configuration>
+					<flags>-Xmx${application.maxHeapMB}M ${application.vmArgs}</flags>
+					<programFile>${application.file}</programFile>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>really-executable-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -383,7 +537,8 @@
 			</properties>
 		</profile>
 		
-		<!-- Javadocs now return exit code 1 in JDK8+ which prevents any Maven build from completing unless the Javadocs are perfect -->
+		<!-- Javadocs now return exit code 1 in JDK8+ which prevents any Maven build from completing unless the Javadocs
+		     are perfect. In Java 11, this option appears to be ignored. -->
 		<profile>
 			<id>javadoc-doclint-disable</id>
 			<activation>
