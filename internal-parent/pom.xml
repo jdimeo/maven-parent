@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.github.ElderResearch</groupId>
 		<artifactId>maven-parent</artifactId>
-		<version>6.0.1</version>
+		<version>6.0.2</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -15,20 +15,25 @@
 	<name>Elder Research Parent (Internal)</name>
 	
 	<properties>
+		<project.directory></project.directory>
 		<git.url.base>gitlab.com/ElderResearch</git.url.base>
-		<git.url.commons>${git.url.base}/toolbox/commons/jvm</git.url.commons>
+		<git.url.commons>toolbox/commons/jvm</git.url.commons>
 	</properties>
 
-	<!-- TOOD: Override/remove MIT license? -->
+	<!-- Remove inherited OSS license -->
+	<licenses combine.self="override">
+		<license>
+		</license>
+	</licenses>
 
 	<build>
 		<pluginManagement>
 			<plugins>
 				<!-- Configures the release plugin for use to deploy to Artifactory -->
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-release-plugin</artifactId>
-	    			<version>3.0.0-M1</version><!--$NO-MVN-MAN-VER$-->
+				    <groupId>org.apache.maven.plugins</groupId>
+    				<artifactId>maven-release-plugin</artifactId>
+    				<version>3.0.0-M1</version>
 					<configuration>
 						<generateReleasePoms>false</generateReleasePoms>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
