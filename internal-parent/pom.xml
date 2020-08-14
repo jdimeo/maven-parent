@@ -9,6 +9,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
+	<groupId>com.elderresearch.maven-parent</groupId>
 	<artifactId>internal-parent</artifactId>
 	<packaging>pom</packaging>
 

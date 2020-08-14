@@ -7,7 +7,8 @@
 		<version>6.0.5-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-
+	
+	<groupId>com.elderresearch.maven-parent</groupId>
 	<artifactId>scala-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Elder Research Parent (Scala)</name>
