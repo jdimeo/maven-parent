@@ -317,34 +317,6 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!-- Maven site plugin configured to use Velocity and Markdown templates -->
-			<plugin>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.9.0</version>
-				<executions>
-					<execution>
-						<id>attach-descriptor</id>
-						<goals>
-							<goal>attach-descriptor</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<generateReports>false</generateReports>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>io.github.devacfr.maven.skins</groupId>
-						<artifactId>reflow-velocity-tools</artifactId>
-						<version>2.3.0</version>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.9.1</version>
-					</dependency>
-				</dependencies>
-			</plugin>
 			<!-- Copy sources to a generated source folder so it can be recompiled for a different Java version -->
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -368,7 +340,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>			
+			</plugin>	
 		</plugins>
 		
 		<!-- These plugins are used to create platform specific executables and must be instantiated by children -->
