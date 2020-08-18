@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>maven-parent</artifactId>
-	<version>6.0.5</version>
+	<version>6.0.6</version>
 	<packaging>pom</packaging>
 	
 	<name>Elder Research Parent</name>
@@ -178,25 +178,25 @@
 				<version>${lombok.version}.0</version>
 				<executions>
 					<execution>
-						<id>delombok-main-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>delombok</goal>
-						</goals>
-						<configuration>
-							<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-							<addOutputDirectory>false</addOutputDirectory>
-							<outputDirectory>${lombok.delombok.dir}</outputDirectory>
-						</configuration>
-					</execution>
-					<execution>
 						<id>delombok-other-source</id>
-						<phase>generate-sources</phase>
+						<phase>process-classes</phase>
 						<goals>
 							<goal>delombok</goal>
 						</goals>
 						<configuration>
 							<sourceDirectory>${lombok.src.dir}</sourceDirectory>
+							<addOutputDirectory>false</addOutputDirectory>
+							<outputDirectory>${lombok.delombok.dir}</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>delombok-main-source</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>delombok</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
 							<addOutputDirectory>false</addOutputDirectory>
 							<outputDirectory>${lombok.delombok.dir}</outputDirectory>
 						</configuration>
