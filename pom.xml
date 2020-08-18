@@ -179,7 +179,7 @@
 				<executions>
 					<execution>
 						<id>delombok-main-source</id>
-						<phase>generate-sources</phase>
+						<phase>process-classes</phase>
 						<goals>
 							<goal>delombok</goal>
 						</goals>
@@ -191,7 +191,7 @@
 					</execution>
 					<execution>
 						<id>delombok-other-source</id>
-						<phase>generate-sources</phase>
+						<phase>process-classes</phase>
 						<goals>
 							<goal>delombok</goal>
 						</goals>
