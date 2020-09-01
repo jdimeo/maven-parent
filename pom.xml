@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>maven-parent</artifactId>
-	<version>6.0.7-SNAPSHOT</version>
+	<version>6.0.7</version>
 	<packaging>pom</packaging>
 	
 	<name>Elder Research Parent</name>
