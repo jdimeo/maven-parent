@@ -93,6 +93,7 @@
 		<application.headerType>gui</application.headerType>
 		<application.vendor>${project.organization.name}</application.vendor>
 		<application.file>${project.name}</application.file>
+		<application.minimize>false</application.minimize>
 	</properties>
 	
 	<modules>
@@ -349,7 +350,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-shade-plugin</artifactId>
-					<version>2.3</version>
+					<version>3.2.4</version>
 					<executions>
 						<execution>
 							<phase>package</phase>
@@ -358,9 +359,17 @@
 							</goals>
 						</execution>
 					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>com.github.edwgiz</groupId>
+							<artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
+							<version>${log4j.version}</version>
+						</dependency>
+					</dependencies>
 					<configuration>
 						<shadedArtifactAttached>true</shadedArtifactAttached>
 						<shadedClassifierName>shaded</shadedClassifierName>
+						<minimizeJar>${application.minimize}</minimizeJar>
 						<filters>
 							<filter>
 								<artifact>*:*</artifact>
@@ -370,8 +379,22 @@
 									<exclude>META-INF/*.RSA</exclude>
 								</excludes>
 							</filter>
+							<filter>
+								<artifact>com.fasterxml.jackson.*</artifact>
+								<includes><include>**</include></includes>
+							</filter>
+							<filter>
+								<artifact>org.apache.logging.*</artifact>
+								<includes><include>**</include></includes>
+							</filter>
+							<filter>
+								<artifact>${project.groupId}:*</artifact>
+								<includes><include>**</include></includes>
+							</filter>
 						</filters>
 						<transformers>
+							<!-- Correctly handles/merges log4j cache data in a shaded .jar -->
+							<transformer implementation="com.github.edwgiz.maven_shade_plugin.log4j2_cache_transformer.PluginsCacheFileTransformer" />
 							<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 							<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 								<mainClass>${application.mainClass}</mainClass>
