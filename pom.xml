@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>maven-parent</artifactId>
-	<version>6.0.7</version>
+	<version>6.0.8</version>
 	<packaging>pom</packaging>
 	
 	<name>Elder Research Parent</name>
@@ -346,6 +346,20 @@
 		<!-- These plugins are used to create platform specific executables and must be instantiated by children -->
 		<pluginManagement>
 			<plugins>
+				<!-- Configures the release plugin for use to deploy to Artifactory -->
+				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+    				<artifactId>maven-release-plugin</artifactId>
+    				<version>3.0.0-M1</version>
+					<configuration>
+						<generateReleasePoms>false</generateReleasePoms>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<pushChanges>false</pushChanges>
+						<localCheckout>true</localCheckout>
+						<goals>deploy</goals>
+						<tagNameFormat>@{project.version}</tagNameFormat>
+					</configuration>
+				</plugin>
 				<!-- Create a "fat"/shaded jar that is executable and contains all dependencies -->			
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
