@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>maven-parent</artifactId>
-	<version>6.0.8</version>
+	<version>6.0.9</version>
 	<packaging>pom</packaging>
 	
 	<name>Elder Research Parent</name>
@@ -297,9 +297,8 @@
 				<version>${enunciate.version}</version>
 				<executions>
 					<execution>
-						<goals>
-							<goal>docs</goal>
-						</goals>
+						<phase>prepare-package</phase>
+						<goals><goal>docs</goal></goals>
 						<configuration>
 							<docsDir>${project.build.outputDirectory}</docsDir>
 							<skipEnunciate>${enunciate.disabled}</skipEnunciate>
@@ -309,13 +308,6 @@
 						</configuration>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>com.webcohesion.enunciate</groupId>
-						<artifactId>enunciate-lombok</artifactId>
-						<version>${enunciate.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 			<!-- Copy sources to a generated source folder so it can be recompiled for a different Java version -->
 			<plugin>
