@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.elderresearch</groupId>
 		<artifactId>maven-parent</artifactId>
-		<version>6.1.0</version>
+		<version>6.1.1</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -19,9 +19,6 @@
 		<project.directory></project.directory>
 		<git.url.base>gitlab.com/ElderResearch</git.url.base>
 		<git.url.commons>toolbox/commons/jvm</git.url.commons>
-		<git.projectId></git.projectId>
-		<wagon.skip>true</wagon.skip>
-		<wagon.includes>${application.file},${application.file}.exe</wagon.includes>
 	</properties>
 
 	<!-- Remove inherited OSS license -->
@@ -57,23 +54,6 @@
 						<version>1.9.1</version>
 					</dependency>
 				</dependencies>				
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>wagon-maven-plugin</artifactId>
-				<version>2.0.2</version>
-				<executions>
-					<execution>
-						<goals><goal>upload</goal></goals>
-						<phase>deploy</phase>
-						<configuration>
-							<serverId>gitlab-maven</serverId>
-							<fromDir>${project.build.directory}</fromDir>
-							<url>https://gitlab.com/api/v4/projects/${git.projectId}/packages/generic</url>
-							<toDir>${project.artifactId}/${project.version}</toDir>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
