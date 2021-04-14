@@ -94,6 +94,12 @@
 		<application.vendor>${project.organization.name}</application.vendor>
 		<application.file>${project.name}</application.file>
 		<application.minimize>false</application.minimize>
+		
+		<!-- Uploading of binaries/executables/assemblies to hosting/download location (disabled by default) -->
+		<git.projectId></git.projectId>
+		<wagon.url>https://gitlab.com/api/v4/projects/${git.projectId}/packages/generic</wagon.url>
+		<wagon.skip>true</wagon.skip>
+		<wagon.includes>${application.file},${application.file}.exe</wagon.includes>
 	</properties>
 	
 	<modules>
@@ -332,7 +338,24 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>	
+			</plugin>
+			<!-- Upload executables/binaries/assemblies to a separate location (GitLab, by default) -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<version>2.0.2</version>
+				<executions>
+					<execution>
+						<goals><goal>upload</goal></goals>
+						<phase>deploy</phase>
+						<configuration>
+							<serverId>gitlab-maven</serverId>
+							<fromDir>${project.build.directory}</fromDir>
+							<toDir>${project.artifactId}/${project.version}</toDir>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		
 		<!-- These plugins are used to create platform specific executables and must be instantiated by children -->
