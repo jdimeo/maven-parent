@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>maven-parent</artifactId>
-	<version>6.1.2</version>
+	<version>6.1.3</version>
 	<packaging>pom</packaging>
 	
 	<name>Elder Research Parent</name>
@@ -98,6 +98,7 @@
 		<!-- Uploading of binaries/executables/assemblies to hosting/download location (disabled by default) -->
 		<git.projectId></git.projectId>
 		<wagon.url>https://gitlab.com/api/v4/projects/${git.projectId}/packages/generic</wagon.url>
+		<wagon.toDir>${project.artifactId}/${project.version}</wagon.toDir>
 		<wagon.skip>true</wagon.skip>
 		<wagon.includes>${application.file},${application.file}.exe</wagon.includes>
 	</properties>
@@ -351,7 +352,6 @@
 						<configuration>
 							<serverId>gitlab-maven</serverId>
 							<fromDir>${project.build.directory}</fromDir>
-							<toDir>${project.artifactId}/${project.version}</toDir>
 						</configuration>
 					</execution>
 				</executions>
