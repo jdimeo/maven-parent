@@ -65,7 +65,7 @@
 		<eri.artifacts.snapshots>${eri.artifacts.base}/libs-snapshot</eri.artifacts.snapshots>
 
 		<!-- Declare logging version as a property for children to use -->
-		<log4j.version>2.15.0</log4j.version>
+		<log4j.version>2.16.0</log4j.version>
 
 		<!-- For generating swagger.json by scraping source models and javadoc -->
 		<enunciate.version>2.13.0</enunciate.version>
