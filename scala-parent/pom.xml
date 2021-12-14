@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.elderresearch</groupId>
 		<artifactId>maven-parent</artifactId>
-		<version>6.1.5</version>
+		<version>6.1.6</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
@@ -33,7 +33,7 @@
 			<plugin>
 				<groupId>net.alchim31.maven</groupId>
 				<artifactId>scala-maven-plugin</artifactId>
-				<version>4.4.0</version>
+				<version>4.5.4</version>
 				<configuration>
 					<scalaVersion>${scala.version}</scalaVersion>
 					<compileOrder>${scala.compile.order}</compileOrder>
