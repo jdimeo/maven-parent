@@ -442,7 +442,7 @@
 				<plugin>
 					<groupId>com.akathist.maven.plugins.launch4j</groupId>
 					<artifactId>launch4j-maven-plugin</artifactId>
-					<version>1.7.25</version>
+					<version>2.1.1</version>
 					<executions>
 						<execution>
 							<id>l4j-gui</id>
@@ -462,6 +462,7 @@
 						</classPath>
 						<icon>${application.iconWin}</icon>
 						<jre>
+							<path>%PATH%</path>
 							<minVersion>${application.minJavaVersion}.0</minVersion>
 							<initialHeapSize>128</initialHeapSize>
 							<maxHeapSize>${application.maxHeapMB}</maxHeapSize>
