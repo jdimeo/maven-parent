@@ -73,6 +73,8 @@
 		
 		<!-- For boilerplate reduction and delomboking for javadoc -->
 		<lombok.version>1.18.22</lombok.version>
+		<lombok.plugin.version>1.18.20.0</lombok.plugin.version>
+		<!-- lombok.plugin.version>${lombok.version}.0</lombok.version -->
 		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
 		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
 		
@@ -183,7 +185,7 @@
 			<plugin>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok-maven-plugin</artifactId>
-				<version>${lombok.version}.0</version>
+				<version>${lombok.plugin.version}</version>
 				<executions>
 					<execution>
 						<id>delombok-other-source</id>
