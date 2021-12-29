@@ -72,7 +72,7 @@
 		<enunciate.disabled>true</enunciate.disabled>
 		
 		<!-- For boilerplate reduction and delomboking for javadoc -->
-		<lombok.version>1.18.20</lombok.version>
+		<lombok.version>1.18.22</lombok.version>
 		<lombok.delombok.dir>${project.build.directory}/delombok-for-javadoc</lombok.delombok.dir>
 		<lombok.src.dir>${project.basedir}/src/main/lombok</lombok.src.dir>
 		
