@@ -103,6 +103,7 @@
 		<wagon.toDir>${project.artifactId}/${project.version}</wagon.toDir>
 		<wagon.skip>true</wagon.skip>
 		<wagon.includes>${application.file},${application.file}.exe</wagon.includes>
+        <wagon.serverId>gitlab-maven</wagon.serverId>
 	</properties>
 	
 	<modules>
@@ -352,7 +353,6 @@
 						<goals><goal>upload</goal></goals>
 						<phase>deploy</phase>
 						<configuration>
-							<serverId>gitlab-maven</serverId>
 							<fromDir>${project.build.directory}</fromDir>
 						</configuration>
 					</execution>
