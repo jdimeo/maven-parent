@@ -134,8 +134,9 @@
 	<dependencies>
 		<!-- Always bring in JUnit - test scope won't bloat binaries -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.2</version>
 			<scope>test</scope>
 		</dependency>
 		
