@@ -15,7 +15,7 @@ The parent POM provides a top-level POM from which all of our ERI artifacts can 
 - Our CI information (GitLab)
 - Our issue management information (Jira)
 - Common dependencies across all projects
-	- JUnit 4.x
+	- JUnit 5.x
 	- [Lombok](http://www.projectlombok.org)
 	- Log4j2
 	- [AutoService](https://github.com/google/auto/tree/master/service)
