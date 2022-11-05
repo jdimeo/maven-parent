@@ -11,7 +11,7 @@
 	<description>Elder Research parent POM defining repositories, metadata, and dependencies that all internal and open-source projects inherit</description>
 	<organization>
 		<name>Elder Research</name>
-		<url>http://www.elderresearch.com</url>
+		<url>https://www.elderresearch.com</url>
 	</organization>
 	<inceptionYear>1995</inceptionYear>
 	
