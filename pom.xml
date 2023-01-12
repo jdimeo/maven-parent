@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>maven-parent</artifactId>
-	<version>6.4.4-SNAPSHOT</version>
+	<version>6.4.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
 	<name>Elder Research Parent</name>
@@ -50,7 +50,7 @@
 		     bind the copy phase to "generate-sources" and specify the sibling module with the current sources, the
 		     plugin will copy over the sources to a folder in target to allow recompilation with a different release. -->
 		<source.copy.phase>none</source.copy.phase>
-		<source.copy.exclude></source.copy.exclude>
+		<source.copy.exclude />
 		<relative.source.path>../core/src/main/java</relative.source.path>
 		<maven.compiler.release>11</maven.compiler.release>
 	
@@ -100,7 +100,7 @@
 		<application.minimize>false</application.minimize>
 		
 		<!-- Uploading of binaries/executables/assemblies to hosting/download location (disabled by default) -->
-		<git.projectId></git.projectId>
+		<git.projectId />
 		<wagon.url>https://gitlab.com/api/v4/projects/${git.projectId}/packages/generic</wagon.url>
 		<wagon.toDir>${project.artifactId}/${project.version}</wagon.toDir>
 		<wagon.skip>true</wagon.skip>
@@ -118,7 +118,8 @@
 	<scm>
 		<connection>scm:git:ssh://${git.url.base}</connection>
 		<url>https://${git.url.base}</url>
-	</scm>
+	  <tag>HEAD</tag>
+  </scm>
 
 	<!-- Standardize Jackson versions across all modules -->
 	<dependencyManagement>
