@@ -4,7 +4,7 @@
 
 	<groupId>com.elderresearch</groupId>
 	<artifactId>maven-parent</artifactId>
-	<version>6.4.4</version>
+	<version>6.4.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
 	<name>Elder Research Parent</name>
@@ -118,7 +118,7 @@
 	<scm>
 		<connection>scm:git:ssh://${git.url.base}</connection>
 		<url>https://${git.url.base}</url>
-	  <tag>6.4.4</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<!-- Standardize Jackson versions across all modules -->
