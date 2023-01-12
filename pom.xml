@@ -81,7 +81,7 @@
 		<!-- This is automatically set to "none" for JDK8+ since javadoc issues break the build -->
 		<javadoc.doclint>all</javadoc.doclint>
 
-		<jackson.version>2.14.0-rc2</jackson.version>
+		<jackson.version>2.14.1</jackson.version>
 		
 		<!-- These are referenced multiple places so are located here to avoid redundancy and allow for convenient
 		     change since currently there isn't an "official" version of SWT in central -->
@@ -175,12 +175,10 @@
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.fasterxml.jackson.dataformat</groupId>
 		    <artifactId>jackson-dataformat-yaml</artifactId>
-			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
 	
